@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209194558) do
+ActiveRecord::Schema.define(:version => 20110220210027) do
 
   create_table "assessments", :force => true do |t|
     t.integer "exam_id"
@@ -25,14 +25,27 @@ ActiveRecord::Schema.define(:version => 20110209194558) do
     t.date   "held_in"
   end
 
+  create_table "exams_grades", :id => false, :force => true do |t|
+    t.integer "exam_id"
+    t.integer "grade_id"
+  end
+
   create_table "grades", :force => true do |t|
     t.string "name"
   end
 
-  create_table "grades_students", :id => false, :force => true do |t|
-    t.integer "exam_id"
-    t.integer "grade_id"
+  create_table "rails_admin_histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
 
   create_table "students", :force => true do |t|
     t.string   "first_name"
@@ -52,5 +65,24 @@ ActiveRecord::Schema.define(:version => 20110209194558) do
     t.integer "student_id"
     t.integer "grade_id"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                               :default => "", :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
