@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+  
+  has_many :students, :foreign_key => :registered_by
+  
+  validates_presence_of :first_name, :last_name
+  
+  def to_s
+    first_name + " " + last_name
+  end
 end
