@@ -5,7 +5,14 @@
   <% end %>
   <div id="quickAccess">
     <ul id="quick">
-      <!--<li><a href="#">Quick add</a></li>-->
+      <% if params[:model_name] == "students" %>
+        <li>
+          <%= link_to(t("admin.list.certificate"), rails_admin_certificate_path, :class => "addlink", :style => "width: auto;") %>
+        </li>
+        <li>
+          <%= link_to(t("admin.list.final_certificate"), rails_admin_final_certificate_path, :class => "addlink", :style => "width: auto;") %>
+        </li>
+      <% end %>
       <li>
       <%= link_to(t("admin.history.name"), rails_admin_history_object_path(:id => params[:id]), :class => "addlink") %>
       </li>

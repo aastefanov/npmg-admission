@@ -127,6 +127,12 @@ module RailsAdmin
 
       redirect_to rails_admin_list_path(:model_name => @abstract_model.to_param)
     end
+    
+    def certificate
+    end
+    
+    def final_certificate
+    end
 
     def bulk_delete
       @authorization_adapter.authorize(:bulk_delete, @abstract_model) if @authorization_adapter

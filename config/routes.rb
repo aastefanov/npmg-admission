@@ -19,6 +19,9 @@ Admission::Application.routes.draw do
       delete "/:model_name/:id", :to => :destroy, :as => "destroy"
       get "/:model_name/bulk_delete", :to => :bulk_delete, :as => "bulk_delete"
       post "/:model_name/bulk_destroy", :to => :bulk_destroy, :as => "bulk_destroy"
+      
+      get "/students/:id/certificate", :model_name => "students", :to => :certificate, :as => "certificate"
+      get "/students/:id/final_certificate", :model_name => "students", :to => :final_certificate, :as => "final_certificate"
     end
     scope "history", :as => "history" do
       controller "history" do

@@ -28,6 +28,8 @@ bg:
       search: "ТЪРСИ"
       select: "Избор на %{name} за редакция"
       show_all: "Покажи всички"
+      certificate: "Служебна бележка"
+      final_certificate: "Служебна бележка след изпити"
     new:
       basic_info: "Информация"
       required: "Задължително"
