@@ -6,6 +6,8 @@ gem 'mysql'
 gem 'devise' # Devise must be required before RailsAdmin
 # gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
+gem 'pdfkit'
+
 group :test do
   gem "rspec-rails", "~> 2.0.1"
   gem 'factory_girl_rails'
