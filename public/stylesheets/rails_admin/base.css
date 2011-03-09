@@ -106,14 +106,15 @@ ul.breadcrumb li a:hover{
 }
 
 #headerLeft h1#logo{
-	margin-top:62px;
+	margin-top:6px;
   font-weight:normal;
   font-size:22px;
+  position:absolute;
 }
 #headerLeft h1#logo span.image_replacement{
 	background-image:url(../../images/rails_admin/logo.png);
-	width:64px;
-	height:46px;
+	width:550px;
+	height:70px;
 }
 
 #headerRight{
@@ -244,7 +245,7 @@ ul#quick li a {
 ul#nav{
   float:left;
   list-style-type:none;
-  margin-top:88px;
+  margin-top:89px;
   margin-left:20px;
 }
 

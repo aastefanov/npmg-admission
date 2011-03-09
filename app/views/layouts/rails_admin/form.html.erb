@@ -59,23 +59,6 @@
   <div id="wrapper">
     <div id="header">
       <div id="headerLeft">
-        <ul class="breadcrumb">
-          <li>
-            <%= link_to(t('home.name'), '/') %>
-          </li>
-          <li>
-            &rsaquo;
-            <%= link_to(t('admin.dashboard.name'), rails_admin_dashboard_path) %>
-          </li>
-          <li>
-            &rsaquo;
-            <%= link_to(@model_config.update.label, rails_admin_list_path(:model_name => @abstract_model.to_param)) %>
-          </li>
-          <li>
-            &rsaquo;
-            <span><%= @page_name %></span>
-          </li>
-        </ul>
         <h1 id="logo">
           <%= link_to rails_admin_dashboard_path do %>
             <span class="image_replacement"><%= @plugin_name %></span>
