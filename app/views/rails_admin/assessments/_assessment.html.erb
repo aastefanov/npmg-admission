@@ -1,0 +1,18 @@
+<div class="assessment" id="assessment-<%= assessment.exam_id %>">
+	<h2><%= assessment.exam.name %></h2>
+	<div class="formSection">
+		<div class="field">
+			<label>Оценка от олимпиада</label>
+			<input class="string" type="text" name="assessments[][competition_mark]" value="<%= assessment.competition_mark  %>" />
+			<p class="help">Число, което представлява оценка.</p>
+		</div>
+		<div class="field">
+			<label>Ще се явява</label>
+			<input type="checkbox" name="assessments[][is_taking_exam]" value="1"<%= (assessment.is_taking_exam?) ? " checked" : "" %>/> да
+		</div>
+		<input type="hidden" name="assessments[][exam_id]" value="<%= assessment.exam_id %>" />
+		<% unless assessment.new_record? %>
+			<input type="hidden" name="assessments[][id]" value="<%= assessment.id %>" />
+		<% end %>
+	</div>
+</div>

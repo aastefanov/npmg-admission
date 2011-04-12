@@ -1,7 +1,7 @@
 module RailsAdmin
   class MainController < RailsAdmin::ApplicationController
     before_filter :get_model, :except => [:index]
-    before_filter :get_object, :only => [:edit, :update, :delete, :destroy]
+    before_filter :get_object, :only => [:edit, :update, :delete, :destroy, :certificate]
     before_filter :get_bulk_objects, :only => [:bulk_delete, :bulk_destroy]
     before_filter :get_attributes, :only => [:create, :update]
     before_filter :check_for_cancel, :only => [:create, :update, :destroy, :bulk_destroy]
@@ -64,6 +64,7 @@ module RailsAdmin
         end
         @authorization_adapter.authorize(:create, @abstract_model, @object)
       end
+
       @object.attributes = @attributes
       @object.associations = params[:associations]
       @page_name = t("admin.actions.create").capitalize + " " + @model_config.create.label.downcase
@@ -97,10 +98,24 @@ module RailsAdmin
 
       @old_object = @object.clone
 
+      if @object.kind_of? Student
+        @student = Student.find(params[:id])
+        @student.update_attributes(params[:students])
+        # Fuckin hack, FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        @student.assessments = Array.new
+        params[:assessments].each do |a|
+          attr = (a[:id]) ? Assessment.find(a[:id]) : Assessment.new
+          attr.is_taking_exam = false
+          attr.attributes = a
+          @student.assessments << attr
+        end
+      end
+
       @object.attributes = @attributes
       @object.associations = params[:associations]
 
-      if @object.save
+      if @object.valid?
+        @student.save unless @student.nil?
         AbstractHistory.create_update_history @abstract_model, @object, @cached_assocations_hash, associations_hash, @modified_assoc, @old_object, _current_user
         redirect_to_on_success
       else
@@ -129,6 +144,8 @@ module RailsAdmin
     end
     
     def certificate
+      @authorization_adapter.authorize(:edit, @abstract_model, @object) if @authorization_adapter
+      @page_name = @object.full_name
     end
     
     def final_certificate

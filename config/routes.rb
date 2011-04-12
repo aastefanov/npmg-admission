@@ -7,6 +7,9 @@ Admission::Application.routes.draw do
     # Prefix route urls with "admin" and route names with "rails_admin_"
   scope "admin", :module => :rails_admin, :as => "rails_admin" do
     # Routes for rails_admin controller
+    controller "assessments" do
+      get "/get_assessments/:id", :to => :get_assessments, :as => "get_assessments"
+    end
     controller "main" do
       match "/", :to => :index, :as => "dashboard"
       get "/:model_name", :to => :list, :as => "list"

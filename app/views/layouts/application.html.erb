@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Admission</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="NONE,NOARCHIVE" />
+  <title><%= @page_name %> | <%= @plugin_name %></title>
+  <%= stylesheet_link_tag('print', :media => :screen) %>
+  <%= stylesheet_link_tag('print', :media => :print) %>
+
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div id="wrapper">
+    <div class="header">
+      <img src="/images/rails_admin/logo_print.jpg" alt="logo" />
+    </div>
+    <%= content_for(:layout) %>
+  </div>
 </body>
 </html>

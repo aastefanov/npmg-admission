@@ -17,12 +17,13 @@
   end
 
   # exclude selected from the original collection
-  collection = collection.map{|t|
+  collection_new = collection.map{|t|
     t if not selected.include?(t)
   }.compact
 
 %>
               <%= label_tag "#{field.abstract_model.to_param}_#{association_name}", field.label %>
+              <% unless association_name == :grades %>
               <div class="many_header">
                 <input type="text" id="<%= "#{field.abstract_model.to_param}_#{association_name}" %>" class="searchMany" value="Search <%= association_name %>" ref="<%= association_name %>" used="0" />
                 <p>
@@ -32,7 +33,7 @@
               </div>
               <div class="manySelector">
                 <select multiple="multiple" size="8" class="firstSelect">
-                  <%= options_for_select(collection) %>
+                  <%= options_for_select(collection_new) %>
                 </select>
                 <a href="javascript:void(0)" class="addAssoc"><%= image_tag "rails_admin/selector-add.gif", :alt => "Add element", :class => "add_elem" %></a>
                 <a href="javascript:void(0)" class="removeAssoc"><%= image_tag "rails_admin/selector-remove.gif", :alt => "Remove element", :class => "remove_elem" %></a>
@@ -53,4 +54,37 @@
                 <% end %>
                 <% end %>
               </div>
+              <% else %>
+
+                <div style="margin-left: 103px;">
+                  <% collection.each do |elem| %>
+                      <%= render :partial => 'grades', :locals => {:grade => elem, :selected => selected} %>
+                      <input type="hidden" value="" name="associations[grades][]" />
+                  <% end %>
+                  <input type="hidden" id="students_grades" name="students[grades]" value="0" />
+                </div>
+                </div>
+                </div>
+                <div id="assessments">
+                  <%= render Assessment.where(:student_id => params[:id]).all %>
+                </div>
+                
+                 <div class="formSection">
+                 <div class="field">
+              <% end %>
               <span class="breakSpan"></span>
+
+<script>
+  document.on("click", "input[data-remote]", function(event, element) {
+    if(!element.checked == true) return; 
+    new Ajax.Request(element.readAttribute('data-url'), {
+      method: "GET",
+      parameters: {},
+      evalScripts: true,
+
+      onComplete:    function(request) { element.fire("ajax:complete", request); },
+      onSuccess:     function(request) { element.fire("ajax:success",  request); },
+      onFailure:     function(request) { element.fire("ajax:failure",  request); }
+    });
+  });
+</script>

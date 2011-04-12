@@ -5,24 +5,19 @@ class Student < ActiveRecord::Base
   
   before_validation lambda { self.registered_by = RailsAdmin.current_user_method }
   
-  validates_presence_of :first_name, :middle_name, :last_name, :address, :registered_by
-  
-  validates :email,   
-            :presence => true,   
-            :uniqueness => true,   
-            :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }  
-            
+  validates_presence_of :first_name, :middle_name, :last_name, :registered_by
+
   validates :egn,
             :presence => true,
             :uniqueness => true,
-            :numericality => true
-            
-  validates :ref_number,
-            :presence => true,
-            :uniqueness => true,
-            :numericality => true
+            :numericality => true,
+            :length => {:within => 10..10}
             
   validates :phone,
             :presence => true,
             :numericality => true
+
+  def full_name
+    first_name + " " + middle_name + " " + last_name
+  end
 end

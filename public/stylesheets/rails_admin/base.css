@@ -344,3 +344,11 @@ ul#nav li.more ul li a:hover{
 ul#nav li.more ul li.active a{
   background:#ccc;
 }
+
+
+
+
+
+.assessment-label {
+  font-weight: normal !important; 
+}

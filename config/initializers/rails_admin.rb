@@ -5,15 +5,8 @@ RailsAdmin.config do |config|
     field :first_name
     field :middle_name
     field :last_name
-    field :is_girl
     field :egn
-    field :ref_number
-    
-    group :contacts do
-      field :email
-      field :phone
-      field :address
-    end
+    field :phone
     
     group :grades do
       field :grades

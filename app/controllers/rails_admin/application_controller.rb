@@ -41,7 +41,7 @@ module RailsAdmin
     end
 
     def set_plugin_name
-      @plugin_name = "RailsAdmin"
+      @plugin_name = "НПМГ кандидатстване"
     end
 
     def not_found

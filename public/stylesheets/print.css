@@ -1,0 +1,84 @@
+body {
+  background: white;
+  font-size: 12pt;
+}
+
+#wrapper {
+  width: auto;
+  margin: 0 5%;
+  padding: 0;
+  border: 0;
+  float: none !important;
+  color: black;
+  background: transparent none;
+}
+
+a:link, a:visited {
+  color: #520;
+  background: transparent;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.header {
+  text-align: center;
+}
+
+.label {
+  font-weight: bold;
+  display: inline-block;
+  width: 180px;
+}
+
+.content, .exams, .signs, .last-info {
+  margin-top: 50pt;
+  clear: both;
+  overflow: hidden;
+}
+
+.value {
+  
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-weight: bold;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.left {
+  width: 50%;
+  float: left;
+}
+
+.right {
+  width: 50%;
+  float: right;
+}
+
+.box {
+  display: block;
+  float: left;
+}
+
+.sign-box{
+  text-align: center;
+}
+
+.info {
+  font-size: 10pt;
+  color: #aaa;
+}
+
+.important {
+  font-size: 14pt;
+  font-weight: bold;
+  text-align: center;
+}

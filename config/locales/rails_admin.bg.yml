@@ -22,8 +22,10 @@ bg:
     credentials:
       log_out: "Изход"
     list:
+      select_action: "Избери"
       edit_action: "Редактирай"
       delete_action: "Изтрий"
+      delete_selected: "Изтрии избраните"
       add_new: "Добави"
       search: "ТЪРСИ"
       select: "Избор на %{name} за редакция"
@@ -55,6 +57,6 @@ bg:
       create: "създай"
       created: "създаден"
       update: "редактирай"
-      updated: "редактиран"
+      updated: "редактиране"
       delete: "изтрий"
       deleted: "изтрит"
