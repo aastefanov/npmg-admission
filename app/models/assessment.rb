@@ -9,5 +9,9 @@ class Assessment < ActiveRecord::Base
   	assessment
   end
 
+  def final_mark
+  	(exam_mark || 0) > (competition_mark || 0) ? exam_mark : competition_mark
+  end
+
   attr_protected :id
 end

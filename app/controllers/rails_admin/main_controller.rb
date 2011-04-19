@@ -1,7 +1,7 @@
 module RailsAdmin
   class MainController < RailsAdmin::ApplicationController
     before_filter :get_model, :except => [:index]
-    before_filter :get_object, :only => [:edit, :update, :delete, :destroy, :certificate]
+    before_filter :get_object, :only => [:edit, :update, :delete, :destroy, :certificate, :final_certificate]
     before_filter :get_bulk_objects, :only => [:bulk_delete, :bulk_destroy]
     before_filter :get_attributes, :only => [:create, :update]
     before_filter :check_for_cancel, :only => [:create, :update, :destroy, :bulk_destroy]
@@ -116,6 +116,7 @@ module RailsAdmin
 
       if @object.valid?
         @student.save unless @student.nil?
+        @object.save
         AbstractHistory.create_update_history @abstract_model, @object, @cached_assocations_hash, associations_hash, @modified_assoc, @old_object, _current_user
         redirect_to_on_success
       else
@@ -149,6 +150,8 @@ module RailsAdmin
     end
     
     def final_certificate
+      @authorization_adapter.authorize(:edit, @abstract_model, @object) if @authorization_adapter
+      @page_name = @object.full_name
     end
 
     def bulk_delete
