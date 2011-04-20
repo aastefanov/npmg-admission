@@ -19,7 +19,7 @@
       <% @object.assessments.each do |assess| %>
       <tr>
         <td><%= assess.exam.name %></td>
-        <td><%= assess.competition_mark.nil? ? "-" : assess.competition_mark %></td>
+        <td><%= assess.competition_mark.nil? ? "-" : "%.3f" % assess.competition_mark %></td>
         <td><%= assess.exam.held_in.strftime("%d.%m.%Yг.") %></td>
         <td><%= assess.is_taking_exam? ? "Да" : "Не" %></td>
       </tr>
