@@ -1,4 +1,4 @@
 <div class="grade-container">
   <input data-remote="true" data-url="<%= rails_admin_get_assessments_path(grade[1]) %>" type="checkbox" name="associations[grades][]" value="<%= grade[1] %>"<%= (selected.include?(grade)) ? " checked" : "" %>/>
-  <%= grade %>
+  <%= grade[0] %>
 </div>

@@ -65,12 +65,17 @@ module RailsAdmin
         @authorization_adapter.authorize(:create, @abstract_model, @object)
       end
 
+      if @object.kind_of? Student
+        student_params
+      end
+      
       @object.attributes = @attributes
       @object.associations = params[:associations]
       @page_name = t("admin.actions.create").capitalize + " " + @model_config.create.label.downcase
       @page_type = @abstract_model.pretty_name.downcase
 
-      if @object.save
+      if @object.valid?
+        @object.save
         AbstractHistory.create_history_item("Created #{@model_config.list.with(:object => @object).object_label}", @object, @abstract_model, _current_user)
         redirect_to_on_success
       else
@@ -99,23 +104,13 @@ module RailsAdmin
       @old_object = @object.clone
 
       if @object.kind_of? Student
-        @student = Student.find(params[:id])
-        @student.update_attributes(params[:students])
-        # Fuckin hack, FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        @student.assessments = Array.new
-        params[:assessments].each do |a|
-          attr = (a[:id]) ? Assessment.find(a[:id]) : Assessment.new
-          attr.is_taking_exam = false
-          attr.attributes = a
-          @student.assessments << attr
-        end
+        student_params
       end
 
       @object.attributes = @attributes
       @object.associations = params[:associations]
 
       if @object.valid?
-        @student.save unless @student.nil?
         @object.save
         AbstractHistory.create_update_history @abstract_model, @object, @cached_assocations_hash, associations_hash, @modified_assoc, @old_object, _current_user
         redirect_to_on_success
@@ -190,6 +185,18 @@ module RailsAdmin
     end
 
     private
+
+    def student_params
+      @object.update_attributes(params[:students])
+      # Fuckin hack, FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      @object.assessments = Array.new
+      params[:assessments].each do |a|
+        attr = (a[:id]) ? Assessment.find(a[:id]) : Assessment.new
+        attr.is_taking_exam = false
+        attr.attributes = a
+        @object.assessments << attr
+      end
+    end
 
     def get_bulk_objects
       scope = @authorization_adapter && @authorization_adapter.query(params[:action].to_sym, @abstract_model)

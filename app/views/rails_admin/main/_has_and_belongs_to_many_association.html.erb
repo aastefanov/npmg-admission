@@ -59,9 +59,7 @@
                 <div style="margin-left: 103px;">
                   <% collection.each do |elem| %>
                       <%= render :partial => 'grades', :locals => {:grade => elem, :selected => selected} %>
-                      <input type="hidden" value="" name="associations[grades][]" />
                   <% end %>
-                  <input type="hidden" id="students_grades" name="associations[grades]" value="0" />
                 </div>
                 </div>
                 </div>
