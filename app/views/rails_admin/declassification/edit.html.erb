@@ -1,0 +1,44 @@
+<div id="contentHeader">
+  <h2><%= @page_name %></h2>
+  <% if @object.errors[:base].size > 0 %>
+    <%= @object.errors[:base] %>
+  <% end %>
+</div>
+<%= render(:partial => 'layouts/rails_admin/flash', :locals => {:flash => flash}) -%>
+<div id="contentMainNew">
+  <%= form_for(@object, :url => rails_admin_update_declass_path(:id => @object.id), :html => { :method => "put" }) do %>
+    <input type="hidden" name="assessment[id]" value="<%= @object.id %>" />
+    <fieldset>
+      <h2>Информация</h2>
+      <div class="formSection">
+        <div class="field">
+          <label for="student">Ученик</label>
+          <div class="string" style="border: 0px !important;"><%= @object.student.full_name %></div>
+        </div>
+        <div class="field">
+          <label for="exam">Изпит</label>
+          <div class="string" style="border: 0px !important;"><%= @object.exam.name %></div>
+          <p class="help"></p>
+        </div>
+      </div>
+      <h2>Данни</h2>
+      <div class="formSection">
+        <div class="field">
+          <label for="assessment_exam_mark">Оценка от изпит</label>
+          <input id="assessment_exam_mark" class="string" type="text" name="assessment[exam_mark]" value="<%= @object.exam_mark %>" />
+          <p class="help">Число, което представлява оценка.</p>
+        </div>
+        <div class="field">
+          <label for="assessment_fik_number">Фиктивен номер</label>
+          <input id="assessment_fik_number" class="string" type="text" name="assessment[fik_number]" value="<%= @object.fik_number %>" />
+          <p class="help"></p>
+        </div>
+      </div>
+      <ul id="submitArea">
+        <li id="saveContainer">
+          <%= submit_tag "Запамети", :class => "button default", :id => "save_btn" %>
+        </li>
+      </ul>
+    </fieldset>
+  <% end %>
+</div>

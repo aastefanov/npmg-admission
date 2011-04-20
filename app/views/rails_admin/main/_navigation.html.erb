@@ -7,7 +7,7 @@
 <% models[0..max_visible_tabs-1].each do |model| %>
         <li <%if @page_type == model.abstract_model.pretty_name.downcase %>class="active"<% end %>><%= link_to(model.navigation.label, rails_admin_list_path(:model_name => model.abstract_model.to_param)) %></li>
 <% end %>
-        <li></li>
+        <li <%if params[:controller] == "rails_admin/declassification" %>class="active"<% end %>><%= link_to("Разсекретяване", rails_admin_list_path(:model_name => "declassification")) %></li>
 <% if models.size > max_visible_tabs %>
         <li class="more">
           <a href="#">&raquo;</a>

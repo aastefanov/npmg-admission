@@ -10,6 +10,13 @@ Admission::Application.routes.draw do
     controller "assessments" do
       get "/get_assessments/:id", :to => :get_assessments, :as => "get_assessments"
     end
+
+    controller "declassification" do
+      get "/declassification", :model_name => "students", :to => :index, :as => "declass"
+      get "/declassification/edit", :model_name => "assessment", :to => :edit, :as => "edit_declass"
+      put "/declassification/edit", :model_name => "assessment", :to => :update, :as => "update_declass"
+    end
+
     controller "main" do
       match "/", :to => :index, :as => "dashboard"
       get "/:model_name", :to => :list, :as => "list"
@@ -26,6 +33,7 @@ Admission::Application.routes.draw do
       get "/students/:id/certificate", :model_name => "students", :to => :certificate, :as => "certificate"
       get "/students/:id/final_certificate", :model_name => "students", :to => :final_certificate, :as => "final_certificate"
     end
+
     scope "history", :as => "history" do
       controller "history" do
         match "/list", :to => :list, :as => "list"

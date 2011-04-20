@@ -3,9 +3,11 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="NONE,NOARCHIVE" />
-  <title><%= @abstract_model.pretty_name %> | <%= @plugin_name %></title>
+  <title><%= @page_name || @abstract_model.pretty_name %> | <%= @plugin_name %></title>
   <%= stylesheet_link_tag('rails_admin/base') %>
   <%= stylesheet_link_tag('rails_admin/list') %>
+  <%= stylesheet_link_tag('rails_admin/create.css') %>
+  
   <%= javascript_include_tag('rails_admin/prototype.js') %>
   <%= javascript_include_tag('rails_admin/rails.js') %>
 

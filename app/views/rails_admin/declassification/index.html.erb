@@ -1,0 +1,29 @@
+<div id="contentHeader">
+  <h2><%= @page_name %></h2>
+</div>
+<%= render(:partial => 'layouts/rails_admin/flash', :locals => {:flash => flash}) -%>
+<div id="contentMainNew">
+  <form method="get" action="<%= rails_admin_edit_declass_path %>">
+    <fieldset>
+      <div class="formSection">
+        <div class="field">
+          <label for="exam_id">Изпит</label>
+          <select name="exam_id" class="string">
+          <% @exams.each do |exam| %>
+            <option value="<%= exam.id %>"<%= (params[:exam_id].to_i == exam.id) ? " selected" : "" %>><%= exam.name %></li>
+          <% end %>
+          </select>
+        </div>
+        <div class="field">
+          <label for="student_id">Входящ номер</label>
+          <input type="text" class="string" name="student_id" /> 
+        </div>
+      </div>
+      <ul id="submitArea">
+        <li id="saveContainer">
+          <%= submit_tag "Напред", :class => "button default", :id => "save_btn" %>
+        </li>
+      </ul>
+    </fieldset>
+  </form>
+</div>

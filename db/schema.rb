@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110308232921) do
+ActiveRecord::Schema.define(:version => 20110420083347) do
 
   create_table "assessments", :force => true do |t|
     t.integer "exam_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110308232921) do
     t.decimal "exam_mark",        :precision => 10, :scale => 0
     t.decimal "competition_mark", :precision => 10, :scale => 0
     t.boolean "is_taking_exam"
+    t.string  "fik_number"
   end
 
   create_table "exams", :force => true do |t|
