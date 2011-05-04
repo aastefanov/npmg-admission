@@ -2,6 +2,7 @@ RailsAdmin.config do |config|
   config.excluded_models << Assessment
   
   config.model Student do
+    field :id
     field :first_name
     field :middle_name
     field :last_name
