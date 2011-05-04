@@ -8,7 +8,10 @@ Admission::Application.routes.draw do
   scope "admin", :module => :rails_admin, :as => "rails_admin" do
     # Routes for rails_admin controller
     controller "assessments" do
+      get "/protocols", :model_name => :assessments, :to => :index, :as => "protocols"
       get "/get_assessments/:id", :to => :get_assessments, :as => "get_assessments"
+      get "/protocols/exam", :format => :csv, :to => :exam_protocol, :as => "exam_protocol"
+      get "/protocols/inspector", :format => :csv, :to => :inspector_protocol, :as => "inspector_protocol"
     end
 
     controller "declassification" do

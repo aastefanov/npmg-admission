@@ -9,24 +9,7 @@ module RailsAdmin
     def index
       @authorization_adapter.authorize(:index) if @authorization_adapter
       @page_name = t("admin.dashboard.pagename")
-      @page_type = "dashboard"
-
-      @history = AbstractHistory.history_latest_summaries
-      # history listing with ref = 0 and section = 4
-      @historyListing, @current_month = AbstractHistory.history_for_month(0, 4)
-
-      @abstract_models = RailsAdmin::AbstractModel.all
-
-      @most_recent_changes = {}
-      @count = {}
-      @max = 0
-      @abstract_models.each do |t|
-        current_count = t.count
-        @max = current_count > @max ? current_count : @max
-        @count[t.pretty_name] = current_count
-        @most_recent_changes[t.pretty_name] = AbstractHistory.most_recent_history(t.pretty_name).last.try(:updated_at)
-      end
-
+      
       render :layout => 'rails_admin/dashboard'
     end
 

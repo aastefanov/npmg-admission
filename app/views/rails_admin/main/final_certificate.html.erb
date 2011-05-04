@@ -12,15 +12,11 @@
     <table>
       <tr>
         <th>Изпит</th>
-        <th>Оценка от олимпиада</th>
-        <th>Оценка от изпит</th>
         <th>Крайна оценка</th>
       </tr>
       <% @object.assessments.each do |assess| %>
       <tr>
         <td><%= assess.exam.name %></td>
-        <td><%= assess.competition_mark.nil? ? "-" : "%.3f" % assess.competition_mark %></td>
-        <td><%= assess.exam_mark.nil? ? "неявил се" : "%.3f" % assess.exam_mark %></td>
         <td><%= (assess.final_mark == 0) ? "2.000" : "%.3f" % assess.final_mark %></td>
       </tr>
       <% end %>

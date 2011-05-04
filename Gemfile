@@ -6,7 +6,10 @@ gem 'mysql'
 gem 'devise' # Devise must be required before RailsAdmin
 # gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
-gem 'pdfkit'
+# gem 'pdfkit'
+
+gem 'fastercsv'
+gem 'csv_builder'
 
 group :test do
   gem "rspec-rails", "~> 2.0.1"

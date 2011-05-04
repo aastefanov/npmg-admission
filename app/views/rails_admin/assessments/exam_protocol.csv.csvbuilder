@@ -1,0 +1,4 @@
+csv << ["Входящ номер", "Име", "Допълнителни листи", "Излизания", "Край", "Подпис"]
+@assessments.each do |assessment|
+	csv << [assessment.student_id, assessment.student.full_name, "", "", "", ""]
+end
