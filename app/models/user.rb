@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name
   
-  has_many :students, :foreign_key => :registered_by
+  has_many :students, :foreign_key => :registered_by, :dependent => :destroy
   
   validates_presence_of :first_name, :last_name, :email
   

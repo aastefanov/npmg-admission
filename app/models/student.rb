@@ -1,6 +1,6 @@
 class Student < ActiveRecord::Base
   has_and_belongs_to_many :grades, :join_table => :students_grades
-  has_many :assessments
+  has_many :assessments, :dependent => :destroy
   belongs_to :user, :foreign_key => :registered_by
   
   before_validation lambda { self.registered_by = RailsAdmin.current_user_method }
