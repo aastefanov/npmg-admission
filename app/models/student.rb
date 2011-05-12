@@ -3,8 +3,6 @@ class Student < ActiveRecord::Base
   has_many :assessments, :dependent => :destroy
   belongs_to :user, :foreign_key => :registered_by
   
-  before_validation lambda { self.registered_by = RailsAdmin.current_user_method }
-  
   validates_presence_of :first_name, :middle_name, :last_name, :registered_by
 
   validates :egn,

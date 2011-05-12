@@ -50,6 +50,7 @@ module RailsAdmin
 
       if @object.kind_of? Student
         student_params
+        @object.registered_by = _current_user.id
       end
       
       @object.attributes = @attributes
@@ -88,6 +89,7 @@ module RailsAdmin
 
       if @object.kind_of? Student
         student_params
+        @object.registered_by = _current_user.id
       end
 
       @object.attributes = @attributes
