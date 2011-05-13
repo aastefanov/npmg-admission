@@ -1,7 +1,8 @@
 <div class="content">
-  
+  Изх. №: __________/__________
+  <h1>Служебна бележка</h1>
   <div class="personal-data">
-  <% [["Входящ номер-НПМГ", :id], ["Име", :full_name], ["ЕГН", :egn], ["Телефон", :phone]].each do |pair| %>
+  <% [["Входящ номер-НПМГ", :id], ["Име", :full_name], ["ЕГН", :egn]].each do |pair| %>
     <p>
       <span class="label"><%= pair[0] %>:</span> <span class="value"><%= @object.send pair[1] %></span>
     </p>
@@ -11,37 +12,32 @@
   <div class="exams">
     <table>
       <tr>
-        <th>Изпит</th>
+        <th>Паралелка</th>
         <th>Крайна оценка</th>
       </tr>
-      <% @object.assessments.each do |assess| %>
+      <% @assessments.each do |asses| %>
       <tr>
-        <td><%= assess.exam.name %></td>
-        <td><%= (assess.final_mark == 0) ? "2.000" : "%.3f" % assess.final_mark %></td>
+        <td><%= asses.exam.name %></td>
+        <td><%= Assessment.mark_with_words(asses.final_m) %> <strong><%= asses.final_m.to_f == 0.0 ? "" : asses.final_m %></strong></td>
       </tr>
       <% end %>
     </table>
   </div>
 
-  <div class="signs">
-    <div class="left">
-      <p>
-      <span class="label box">Съгласен съм с верността на данните:</span> <span class="value box sign-box">___________<br /><span class="info">(подпис)</info></span>
-    </p>
-    </div>
-    <div class="right">
-      <p>
-        <span class="label box">Приел:</span> <span class="value box sign-box">___________<br /><span class="info">(<%= @object.user.full_name %>)</info></span>
-      </p>
-      <p class="info" style="padding-top: 20px; clear: both;">
-        Издадено в НПМГ на <%= @object.created_at.strftime("%d.%m.%Yг. в %H:%Mч.") %>
-      </p>
-    </div>
-  </div>
-
   <div class="last-info">
     <div class="important">Важно!</div>
     <br />
-    
+    <ul>
+      <li>Класирането за НПМГ "Акад. Л. Чакалов" става с общото класиране за училищата в град София.</li>
+      <li>Подаване на документи за участие в 1 етап на класирането се извършва в определените училища-гнезда в град София.</li>
+      <li>Училище-гнездо за кандидати извън област София-град е 48 ОУ "Йосиф Ковачев", ул. Клокотница №21, тел.: 02/831 30 87; 02/831 01 20.</li>
+    </ul>
   </div>
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <span class="principal">Иванка Генова</span><br />
+  Директор на НПМГ "Акад. Л. Чакалов"
 </div>

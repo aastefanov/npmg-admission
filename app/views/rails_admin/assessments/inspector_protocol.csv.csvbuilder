@@ -1,16 +1,5 @@
-csv << ["Входящ номер", "Име", "ЕГН", "Фиктивен номвер", "Оценка с думи", "Оценка с цифри"]
+csv << ["ОБЩ ПРОТОКОЛ\n за резултатите от приемен изпит\n по #{@grade.name} след 7ми клас", "", "", "", "", ""]
+csv << ["Входящ номер", "Фиктивен номвер", "Име", "ЕГН", "Оценка с думи", "Оценка с цифри"]
 @assessments.each do |assessment|
-	words = "Слаб"
-	if assessment.final_m.to_f < 3.0
-		words = "Слаб"
-	elsif assessment.final_m.to_f < 3.5
-		words = "Среден"
-	elsif assessment.final_m.to_f < 4.5
-		words = "Добър"
-	elsif assessment.final_m.to_f < 5.5
-		words = "Мн. добър"
-	else
-		words = "Отличен"
-	end
-	csv << [assessment.student_id, assessment.first_name + " " + assessment.middle_name + " " + assessment.last_name, assessment.egn, assessment.fik_number, words, assessment.final_m]
+	csv << [assessment.student_id, assessment.fik_number, assessment.first_name + " " + assessment.middle_name + " " + assessment.last_name, assessment.egn, Assessment.mark_with_words(assessment.final_m), assessment.final_m]
 end

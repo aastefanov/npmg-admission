@@ -82,3 +82,25 @@ td {
   font-weight: bold;
   text-align: center;
 }
+
+ul  {
+  padding-left: 20px;
+}
+
+ul li {
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+ul li:last-child {
+  padding-bottom: 0px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.principal {
+  font-size: 14pt;
+  font-weight: bold;
+}

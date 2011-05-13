@@ -89,7 +89,6 @@ module RailsAdmin
 
       if @object.kind_of? Student
         student_params
-        @object.registered_by = _current_user.id
       end
 
       @object.attributes = @attributes
@@ -132,6 +131,11 @@ module RailsAdmin
     def final_certificate
       @authorization_adapter.authorize(:edit, @abstract_model, @object) if @authorization_adapter
       @page_name = @object.full_name
+
+      @assessments = Assessment.joins(:exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id")
+      @assessments = @assessments.where("assessments.student_id = #{@object.id}")
+      @assessments = @assessments.group("exams_grades.grade_id")
+      @assessments = @assessments.select("assessments.exam_id, assessments.student_id, assessments.fik_number, MAX(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0))) as final_m")
     end
 
     def bulk_delete
@@ -173,13 +177,16 @@ module RailsAdmin
 
     def student_params
       @object.update_attributes(params[:students])
-      # Fuckin hack, FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      @object.assessments = Array.new
+      return if params[:assessments].nil?
       params[:assessments].each do |a|
-        attr = (a[:id]) ? Assessment.find(a[:id]) : Assessment.new
-        attr.is_taking_exam = false
-        attr.attributes = a
-        @object.assessments << attr
+        asses = (a[:id]) ? Assessment.find(a[:id]) : Assessment.new
+        asses.is_taking_exam = false
+        asses.attributes = a
+        if a[:id].nil?
+          @object.assessments << asses 
+        else
+          asses.save
+        end
       end
     end
 
