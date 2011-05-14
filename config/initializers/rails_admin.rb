@@ -25,6 +25,7 @@ RailsAdmin.config do |config|
   end
   
   config.model User do
+    field :is_active
     field :first_name
     field :last_name
     field :email

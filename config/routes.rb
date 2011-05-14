@@ -5,7 +5,7 @@ Admission::Application.routes.draw do
   root :to => "welcome#index"
 
     # Prefix route urls with "admin" and route names with "rails_admin_"
-  scope "admin", :module => :rails_admin, :as => "rails_admin" do
+  scope "adnp2011", :module => :rails_admin, :as => "rails_admin" do
     # Routes for rails_admin controller
     controller "assessments" do
       get "/protocols", :model_name => :assessments, :to => :index, :as => "protocols"
