@@ -3,9 +3,11 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="NONE,NOARCHIVE" />
-  <title><%= @page_name.nil? ? "" : @page_name + " |" %> <%= @plugin_name || "НПМГ прием" %></title>
+  <title><%= @page_name.nil? ? "" : @page_name + " |" %> <%= @plugin_name || "НПМГ приемна кампания " + Time.now.strftime("%Y") %></title>
   <%= stylesheet_link_tag('print', :media => :screen) %>
   <%= stylesheet_link_tag('print', :media => :print) %>
+
+  <%= (@screen) ? stylesheet_link_tag('screen', :media => :screen) : "" %>
 
   <%= csrf_meta_tag %>
 </head>
@@ -14,6 +16,12 @@
     <div class="header">
       <img src="/images/rails_admin/logo_print.jpg" alt="logo" />
     </div>
+    <% if flash[:error] %>
+      <div class="box flash-error full">
+        <%= flash[:error] %>
+      </div>
+      <div style="clear: both;"></div>
+    <% end %>
     <%= content_for(:layout) %>
   </div>
 </body>

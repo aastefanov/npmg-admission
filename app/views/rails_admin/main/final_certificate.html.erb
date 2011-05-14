@@ -17,7 +17,7 @@
       </tr>
       <% @assessments.each do |asses| %>
       <tr>
-        <td><%= asses.exam.name %></td>
+        <td><%= asses.grade_name %></td>
         <td><%= Assessment.mark_with_words(asses.final_m) %> <strong><%= asses.final_m.to_f == 0.0 ? "" : asses.final_m %></strong></td>
       </tr>
       <% end %>

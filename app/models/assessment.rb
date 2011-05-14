@@ -27,4 +27,12 @@ class Assessment < ActiveRecord::Base
 
     words
   end
+
+  def self.num_with_greater_marks(grade, mark)
+    n = Assessment.joins(:exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id", "INNER JOIN grades ON grades.id = exams_grades.grade_id")
+    n = n.where("grades.id = #{grade}")
+    n = n.select("SUM(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0)) > #{mark}) as num")
+
+    return n.first.num
+  end
 end

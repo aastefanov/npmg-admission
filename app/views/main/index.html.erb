@@ -1,0 +1,42 @@
+<div class="boxes">
+  <div class="box">
+     <h2>Къде съм?</h2>
+     <p>
+     Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
+     </p>
+  </div>
+
+  <div class="box">
+     <h2>Къде съм?</h2>
+     <p>
+     Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
+     </p>
+  </div>
+
+  <div class="box">
+     <h2>Къде съм?</h2>
+     <p>
+     Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
+     </p>
+  </div>
+</div>
+<div class="boxes">
+  <div class="box full">
+    <h2>Проверка на резултат</h2>
+    <p>
+    <% form_for :student, :url => results_url do |f| %>
+      <div class="row">
+        <label for="id">Входящ номер:</label>
+        <input type="text" name="id" />
+      </div>
+      <div class="row">
+        <label for="id">ЕГН:</label>
+        <input type="text" name="egn" />
+      </div>
+      <div class="row">
+        <input type="submit" value="Провери" />
+      </div>
+    <% end %>
+    </p>
+  </div>
+</div>

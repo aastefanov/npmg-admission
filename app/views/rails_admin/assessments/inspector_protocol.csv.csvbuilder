@@ -1,5 +1,8 @@
 csv << ["ОБЩ ПРОТОКОЛ\n за резултатите от приемен изпит\n по #{@grade.name} след 7ми клас", "", "", "", "", ""]
 csv << ["Входящ номер", "Фиктивен номвер", "Име", "ЕГН", "Оценка с думи", "Оценка с цифри"]
+used = Array.new
 @assessments.each do |assessment|
+	next if used.include?(assessment.student_id)
+	used << assessment.student_id
 	csv << [assessment.student_id, assessment.fik_number, assessment.first_name + " " + assessment.middle_name + " " + assessment.last_name, assessment.egn, Assessment.mark_with_words(assessment.final_m), assessment.final_m]
 end

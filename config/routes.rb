@@ -1,8 +1,11 @@
 Admission::Application.routes.draw do
   devise_for :users
 
+  controller "students" do
+    post "/get_results", :to => :results, :as => "results"
+  end
   
-  root :to => "welcome#index"
+  root :to => "main#index"
 
     # Prefix route urls with "admin" and route names with "rails_admin_"
   scope "adnp2011", :module => :rails_admin, :as => "rails_admin" do
@@ -47,5 +50,5 @@ Admission::Application.routes.draw do
     end
   end  
 
-  # match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
 end

@@ -132,10 +132,10 @@ module RailsAdmin
       @authorization_adapter.authorize(:edit, @abstract_model, @object) if @authorization_adapter
       @page_name = @object.full_name
 
-      @assessments = Assessment.joins(:exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id")
+      @assessments = Assessment.joins(:exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id", "INNER JOIN grades ON grades.id = exams_grades.grade_id")
       @assessments = @assessments.where("assessments.student_id = #{@object.id}")
       @assessments = @assessments.group("exams_grades.grade_id")
-      @assessments = @assessments.select("assessments.exam_id, assessments.student_id, assessments.fik_number, MAX(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0))) as final_m")
+      @assessments = @assessments.select("grades.name as grade_name, assessments.exam_id, assessments.student_id, assessments.fik_number, MAX(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0))) as final_m")
     end
 
     def bulk_delete

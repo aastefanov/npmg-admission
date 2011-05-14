@@ -11,7 +11,7 @@ module RailsAdmin
 
     def edit
       @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
-      @object = Assessment.where(:student_id => params[:student_id]).where(:exam_id => params[:exam_id]).first
+      @object = Assessment.where(:student_id => params[:student_id]).where(:exam_id => params[:exam_id]).where(:is_taking_exam => true).first
       unless @object
         flash[:error] = "Няма ученик, който да се явява на този изпит!"
         redirect_to rails_admin_declass_path

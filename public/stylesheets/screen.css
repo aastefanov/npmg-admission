@@ -1,0 +1,108 @@
+body {
+  background: white;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5em;
+  padding: 10px;
+}
+
+a:link, a:visited {
+  color: #9E1A0C;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#wrapper {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.boxes {
+  overflow: hidden;
+}
+
+.box {
+  width: 275px;
+  margin-top: 50px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px;
+  float: left;
+  margin-left: 20px;
+}
+
+.box h2 {
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  text-shadow:2px 2px 2px rgba(64, 64, 64, 0.1);
+  font-weight: normal;
+  color:#222;
+}
+
+.box p {
+  margin: 0;
+  color: #666;
+}
+
+.full {
+  width: 906px;
+}
+
+.half {
+  width: 435px;
+}
+
+.box p strong {
+  color: #000;
+}
+
+label {
+  width: 100px;
+  display: inline-block;
+}
+
+.row {
+  margin: 10px 0;
+}
+
+input {
+  border: 1px solid #ccc;
+  padding: 3px;
+  color: #000;
+  margin: 0;
+}
+
+input[type="text"] {
+  width: 200px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  color: #000;
+}
+
+input[type="submit"] {
+  padding: 3px 10px;
+}
+
+input:active {
+  border: 1px solid #222;
+}
+
+.flash-error {
+  background: #FF9494;
+  border: 1px solid red;
+  font-size: 13px;
+  text-align: center;
+  text-shadow:2px 2px 2px rgba(64, 64, 64, 0.1);
+  font-weight: bold;
+  color:#222;
+}
+
+.box ul {
+  margin-left: 10px;
+}
+
+.box li {
+  padding-bottom: 0;
+}
