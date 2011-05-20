@@ -26,11 +26,13 @@
         <div class="field">
           <label for="assessment_exam_mark">Оценка от изпит</label>
           <input id="assessment_exam_mark" class="string" type="text" name="assessment[exam_mark]" value="<%= @object.exam_mark %>" />
+          <span class="errorMessage"><%= @object.errors[:exam_mark] %></span>
           <p class="help">Число, което представлява оценка.</p>
         </div>
         <div class="field">
           <label for="assessment_fik_number">Фиктивен номер</label>
           <input id="assessment_fik_number" class="string" type="text" name="assessment[fik_number]" value="<%= @object.fik_number %>" />
+          <span class="errorMessage"><%= @object.errors[:fik_number] %></span>
           <p class="help"></p>
         </div>
       </div>

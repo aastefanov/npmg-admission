@@ -32,6 +32,9 @@ module RailsAdmin
         redirect_to rails_admin_declass_path(:exam_id => @object.exam_id)
       else
         flash[:error] = "Възникна грешка при валидацията!"
+        if @object.fik_number
+          @object.errors[:fik_number] = "Трябва да бъде въведен." if @object.fik_number.size < 1
+        end
         render :action => :edit, :layout => 'rails_admin/form'
       end
     end

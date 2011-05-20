@@ -64,7 +64,7 @@
                 </div>
                 </div>
                 <div id="assessments">
-                  <%= render Assessment.where(:student_id => params[:id]).all %>
+                  <%= render @object.assessments %>
                 </div>
                 
                  <div class="formSection">
@@ -85,4 +85,28 @@
       onFailure:     function(request) { element.fire("ajax:failure",  request); }
     });
   });
+
+  document.on("submit", "form", function(event, element) {
+    if(!isValidEGN($("students_egn").value)) {
+      var answer = confirm("ВНИМАНИЕ, невалидно ЕГН! Да бъде ли записан ученикът?");
+      if(answer == false)
+        event.stop();
+    }   
+  });
+
+  function isValidEGN(s){
+    var t = [2,4,8,5,10,9,7,3,6];
+    if(typeof s != 'string') return false;
+    if(s.length != 10) return false;
+    var rv; var rr = 0;
+    for(var i=0;i<9;i++){
+        if(s[i] == 0) continue ;
+        rr = rr + (s[i] * t[i]);
+    }
+    var chs = 0;
+    chs = (rr % 11);
+    if(chs == 10) chs = 0;
+    if(s[9] == chs) return true;
+    else return false;
+}
 </script>

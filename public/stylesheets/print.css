@@ -31,7 +31,7 @@ a:link, a:visited {
 }
 
 .content, .exams, .signs, .last-info {
-  margin-top: 50pt;
+  margin-top: 30pt;
   clear: both;
   overflow: hidden;
 }
@@ -89,7 +89,7 @@ ul  {
 
 ul li {
   font-weight: bold;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 ul li:last-child {
@@ -103,4 +103,8 @@ h1 {
 .principal {
   font-size: 14pt;
   font-weight: bold;
+}
+
+.personal-data p {
+  margin: 5px 0;
 }

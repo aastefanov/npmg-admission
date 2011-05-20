@@ -10,6 +10,11 @@
   <%= (@screen) ? stylesheet_link_tag('screen', :media => :screen) : "" %>
 
   <%= csrf_meta_tag %>
+  <style type="text/css" media="print">
+    .print {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper">

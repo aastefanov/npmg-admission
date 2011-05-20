@@ -47,20 +47,23 @@ module RailsAdmin
         end
         @authorization_adapter.authorize(:create, @abstract_model, @object)
       end
-
-      if @object.kind_of? Student
-        student_params
-        @object.registered_by = _current_user.id
-      end
       
-      @object.attributes = @attributes
-      @object.associations = params[:associations]
       @page_name = t("admin.actions.create").capitalize + " " + @model_config.create.label.downcase
       @page_type = @abstract_model.pretty_name.downcase
 
+      if @object.kind_of? Student
+        @object = Student.new
+        @object.attributes = params[:students]
+        @object.attributes[:assessments_attributes] = params[:assessments]
+        @object.registered_by = _current_user.id
+      else
+        @object.attributes = @attributes
+        @object.associations = params[:associations]
+      end
+
       if @object.valid?
         @object.save
-        AbstractHistory.create_history_item("Created #{@model_config.list.with(:object => @object).object_label}", @object, @abstract_model, _current_user)
+        AbstractHistory.create_history_item("Created #{@model_config.list.with(:object => @object).object_label}", @object, @abstract_model, _current_user) unless @object.kind_of? Student
         redirect_to_on_success
       else
         render_error
@@ -88,15 +91,17 @@ module RailsAdmin
       @old_object = @object.clone
 
       if @object.kind_of? Student
-        student_params
+        @object = Student.find(params[:id])
+        @object.attributes = params[:students]
+        @object.attributes[:assessments_attributes] = params[:assessments]
+      else
+        @object.attributes = @attributes
+        @object.associations = params[:associations]
       end
-
-      @object.attributes = @attributes
-      @object.associations = params[:associations]
 
       if @object.valid?
         @object.save
-        AbstractHistory.create_update_history @abstract_model, @object, @cached_assocations_hash, associations_hash, @modified_assoc, @old_object, _current_user
+        AbstractHistory.create_update_history(@abstract_model, @object, @cached_assocations_hash, associations_hash, @modified_assoc, @old_object, _current_user) unless @object.kind_of? Student
         redirect_to_on_success
       else
         render_error :edit
@@ -174,21 +179,6 @@ module RailsAdmin
     end
 
     private
-
-    def student_params
-      @object.update_attributes(params[:students])
-      return if params[:assessments].nil?
-      params[:assessments].each do |a|
-        asses = (a[:id]) ? Assessment.find(a[:id]) : Assessment.new
-        asses.is_taking_exam = false
-        asses.attributes = a
-        if a[:id].nil?
-          @object.assessments << asses 
-        else
-          asses.save
-        end
-      end
-    end
 
     def get_bulk_objects
       scope = @authorization_adapter && @authorization_adapter.query(params[:action].to_sym, @abstract_model)

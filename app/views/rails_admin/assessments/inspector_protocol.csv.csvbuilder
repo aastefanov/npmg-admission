@@ -4,5 +4,5 @@ used = Array.new
 @assessments.each do |assessment|
 	next if used.include?(assessment.student_id)
 	used << assessment.student_id
-	csv << [assessment.student_id, assessment.fik_number, assessment.first_name + " " + assessment.middle_name + " " + assessment.last_name, assessment.egn, Assessment.mark_with_words(assessment.final_m), assessment.final_m]
+	csv << [assessment.student_id, assessment.fik_number, assessment.first_name + " " + assessment.middle_name + " " + assessment.last_name, assessment.egn, Assessment.mark_with_words(assessment.final_m), assessment.final_m.to_f == 0 ? "2.000" : assessment.final_m]
 end
