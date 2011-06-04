@@ -25,7 +25,7 @@
 
 <div class="boxes">
   <% @assessments.each do |assessment| %>
-    <div id="" class="box full">
+    <div id="<%= assessment.grade_id %>" class="box full">
       <h2>Профил - <%= assessment.grade_name %></h2>
       <p>
         <div class="row">

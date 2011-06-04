@@ -53,8 +53,7 @@ module RailsAdmin
 
       if @object.kind_of? Student
         @object = Student.new
-        @object.attributes = params[:students]
-        @object.attributes[:assessments_attributes] = params[:assessments]
+        student_stuff
         @object.registered_by = _current_user.id
       else
         @object.attributes = @attributes
@@ -92,8 +91,7 @@ module RailsAdmin
 
       if @object.kind_of? Student
         @object = Student.find(params[:id])
-        @object.attributes = params[:students]
-        @object.attributes[:assessments_attributes] = params[:assessments]
+        student_stuff
       else
         @object.attributes = @attributes
         @object.associations = params[:associations]
@@ -179,6 +177,20 @@ module RailsAdmin
     end
 
     private
+    
+    def student_stuff
+        @object.attributes = params[:students]
+        @object.attributes[:assessments_attributes] = params[:assessments]
+        @object.grades = []
+        return if params[:associations].nil?
+        params[:associations][:grades].each do |grade|
+          begin
+            @object.grades << Grade.find(grade.to_i)
+          rescue ActiveRecord::RecordNotFound
+            @object.errors.add "Wrong grade_id given!"
+          end
+        end
+    end    
 
     def get_bulk_objects
       scope = @authorization_adapter && @authorization_adapter.query(params[:action].to_sym, @abstract_model)

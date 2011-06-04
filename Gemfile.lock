@@ -101,6 +101,3 @@ DEPENDENCIES
   mysql
   rails (= 3.0.3)
   rspec-rails (~> 2.0.1)
-
-METADATA
-  version: 1.0.6
