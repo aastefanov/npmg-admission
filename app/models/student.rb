@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   has_many :assessments, :dependent => :destroy
   belongs_to :user, :foreign_key => :registered_by
   
-  validates_presence_of :first_name, :middle_name, :last_name, :registered_by
+  validates_presence_of :first_name, :middle_name, :last_name, :registered_by, :grades
 
   after_update :save_assessments
 
