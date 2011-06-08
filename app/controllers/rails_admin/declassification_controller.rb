@@ -38,5 +38,49 @@ module RailsAdmin
         render :action => :edit, :layout => 'rails_admin/form'
       end
     end
+
+    # Format: exam_id, student_id, fik_number, exam_mark
+    def import
+      @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
+      @errors = []
+      @i = 0
+      begin
+        FasterCSV.parse(params[:csv].read) do |row|
+          student = Assessment.where(:student_id => row[1]).where(:exam_id => row[0]).where(:is_taking_exam => true).first
+          unless student
+            @errors << [row[0], row[1], false]
+            next
+          end
+
+          student.fik_number = row[2]
+          student.exam_mark = row[3]
+          
+          unless student.save
+            @errors << [row[0], row[1], true]
+          else
+            @i += 1
+          end
+        end
+      rescue FasterCSV::MalformedCSVError
+        flash[:error] = "Грешно форматиран файл!"
+        redirect_to rails_admin_declass_path
+        return
+      #rescue
+       # flash[:error] = "Възникна друга грешка..."
+        #redirect_to rails_admin_declass_path
+        #return
+     end
+
+      if @errors.size == 0
+        flash[:notice] = "Успешно разсекретихте #{@i} работи."
+        redirect_to rails_admin_declass_path
+        return
+      else
+        flash[:error] = "Възникнаха грешки при разсекретяването на #{@errors.size} работи."
+      end
+
+      @page_name = "Автоматизирано разсекратяване"
+      render :layout => 'rails_admin/list'
+    end
   end
 end

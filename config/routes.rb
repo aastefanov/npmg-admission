@@ -15,10 +15,12 @@ Admission::Application.routes.draw do
       get "/get_assessments/:id", :to => :get_assessments, :as => "get_assessments"
       get "/protocols/exam", :format => :csv, :to => :exam_protocol, :as => "exam_protocol"
       get "/protocols/inspector", :format => :csv, :to => :inspector_protocol, :as => "inspector_protocol"
+      get "/protocols/all_students", :format => :csv, :to => :all_students, :as => "all_students_protocol"
     end
 
     controller "declassification" do
       get "/declassification", :model_name => "students", :to => :index, :as => "declass"
+      post "/declassification/import", :model_name => "assessment", :to => :import, :as => "import_declass"
       get "/declassification/edit", :model_name => "assessment", :to => :edit, :as => "edit_declass"
       put "/declassification/edit", :model_name => "assessment", :to => :update, :as => "update_declass"
     end

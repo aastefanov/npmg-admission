@@ -45,4 +45,17 @@
       </ul>
     </fieldset>
   </form>
+  <br />
+  <br />
+  <form method="get" action="<%= rails_admin_all_students_protocol_path %>">
+    <fieldset>
+      <h2>Краен списък за служебни бележки</h2>
+      <br />
+      <ul id="submitArea">
+        <li id="saveContainer">
+          <%= submit_tag "Напред", :class => "button default", :id => "save_btn" %>
+        </li>
+      </ul>
+    </fieldset>
+  </form>
 </div>

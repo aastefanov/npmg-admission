@@ -5,6 +5,7 @@
 <div id="contentMainNew">
   <form method="get" action="<%= rails_admin_edit_declass_path %>">
     <fieldset>
+      <h2>Ръчно разсекретяване</h2>
       <div class="formSection">
         <div class="field">
           <label for="exam_id">Изпит</label>
@@ -26,4 +27,23 @@
       </ul>
     </fieldset>
   </form>
+
+  <br />
+  <br />
+  <% form_for :import, :url => rails_admin_import_declass_path, :method => :post, :html => {:multipart => true} do |f| %>
+    <fieldset>
+      <h2>Автоматично разсекретяване</h2>
+      <div class="formSection">
+        <div class="field">
+          <label for="csv">Файл</label>
+          <input type="file" class="string" name="csv" /> 
+        </div>
+      </div>
+      <ul id="submitArea">
+        <li id="saveContainer">
+          <%= submit_tag "Напред", :class => "button default", :id => "save_btn" %>
+        </li>
+      </ul>
+    </fieldset>
+  <% end %>
 </div>
