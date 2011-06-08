@@ -44,6 +44,7 @@ module RailsAdmin
       @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
       @errors = []
       @i = 0
+      unless params[:csv].nil?
       begin
         FasterCSV.parse(params[:csv].read) do |row|
           student = Assessment.where(:student_id => row[1]).where(:exam_id => row[0]).where(:is_taking_exam => true).first
@@ -65,11 +66,8 @@ module RailsAdmin
         flash[:error] = "Грешно форматиран файл!"
         redirect_to rails_admin_declass_path
         return
-      #rescue
-       # flash[:error] = "Възникна друга грешка..."
-        #redirect_to rails_admin_declass_path
-        #return
-     end
+      end
+      end
 
       if @errors.size == 0
         flash[:notice] = "Успешно разсекретихте #{@i} работи."
