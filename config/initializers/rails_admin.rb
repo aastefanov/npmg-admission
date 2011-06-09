@@ -15,6 +15,7 @@ RailsAdmin.config do |config|
   end
   
   config.model Exam do
+    field :id
     field :name
     field :held_in
   end
