@@ -13,9 +13,9 @@ gem 'jquery-rails'
 
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'devise-encryptable'
-# gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 # gem 'pdfkit'
 
-gem 'fastercsv'
+#gem 'fastercsv'
 gem 'csv_builder'

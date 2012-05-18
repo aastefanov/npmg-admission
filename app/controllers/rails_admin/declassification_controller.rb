@@ -2,17 +2,24 @@
 
 module RailsAdmin
   class DeclassificationController < RailsAdmin::ApplicationController
+    include ActionView::Helpers::TextHelper
+    include RailsAdmin::MainHelper
+    include RailsAdmin::ApplicationHelper
+
+    layout :get_layout
+
+    def get_layout
+      "rails_admin/application"
+    end
 
     def index
-      @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @page_name = "Разсекратяване"
       @exams = Exam.all
-
-      render :layout => 'rails_admin/list'
     end
 
     def edit
-      @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @object = Assessment.where(:student_id => params[:student_id]).where(:exam_id => params[:exam_id]).where(:is_taking_exam => true).first
       unless @object
         flash[:error] = "Няма ученик, който да се явява на този изпит!"
@@ -22,11 +29,10 @@ module RailsAdmin
 
       @page_name = "Разсекратяване"
 
-      render :layout => 'rails_admin/form'
     end
 
     def update
-      @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @object = Assessment.find(params[:assessment][:id])
 
       if @object.update_attributes(params[:assessment])
@@ -37,13 +43,13 @@ module RailsAdmin
         if @object.fik_number
           @object.errors[:fik_number] = "Трябва да бъде въведен." if @object.fik_number.size < 1
         end
-        render :action => :edit, :layout => 'rails_admin/form'
+        render :action => :edit
       end
     end
 
     # Format: exam_id, student_id, fik_number, exam_mark
     def import
-      @authorization_adapter.authorize(:index, @abstract_model) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @errors = []
       @i = 0
       unless params[:csv].nil?
@@ -80,7 +86,6 @@ module RailsAdmin
       end
 
       @page_name = "Автоматизирано разсекратяване"
-      render :layout => 'rails_admin/list'
     end
   end
 end

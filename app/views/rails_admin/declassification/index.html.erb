@@ -1,9 +1,8 @@
 <div id="contentHeader">
   <h2><%= @page_name %></h2>
 </div>
-<%= render(:partial => 'layouts/rails_admin/flash', :locals => {:flash => flash}) -%>
 <div id="contentMainNew">
-  <form method="get" action="<%= rails_admin_edit_declass_path %>">
+  <form method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_edit_declass_path %>">
     <fieldset>
       <h2>Ръчно разсекретяване</h2>
       <div class="formSection">
@@ -30,7 +29,7 @@
 
   <br />
   <br />
-  <% form_for :import, :url => rails_admin_import_declass_path, :method => :post, :html => {:multipart => true} do |f| %>
+  <% form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_import_declass_path, :method => :post, :html => {:multipart => true} do |f| %>
     <fieldset>
       <h2>Автоматично разсекретяване</h2>
       <div class="formSection">
