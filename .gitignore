@@ -7,3 +7,4 @@ ENV=production/
 public/javascripts/ckeditor/
 test/
 tmp/
+.sass-cache/

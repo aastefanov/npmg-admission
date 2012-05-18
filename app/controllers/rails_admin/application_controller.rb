@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rails_admin/abstract_model'
 
 module RailsAdmin

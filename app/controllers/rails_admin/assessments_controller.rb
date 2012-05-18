@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module RailsAdmin
   class AssessmentsController < RailsAdmin::ApplicationController
     def index

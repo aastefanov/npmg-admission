@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Assessment < ActiveRecord::Base
   belongs_to :exam
   belongs_to :student

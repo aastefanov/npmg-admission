@@ -13,13 +13,20 @@ module RailsAdmin
         excluded_models << ['History']
 
         # orig regexp -- found 'class' even if it's within a comment or a quote
-        filenames = Dir.glob(Rails.application.paths.app.models.collect { |path| File.join(path, "**/*.rb") })
-        class_names = []
-        filenames.each do |filename|
-          class_names += File.read(filename).scan(/class ([\w\d_\-:]+)/).flatten
-        end
-        possible_models = Module.constants | class_names
+        #filenames = Dir.glob(Rails.application.paths.app.models.collect { |path| File.join(path, "**/*.rb") })
+        #class_names = []
+        #filenames.each do |filename|
+        #  class_names += File.read(filename).scan(/class ([\w\d_\-:]+)/).flatten
+        #end
+        #possible_models = Module.constants | class_names
         #Rails.logger.info "possible_models: #{possible_models.inspect}"
+        
+	possible_models = []
+	ActiveRecord::Base.send(:subclasses).each do |model| 
+  	  possible_models << model.name 
+	end 
+
+
         add_models(possible_models, excluded_models)
 
         #Rails.logger.info "final models: #{@models.map(&:model).inspect}"
