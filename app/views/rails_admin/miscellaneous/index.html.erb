@@ -1,0 +1,17 @@
+<ul class='nav nav-tabs' style="display: block !important;">
+  <li id="first_button" class="icon show_member_link active"><a href="#first_import" onclick=""><i class="icon-pencil"></i> <span>Автоматично въвеждане на точки-оценка</span></a></li>
+</ul>
+
+<%= form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_points_marks_import_path, :method => :post, :html => {:multipart => true, :id => "auto_import", :class => "form-horizontal densier"} do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label" for="csv">Файл</label>
+      <div class="controls">
+        <input type="file" class="string" name="csv" /> 
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= submit_tag "Въвеждане", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+<% end %>

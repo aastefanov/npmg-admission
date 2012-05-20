@@ -24,6 +24,11 @@ Admission::Application.routes.draw do
       get "/declassification/edit", :model_name => "students", :to => :edit, :as => "edit_declass"
       put "/declassification/edit", :model_name => "students", :to => :update, :as => "update_declass"
     end
+
+    controller "miscellaneous" do
+      get "/miscellaneous", :model_name => "students", :to => :index, :as => "misc"
+      post "/miscellaneous/points_marks_import", :model_name => "students", :to => :points_marks_import, :as => "points_marks_import"
+    end
   end
 
   mount RailsAdmin::Engine => '/adnp2012', :as => 'rails_admin'
