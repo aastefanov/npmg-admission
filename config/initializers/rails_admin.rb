@@ -15,6 +15,7 @@ RailsAdmin.config do |config|
     delete
     history_show
     show_in_app
+    assessment_certificate
   end
 
   config.model Assessment do
