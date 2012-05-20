@@ -16,16 +16,6 @@ module RailsAdmin
       @grades = Grade.all
     end
 
-    def get_assessments
-      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
-      
-      @assessments = Array.new
-      @grade = Grade.find(params[:id])
-      @grade.exams.each do |exam|
-        @assessments << Assessment.build(exam)
-      end
-    end
-
     def exam_protocol
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
 

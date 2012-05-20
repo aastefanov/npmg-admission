@@ -11,7 +11,7 @@
   <div class="box full">
     <h2>Проверка на резултат</h2>
     <p>
-    <% form_for :student, :url => results_url do |f| %>
+    <%= form_for :student, :url => results_url do |f| %>
       <div class="row">
         <label for="id">Входящ номер:</label>
         <input type="text" name="id" />

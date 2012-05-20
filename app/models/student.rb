@@ -2,6 +2,7 @@ class Student < ActiveRecord::Base
   has_and_belongs_to_many :grades, :join_table => :students_grades
   has_many :assessments, :dependent => :destroy
   belongs_to :user, :foreign_key => :registered_by
+  has_paper_trail
 
   accepts_nested_attributes_for :assessments, :allow_destroy => true
   # attr_accessible :assessments_attributes

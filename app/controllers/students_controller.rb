@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class StudentsController < ApplicationController
   def results
     @screen = true

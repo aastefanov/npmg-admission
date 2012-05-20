@@ -147,6 +147,7 @@ bg:
       exam: "Изпити"
       grade: "Паралелки"
       student: "Ученици"
+      assessment: "Изпит"
     attributes:
       student:
         id: "Входящ номер"  
@@ -157,6 +158,10 @@ bg:
         phone: "Телефон"
         grades: "Паралелки"
         assessments: "Изпити"
+      assessment:
+        exam: "Изпит"
+        competition_mark: "Оценка от състезание"
+        is_taking_exam: "Ще се яви"
       exam:
         name: "Име"
         held_in: "Провежда се на"
@@ -164,6 +169,7 @@ bg:
         name: "Име"
         exams: "Изпити"
       user:
+        is_active: "Активен"
         first_name: "Първо име"
         last_name: "Фамилия"
         email: "Мейл"

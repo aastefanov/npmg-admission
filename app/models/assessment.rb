@@ -3,6 +3,7 @@
 class Assessment < ActiveRecord::Base
   belongs_to :exam
   belongs_to :student
+  has_paper_trail
 
   validates_presence_of :exam_id
 

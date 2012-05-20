@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 RailsAdmin.config do |config|
-  config.audit_with :history, User
+  config.audit_with :paper_trail, User
   config.current_user_method { current_user } #auto-generated
   config.main_app_name = ["НПМГ", "Прием"]
 
