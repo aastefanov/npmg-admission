@@ -2,7 +2,7 @@
 
 RailsAdmin.config do |config|
   config.audit_with :paper_trail, User
-  config.current_user_method { current_user } #auto-generated
+  config.current_user_method { current_user }
   config.main_app_name = ["НПМГ", "Прием"]
 
   config.actions do
@@ -25,6 +25,23 @@ RailsAdmin.config do |config|
     field :exam
     field :competition_mark
     field :is_taking_exam
+  end
+
+  config.model Competition do
+    field :name
+    field :exam
+  end
+
+  config.model Applicant do
+    visible false
+  end
+
+  config.model Review do
+    visible false
+  end
+
+  config.model Asset do
+    visible false
   end
   
   config.model Student do

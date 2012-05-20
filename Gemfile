@@ -12,6 +12,7 @@ end
 gem 'jquery-rails'
 
 gem 'paper_trail', '~> 2'
+gem "paperclip", "~> 3.0"
 
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'devise-encryptable'

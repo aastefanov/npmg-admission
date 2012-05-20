@@ -148,6 +148,7 @@ bg:
       grade: "Паралелки"
       student: "Ученици"
       assessment: "Изпит"
+      competition: "Състезания"
     attributes:
       student:
         id: "Входящ номер"  
@@ -168,6 +169,9 @@ bg:
       grade:
         name: "Име"
         exams: "Изпити"
+      competition:
+        name: "Име"
+        exam: "Изпит"
       user:
         is_active: "Активен"
         first_name: "Първо име"

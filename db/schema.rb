@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520190410) do
+ActiveRecord::Schema.define(:version => 20120520211803) do
+
+  create_table "applicants", :force => true do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.integer  "egn"
+    t.integer  "phone"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "password_salt"
+    t.integer  "version"
+    t.integer  "approved"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "assessments", :force => true do |t|
     t.integer "exam_id"
@@ -21,6 +36,28 @@ ActiveRecord::Schema.define(:version => 20120520190410) do
     t.decimal "exam_mark",        :precision => 4, :scale => 3
     t.decimal "competition_mark", :precision => 4, :scale => 3
   end
+
+  create_table "assets", :force => true do |t|
+    t.string   "description"
+    t.integer  "applicant_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "assets", ["applicant_id"], :name => "index_assets_on_applicant_id"
+
+  create_table "competitions", :force => true do |t|
+    t.string   "name"
+    t.integer  "exam_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "competitions", ["exam_id"], :name => "index_competitions_on_exam_id"
 
   create_table "exams", :force => true do |t|
     t.string "name"
@@ -36,6 +73,16 @@ ActiveRecord::Schema.define(:version => 20120520190410) do
     t.string "name"
   end
 
+  create_table "points_to_marks", :force => true do |t|
+    t.integer  "to_range"
+    t.integer  "competition_id"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.decimal  "mark",           :precision => 4, :scale => 3
+  end
+
+  add_index "points_to_marks", ["competition_id"], :name => "index_points_to_marks_on_competition_id"
+
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
@@ -48,6 +95,15 @@ ActiveRecord::Schema.define(:version => 20120520190410) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "reviews", :force => true do |t|
+    t.text     "content"
+    t.integer  "applicant_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "reviews", ["applicant_id"], :name => "index_reviews_on_applicant_id"
 
   create_table "students", :force => true do |t|
     t.string   "first_name"
