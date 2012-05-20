@@ -4,6 +4,8 @@ class Assessment < ActiveRecord::Base
   belongs_to :exam
   belongs_to :student
 
+  validates_presence_of :exam_id
+
   validates :exam_mark,
     :inclusion => {:in => 2.0..6.0},
     :allow_blank => true,
@@ -23,7 +25,7 @@ class Assessment < ActiveRecord::Base
 
   def validate_special
     if competition_mark.nil? and !is_taking_exam?
-      errors[:base] << "Ученикът трябва или да има оценка от олимпиада или да се яви на изпит!"
+      errors[:is_taking_exam] << "Ученикът трябва или да има оценка от олимпиада или да се яви на изпит!"
     end
   end
 

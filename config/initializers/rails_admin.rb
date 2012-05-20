@@ -5,7 +5,25 @@ RailsAdmin.config do |config|
   config.current_user_method { current_user } #auto-generated
   config.main_app_name = ["НПМГ", "Прием"]
 
-  config.excluded_models << Assessment
+  config.actions do
+    dashboard
+    index
+    new
+    history_index
+    show
+    edit
+    delete
+    history_show
+    show_in_app
+  end
+
+  config.model Assessment do
+    visible false
+
+    field :exam
+    field :competition_mark
+    field :is_taking_exam
+  end
   
   config.model Student do
     field :id
@@ -17,7 +35,16 @@ RailsAdmin.config do |config|
     
     group :grades do
       field :grades
+      field :assessments
     end
+
+    edit do 
+      field :registered_by, :hidden do
+        default_value do
+          bindings[:view]._current_user.id
+        end
+      end
+    end 
   end
   
   config.model Exam do
