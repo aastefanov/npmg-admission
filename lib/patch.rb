@@ -16,8 +16,8 @@ RailsAdmin::ApplicationHelper.module_eval do
           }.html_safe
         end.join.html_safe
       end.join.html_safe + %{
-        <li><a href="#{Rails.application.routes.url_helpers.rails_admin_protocols_path}">Протоколи</a></li>
-        <li><a href="#{Rails.application.routes.url_helpers.rails_admin_declass_path}">Разсекретяване</a></li>
+        <li><a class="pjax" href="#{Rails.application.routes.url_helpers.rails_admin_protocols_path}">Протоколи</a></li>
+        <li><a class="pjax" href="#{Rails.application.routes.url_helpers.rails_admin_declass_path}">Разсекретяване</a></li>
       }.html_safe
     end
 end

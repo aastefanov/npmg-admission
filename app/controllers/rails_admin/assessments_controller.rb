@@ -2,17 +2,22 @@
 
 module RailsAdmin
   class AssessmentsController < RailsAdmin::ApplicationController
+    include ActionView::Helpers::TextHelper
+    include RailsAdmin::MainHelper
+    include RailsAdmin::ApplicationHelper
+
+    layout "rails_admin"
+
+
     def index
-      @authorization_adapter.authorize(:index) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @page_name = "Протоколи"
       @exams = Exam.all
       @grades = Grade.all
-
-      render :layout => 'rails_admin/list'
     end
 
     def get_assessments
-      @authorization_adapter.authorize(:index) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       
       @assessments = Array.new
       @grade = Grade.find(params[:id])
@@ -22,7 +27,7 @@ module RailsAdmin
     end
 
     def exam_protocol
-      @authorization_adapter.authorize(:index) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
 
       @exam = Exam.find(params[:exam_id])
       @assessments = Assessment.where(:exam_id => params[:exam_id], :is_taking_exam => true).order(:student_id)
@@ -36,7 +41,7 @@ module RailsAdmin
    end
 
    def inspector_protocol
-      @authorization_adapter.authorize(:index) if @authorization_adapter
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
 
       @grade = Grade.find(params[:grade_id])
       @assessments = Assessment.joins(:student, :exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id AND exams_grades.grade_id = #{params[:grade_id]}", "INNER JOIN students_grades ON students_grades.student_id = students.id AND students_grades.grade_id = exams_grades.grade_id")
@@ -52,6 +57,8 @@ module RailsAdmin
    end
 
     def all_students
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
+
       @grades = Grade.all
       @students = Student.all
       @assessments = {}

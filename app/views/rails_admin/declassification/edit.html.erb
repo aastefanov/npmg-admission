@@ -1,46 +1,41 @@
 <div id="contentHeader">
-  <h2><%= @page_name %></h2>
   <% if @object.errors[:base].size > 0 %>
     <%= @object.errors[:base] %>
   <% end %>
 </div>
-<%= render(:partial => 'layouts/rails_admin/flash', :locals => {:flash => flash}) -%>
-<div id="contentMainNew">
-  <%= form_for(@object, :url => rails_admin_update_declass_path(:id => @object.id), :html => { :method => "put" }) do %>
-    <input type="hidden" name="assessment[id]" value="<%= @object.id %>" />
-    <fieldset>
-      <h2>Информация</h2>
-      <div class="formSection">
-        <div class="field">
-          <label for="student">Ученик</label>
-          <div class="string" style="border: 0px !important; width: 350px !important;"><%= @object.student.full_name %></div>
-        </div>
-        <div class="field">
-          <label for="exam">Изпит</label>
-          <div class="string" style="border: 0px !important; width: 350px !important;"><%= @object.exam.name %></div>
-          <p class="help"></p>
-        </div>
+<%= form_for(@object, :url => Rails.application.routes.url_helpers.rails_admin_update_declass_path(:id => @object.id), :html => { :method => "put", :class => "form-horizontal densier" }) do %>
+  <input type="hidden" name="assessment[id]" value="<%= @object.id %>" />
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label" for="student">Ученик</label>
+      <div class="controls">
+        <div class="string" style="border: 0px !important; width: 350px !important;"><%= @object.student.full_name %></div>
       </div>
-      <h2>Данни</h2>
-      <div class="formSection">
-        <div class="field">
-          <label for="assessment_exam_mark">Оценка от изпит</label>
-          <input id="assessment_exam_mark" class="string" type="text" name="assessment[exam_mark]" value="<%= @object.exam_mark %>" />
-          <span class="errorMessage"><%= @object.errors[:exam_mark] %></span>
-          <p class="help">Число, което представлява оценка.</p>
-        </div>
-        <div class="field">
-          <label for="assessment_fik_number">Фиктивен номер</label>
-          <input id="assessment_fik_number" class="string" type="text" name="assessment[fik_number]" value="<%= @object.fik_number %>" />
-          <span class="errorMessage"><%= @object.errors[:fik_number] %></span>
-          <p class="help"></p>
-        </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="exam">Изпит</label>
+      <div class="controls">
+        <div class="string" style="border: 0px !important; width: 350px !important;"><%= @object.exam.name %></div>
       </div>
-      <ul id="submitArea">
-        <li id="saveContainer">
-          <%= submit_tag "Запамети", :class => "button default", :id => "save_btn" %>
-        </li>
-      </ul>
-    </fieldset>
-  <% end %>
-</div>
+    </div>
+    <div class="control-group <%= @object.errors[:exam_mark].length > 0 ? 'error' : '' %>">
+      <label class="control-label" for="assessment_exam_mark">Оценка от изпит</label>
+      <div class="controls">
+        <input id="assessment_exam_mark" class="string" type="text" name="assessment[exam_mark]" value="<%= @object.exam_mark %>" />
+        <%= @object.errors[:exam_mark].length > 0 ? '<span class="help-inline">'.html_safe + @object.errors[:exam_mark].first + '</span>'.html_safe : '' %>
+        <p class="help-block">Оценка.</p>
+      </div>
+    </div>
+    <div class="control-group <%= @object.errors[:fik_number].length > 0 ? 'error' : '' %>">
+      <label class="control-label" for="assessment_fik_number">Фиктивен номер</label>
+      <div class="controls">
+        <input id="assessment_fik_number" class="string" type="text" name="assessment[fik_number]" value="<%= @object.fik_number %>" />
+        <%= @object.errors[:fik_number].length > 0 ? '<span class="help-inline">'.html_safe + @object.errors[:fik_number].first + '</span>'.html_safe : '' %>
+        <p class="help-block"></p>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= submit_tag "Разсекретяване", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+<% end %>

@@ -1,14 +1,14 @@
-<div id="contentHeader">
-  <h2><%= @page_name %></h2>
-</div>
-<%= render(:partial => 'layouts/rails_admin/flash', :locals => {:flash => flash}) -%>
-<div id="contentMainNew">
-  <form method="get" action="<%= rails_admin_exam_protocol_path %>">
-    <fieldset>
-      <h2>Квесторски протокол</h2>
-      <div class="formSection">
-        <div class="field">
-          <label for="exam_id">Изпит</label>
+<ul class='nav nav-tabs' style="display: block !important;">
+  <li id="first_button" class="icon show_member_link active"><a href="#first_box" onclick="$('#first_button').addClass('active'); $('#second_button').removeClass('active'); $('#third_button').removeClass('active'); $('#second_box').hide(); $('#third_box').hide(); $('#first_box').show();"><i class="icon-pencil"></i> <span>Квесторски протокол</span></a></li>
+  <li id="second_button" class="icon show_member_link"><a href="#second_box" onclick="$('#second_button').addClass('active'); $('#first_button').removeClass('active'); $('#third_button').removeClass('active'); $('#first_box').hide(); $('#third_box').hide(); $('#second_box').show();"><i class="icon-book"></i> <span>Протокол за инспекторат</span></a></li>
+  <li id="third_button" class="icon show_member_link"><a href="#third_box" onclick="$('#third_button').addClass('active'); $('#second_button').removeClass('active'); $('#first_button').removeClass('active'); $('#first_box').hide(); $('#second_box').hide(); $('#third_box').show();"><i class="icon-book"></i> <span>Краен списък за служебни бележки</span></a></li>
+</ul>
+
+<form id="first_box" class="form-horizontal densier" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_exam_protocol_path %>">
+  <fieldset>
+    <div class="control-group">
+        <label class="control-label" for="exam_id">Изпит</label>
+        <div class="controls">
           <select name="exam_id" class="string">
           <% @exams.each do |exam| %>
             <option value="<%= exam.id %>"<%= (params[:exam_id].to_i == exam.id) ? " selected" : "" %>><%= exam.name %></li>
@@ -16,21 +16,17 @@
           </select>
         </div>
       </div>
-      <ul id="submitArea">
-        <li id="saveContainer">
-          <%= submit_tag "Напред", :class => "button default", :id => "save_btn" %>
-        </li>
-      </ul>
-    </fieldset>
-  </form>
-  <br />
-  <br />
-  <form method="get" action="<%= rails_admin_inspector_protocol_path %>">
-    <fieldset>
-      <h2>Протокол за инспекторат</h2>
-      <div class="formSection">
-        <div class="field">
-          <label for="grade_id">Паралелка</label>
+    <div class="form-actions">
+      <%= submit_tag "Генериране", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+</form>
+
+<form id="second_box" class="form-horizontal densier" style="display: none;" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_inspector_protocol_path %>">
+  <fieldset>
+    <div class="control-group">
+        <label class="control-label" for="grade_id">Паралелка</label>
+        <div class="controls">
           <select name="grade_id" class="string">
           <% @grades.each do |grade| %>
             <option value="<%= grade.id %>"<%= (params[:grade_id].to_i == grade.id) ? " selected" : "" %>><%= grade.name %></li>
@@ -38,24 +34,16 @@
           </select>
         </div>
       </div>
-      <ul id="submitArea">
-        <li id="saveContainer">
-          <%= submit_tag "Напред", :class => "button default", :id => "save_btn" %>
-        </li>
-      </ul>
-    </fieldset>
-  </form>
-  <br />
-  <br />
-  <form method="get" action="<%= rails_admin_all_students_protocol_path %>">
-    <fieldset>
-      <h2>Краен списък за служебни бележки</h2>
-      <br />
-      <ul id="submitArea">
-        <li id="saveContainer">
-          <%= submit_tag "Напред", :class => "button default", :id => "save_btn" %>
-        </li>
-      </ul>
-    </fieldset>
-  </form>
-</div>
+    <div class="form-actions">
+      <%= submit_tag "Генериране", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+</form>
+
+<form id="third_box" class="form-horizontal densier" style="display: none;" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_all_students_protocol_path %>">
+  <fieldset>
+    <div class="form-actions">
+      <%= submit_tag "Генериране", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+</form>

@@ -6,11 +6,7 @@ module RailsAdmin
     include RailsAdmin::MainHelper
     include RailsAdmin::ApplicationHelper
 
-    layout :get_layout
-
-    def get_layout
-      "rails_admin/application"
-    end
+    layout "rails_admin"
 
     def index
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
@@ -23,7 +19,7 @@ module RailsAdmin
       @object = Assessment.where(:student_id => params[:student_id]).where(:exam_id => params[:exam_id]).where(:is_taking_exam => true).first
       unless @object
         flash[:error] = "Няма ученик, който да се явява на този изпит!"
-        redirect_to rails_admin_declass_path
+        redirect_to Rails.application.routes.url_helpers.rails_admin_declass_path
         return
       end
 
@@ -37,7 +33,7 @@ module RailsAdmin
 
       if @object.update_attributes(params[:assessment])
         flash[:notice] = "Успешно разсекретихте резултат."
-        redirect_to rails_admin_declass_path(:exam_id => @object.exam_id)
+        redirect_to Rails.application.routes.url_helpers.rails_admin_declass_path(:exam_id => @object.exam_id)
       else
         flash[:error] = "Възникна грешка при валидацията!"
         if @object.fik_number
@@ -49,12 +45,12 @@ module RailsAdmin
 
     # Format: exam_id, student_id, fik_number, exam_mark
     def import
-      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
+      @authorization_adapter.try(:authorize, :import, @abstract_model, @object)
       @errors = []
       @i = 0
       unless params[:csv].nil?
       begin
-        FasterCSV.parse(params[:csv].read) do |row|
+        CSV.parse(params[:csv].read) do |row|
           student = Assessment.where(:student_id => row[1]).where(:exam_id => row[0]).where(:is_taking_exam => true).first
           unless student
             @errors << [row[0], row[1], false]
@@ -70,16 +66,16 @@ module RailsAdmin
             @i += 1
           end
         end
-      rescue FasterCSV::MalformedCSVError
+      rescue CSV::MalformedCSVError
         flash[:error] = "Грешно форматиран файл!"
-        redirect_to rails_admin_declass_path
+        redirect_to Rails.application.routes.url_helpers.rails_admin_declass_path
         return
       end
       end
 
       if @errors.size == 0
         flash[:notice] = "Успешно разсекретихте #{@i} работи."
-        redirect_to rails_admin_declass_path
+        redirect_to Rails.application.routes.url_helpers.rails_admin_declass_path
         return
       else
         flash[:error] = "Възникнаха грешки при разсекретяването на #{@errors.size} работи."

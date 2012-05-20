@@ -20,9 +20,9 @@ Admission::Application.routes.draw do
 
     controller "declassification" do
       get "/declassification", :model_name => "students", :to => :index, :as => "declass"
-      post "/declassification/import", :model_name => "assessment", :to => :import, :as => "import_declass"
-      get "/declassification/edit", :model_name => "assessment", :to => :edit, :as => "edit_declass"
-      put "/declassification/edit", :model_name => "assessment", :to => :update, :as => "update_declass"
+      post "/declassification/import", :model_name => "students", :to => :import, :as => "import_declass"
+      get "/declassification/edit", :model_name => "students", :to => :edit, :as => "edit_declass"
+      put "/declassification/edit", :model_name => "students", :to => :update, :as => "update_declass"
     end
   end
 
