@@ -18,6 +18,7 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 #  gem 'rails_admin_assessment_certificate', :git => 'git://github.com/vouldjeff/rails_admin_assessment_certificate.git'
 
   gem 'rails_admin_assessment_certificate', :path => '../rails_admin_assessment_certificate'
+  gem 'rails_admin_final_certificate', :path => '../rails_admin_final_certificate'
 
 # gem 'pdfkit'
 

@@ -16,6 +16,7 @@ RailsAdmin.config do |config|
     history_show
     show_in_app
     assessment_certificate
+    final_certificate
   end
 
   config.model Assessment do

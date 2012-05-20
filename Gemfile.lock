@@ -22,6 +22,12 @@ PATH
     rails_admin_assessment_certificate (0.0.1)
       rails (~> 3.2.3)
 
+PATH
+  remote: ../rails_admin_final_certificate
+  specs:
+    rails_admin_final_certificate (0.0.1)
+      rails (~> 3.2.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -164,5 +170,6 @@ DEPENDENCIES
   rails (= 3.2.3)
   rails_admin!
   rails_admin_assessment_certificate!
+  rails_admin_final_certificate!
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)

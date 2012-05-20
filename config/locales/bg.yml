@@ -143,12 +143,13 @@ bg:
 
   activerecord:
     models:
-      user: "Потребител"
-      exam: "Изпит"
-      grade: "Паралелка"
-      student: "Ученик"
+      user: "Потребители"
+      exam: "Изпити"
+      grade: "Паралелки"
+      student: "Ученици"
     attributes:
       student:
+        id: "Входящ номер"  
         first_name: "Първо име"
         middle_name: "Бащино име"
         last_name: "Фамилия"
