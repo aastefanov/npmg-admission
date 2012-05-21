@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521083628) do
+ActiveRecord::Schema.define(:version => 20120521090017) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
@@ -60,6 +60,18 @@ ActiveRecord::Schema.define(:version => 20120521083628) do
   end
 
   add_index "competitions", ["exam_id"], :name => "index_competitions_on_exam_id"
+
+  create_table "enrollement_assessments", :force => true do |t|
+    t.integer "applicant_id"
+    t.integer "points"
+    t.integer "competition_id"
+    t.integer "exam_id"
+    t.boolean "is_taking_exam"
+  end
+
+  add_index "enrollement_assessments", ["applicant_id"], :name => "index_enrollement_assessments_on_applicant_id"
+  add_index "enrollement_assessments", ["competition_id"], :name => "index_enrollement_assessments_on_competition_id"
+  add_index "enrollement_assessments", ["exam_id"], :name => "index_enrollement_assessments_on_exam_id"
 
   create_table "exams", :force => true do |t|
     t.string "name"

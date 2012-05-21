@@ -49,6 +49,10 @@ RailsAdmin.config do |config|
   config.model Asset do
     visible false
   end
+
+  config.model EnrollmentAssessment do
+    visible false
+  end
   
   config.model Student do
     field :id
