@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521090017) do
+ActiveRecord::Schema.define(:version => 20120521124938) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
-    t.integer  "egn"
     t.integer  "phone"
     t.string   "email"
     t.string   "encrypted_password"
@@ -26,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20120521090017) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.boolean  "approved"
+    t.string   "egn"
   end
 
   add_index "applicants", ["approved"], :name => "index_applicants_on_approved"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20120521090017) do
 
   add_index "competitions", ["exam_id"], :name => "index_competitions_on_exam_id"
 
-  create_table "enrollement_assessments", :force => true do |t|
+  create_table "enrollment_assessments", :force => true do |t|
     t.integer "applicant_id"
     t.integer "points"
     t.integer "competition_id"
@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(:version => 20120521090017) do
     t.boolean "is_taking_exam"
   end
 
-  add_index "enrollement_assessments", ["applicant_id"], :name => "index_enrollement_assessments_on_applicant_id"
-  add_index "enrollement_assessments", ["competition_id"], :name => "index_enrollement_assessments_on_competition_id"
-  add_index "enrollement_assessments", ["exam_id"], :name => "index_enrollement_assessments_on_exam_id"
+  add_index "enrollment_assessments", ["applicant_id"], :name => "index_enrollment_assessments_on_applicant_id"
+  add_index "enrollment_assessments", ["competition_id"], :name => "index_enrollment_assessments_on_competition_id"
+  add_index "enrollment_assessments", ["exam_id"], :name => "index_enrollment_assessments_on_exam_id"
 
   create_table "exams", :force => true do |t|
     t.string "name"

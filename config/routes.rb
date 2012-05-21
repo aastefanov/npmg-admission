@@ -1,7 +1,10 @@
 Admission::Application.routes.draw do
-  
+  get "applicants/new"
+
+  get "applicants/edit"
 
   devise_for :users
+  devise_for :applicants
 
   controller "students" do
     post "/get_results", :to => :results, :as => "results"
@@ -56,6 +59,8 @@ Admission::Application.routes.draw do
   #   
   # end 
 
+  resources :applicants
+  match '/update_competitions_select/:exam_id', :controller => :applicants, :action => :update_competitions_select
 
   match ':controller(/:action(/:id(.:format)))'
 end

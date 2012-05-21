@@ -4,4 +4,6 @@ class Asset < ActiveRecord::Base
 
   attr_accessor :delete_file
   before_validation { self.file.clear if self.delete_file == '1' }
+
+  validates_presence_of :description, :file
 end

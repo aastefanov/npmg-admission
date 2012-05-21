@@ -151,6 +151,25 @@ bg:
       competition: "Състезания"
       points_to_mark: "Точки-оценки"
     attributes:
+      applicant:
+        first_name: "Първо име"
+        middle_name: "Бащино име"
+        last_name: "Фамилия"
+        egn: "ЕГН"
+        phone: "Телефон"
+        email: "Имейл"
+        password: "Парола"
+        password_confirmation: "Парола отново"
+        enrollment_assessments: "Изпити"
+        assets: "Файлове"
+      enrollment_assessment:
+        exam: "Изпит"
+        is_taking_exam: "Ще се яви"
+        points: "Точки"
+        competition: "Състезание"
+      asset:
+        file: "Файл"
+        description: "Описание"
       student:
         id: "Входящ номер"  
         first_name: "Първо име"

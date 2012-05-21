@@ -1,6 +1,7 @@
 body {
   background: white;
   font-size: 12pt;
+  margin: 10px;
 }
 
 #wrapper {
@@ -11,13 +12,7 @@ body {
   float: none !important;
   color: black;
   background: transparent none;
-}
-
-a:link, a:visited {
-  color: #520;
-  background: transparent;
-  font-weight: bold;
-  text-decoration: underline;
+  font-size: 12px;
 }
 
 .header {
@@ -107,4 +102,5 @@ h1 {
 
 .personal-data p {
   margin: 5px 0;
+  font-size: 12px;
 }

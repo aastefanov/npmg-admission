@@ -18,11 +18,7 @@ class Assessment < ActiveRecord::Base
     :allow_nil => true
 
   before_validation :validate_special
-  attr_accessor :should_destroy
-
-  def should_destroy?
-    should_destroy.to_i == 1
-  end
+  attr_accessor :_destroy
 
   def validate_special
     if competition_mark.nil? and !is_taking_exam?

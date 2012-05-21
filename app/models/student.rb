@@ -1,3 +1,5 @@
+# encoding: uTF-8
+
 class Student < ActiveRecord::Base
   has_and_belongs_to_many :grades, :join_table => :students_grades
   has_many :assessments, :dependent => :destroy
@@ -20,6 +22,18 @@ class Student < ActiveRecord::Base
             :numericality => true
 
   validates_associated :assessments
+  before_validation :validate_unique_exams
+
+  def validate_unique_exams
+    exams = []
+    assessments.each do |e|
+      exams << e.exam_id unless e._destroy.to_i == 1
+    end
+    set = Set.new exams
+    if set.length != exams.length
+      errors[:assessments] << "Не може да добавите повече от един запис, в който да сте упоменали един и същ изпит."
+    end
+  end
 
   def full_name
     first_name + " " + middle_name + " " + last_name
