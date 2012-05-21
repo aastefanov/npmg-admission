@@ -27,7 +27,7 @@ class Student < ActiveRecord::Base
   def validate_unique_exams
     exams = []
     assessments.each do |e|
-      exams << e.exam_id unless e._destroy.to_i == 1
+      exams << e.exam_id unless e.destroy?
     end
     set = Set.new exams
     if set.length != exams.length

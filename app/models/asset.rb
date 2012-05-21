@@ -2,8 +2,8 @@ class Asset < ActiveRecord::Base
   belongs_to :applicant
   has_attached_file :file
 
-  attr_accessor :delete_file
-  before_validation { self.file.clear if self.delete_file == '1' }
+  attr_accessor :delete_file, :_destroy
+  before_validation { self.file.clear if self.delete_file == '1' || _destroy.to_i == 1 }
 
   validates_presence_of :description, :file
 end

@@ -17,7 +17,7 @@ class Applicant < ActiveRecord::Base
   validates_presence_of :first_name, :middle_name, :last_name, :assets, :enrollment_assessments
   validates_associated :assets, :enrollment_assessments
 
-  after_validation :validate_egn, :validate_unique_exams
+  validate :validate_egn, :validate_unique_exams
 
   validates :egn,
             :presence => true,
@@ -43,10 +43,10 @@ class Applicant < ActiveRecord::Base
   def validate_unique_exams
     exams = []
     enrollment_assessments.each do |e|
-      exams << e.exam_id unless e._destroy.to_i == 1
+      exams << e.exam_id unless e.destroy?
     end
     set = Set.new exams
-    if set.length != exams.length
+    unless set.length == exams.length
       errors[:enrollment_assessments] << "Не може да добавите повече от един запис, в който да сте упоменали един и същ изпит."
     end
   end
