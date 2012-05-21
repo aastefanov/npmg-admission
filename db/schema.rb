@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520211803) do
+ActiveRecord::Schema.define(:version => 20120521083628) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(:version => 20120520211803) do
     t.string   "encrypted_password"
     t.string   "password_salt"
     t.integer  "version"
-    t.integer  "approved"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.boolean  "approved"
   end
+
+  add_index "applicants", ["approved"], :name => "index_applicants_on_approved"
 
   create_table "assessments", :force => true do |t|
     t.integer "exam_id"
@@ -37,11 +39,13 @@ ActiveRecord::Schema.define(:version => 20120520211803) do
     t.decimal "competition_mark", :precision => 4, :scale => 3
   end
 
+  add_index "assessments", ["exam_id"], :name => "index_assessments_on_exam_id"
+  add_index "assessments", ["is_taking_exam"], :name => "index_assessments_on_is_taking_exam"
+  add_index "assessments", ["student_id"], :name => "index_assessments_on_student_id"
+
   create_table "assets", :force => true do |t|
     t.string   "description"
     t.integer  "applicant_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -51,10 +55,8 @@ ActiveRecord::Schema.define(:version => 20120520211803) do
   add_index "assets", ["applicant_id"], :name => "index_assets_on_applicant_id"
 
   create_table "competitions", :force => true do |t|
-    t.string   "name"
-    t.integer  "exam_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string  "name"
+    t.integer "exam_id"
   end
 
   add_index "competitions", ["exam_id"], :name => "index_competitions_on_exam_id"
@@ -69,19 +71,21 @@ ActiveRecord::Schema.define(:version => 20120520211803) do
     t.integer "grade_id"
   end
 
+  add_index "exams_grades", ["exam_id"], :name => "index_exams_grades_on_exam_id"
+  add_index "exams_grades", ["grade_id"], :name => "index_exams_grades_on_grade_id"
+
   create_table "grades", :force => true do |t|
     t.string "name"
   end
 
   create_table "points_to_marks", :force => true do |t|
-    t.integer  "to_range"
-    t.integer  "competition_id"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.decimal  "mark",           :precision => 4, :scale => 3
+    t.integer "to_range"
+    t.integer "competition_id"
+    t.decimal "mark",           :precision => 4, :scale => 3
   end
 
   add_index "points_to_marks", ["competition_id"], :name => "index_points_to_marks_on_competition_id"
+  add_index "points_to_marks", ["to_range"], :name => "index_points_to_marks_on_to_range"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -124,6 +128,9 @@ ActiveRecord::Schema.define(:version => 20120520211803) do
     t.integer "student_id"
     t.integer "grade_id"
   end
+
+  add_index "students_grades", ["grade_id"], :name => "index_students_grades_on_grade_id"
+  add_index "students_grades", ["student_id"], :name => "index_students_grades_on_student_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",               :default => "",   :null => false

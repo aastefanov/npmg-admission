@@ -149,6 +149,7 @@ bg:
       student: "Ученици"
       assessment: "Изпит"
       competition: "Състезания"
+      points_to_mark: "Точки-оценки"
     attributes:
       student:
         id: "Входящ номер"  
@@ -172,6 +173,10 @@ bg:
       competition:
         name: "Име"
         exam: "Изпит"
+      points_to_mark:
+        competition: "Състезание"
+        to_range: "Горна граница"
+        mark: "Оценка"
       user:
         is_active: "Активен"
         first_name: "Първо име"

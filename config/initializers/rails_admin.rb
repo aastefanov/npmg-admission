@@ -40,6 +40,12 @@ RailsAdmin.config do |config|
     visible false
   end
 
+  config.model PointsToMark do
+    field :competition
+    field :to_range
+    field :mark
+  end
+
   config.model Asset do
     visible false
   end
