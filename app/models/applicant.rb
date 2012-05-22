@@ -39,20 +39,21 @@ class Applicant < ActiveRecord::Base
   scope :unapproved, where("`applicants`.`approved` < `applicants`.`version_n` AND `applicants`.`approved` != 0")
   scope :approved, where("`applicants`.`approved` = `applicants`.`version_n`")
   scope :dissapproved, where("`applicants`.`approved` = 0")
-  scope :not_viewed, where("`applicants`.`last_viewed` IS NULL OR `applicants`.`last_viewed` < ?", DateTime.now - 1.hour)
+  scope :not_viewed, where("`applicants`.`last_viewed` IS NULL OR `applicants`.`last_viewed` <= ?", DateTime.now - 1.hour)
 
   attr_accessor :_dissapprove, :_approve
 
   def versionizer
-    version_n  ||= 2
-    approved ||= 1
+    self.version_n  ||= 2
+    self.approved ||= 1
     if _approve
-      approved = version_n
+      self.approved = self.version_n
     elsif _dissapprove
-      approved = 0
+      self.approved = 0
     else
-      version_n += 1
-      approved = 1 if approved == 0
+      self.last_viewed = DateTime.now - 2.hour
+      self.version_n += 1
+      self.approved = 1 if self.approved == 0
     end
   end
 

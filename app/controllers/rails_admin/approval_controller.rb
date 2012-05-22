@@ -31,6 +31,27 @@ module RailsAdmin
     def change_state
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @page_name = "Удобрение на онлайн документи"
+
+      if params[:_edit]
+        redirect_to "/adnp/applicant/#{params[:id]}/edit"
+        return
+      else
+        @applicant = Applicant.find(params[:id])
+        if params[:_approve]
+          @applicant._approve = true
+          flash[:notice] = "Успешно удобрихте регистрация."
+        else
+          flash[:error] = "Не сте въвел забележка." if params[:review].nil?
+          @applicant.last_viewed = DateTime.now - 2.hour
+          @applicant.save
+          return
+          @applicant.reviews << Review.new(:content => params[:review])
+          @applicant._dissapprove = true
+          flash[:notice] = "Успешно отхвърлихте регистрация."
+        end
+        @applicant.save
+        redirect_to Rails.application.routes.url_helpers.rails_admin_approval_path
+      end
     end
   end
 end
