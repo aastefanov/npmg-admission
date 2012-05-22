@@ -1,57 +1,11 @@
-<%= nested_form_for @applicant, :html => {:class => "form-horizontal denser", :multipart => true} do |f| %>
-  <fieldset>
-    <legend style=""><i class="icon-chevron-down"></i> Информация</legend>
-    <% [:first_name, :middle_name, :last_name, :egn, :phone].each do |field| %>
-      <%= render :partial => 'form_text_field', :locals => {:f => f, :object => @applicant, :field => field} %>
+<div class="boxes">
+  <div class="box semi-full">
+    <%= nested_form_for @applicant, :html => {:class => "form-horizontal denser", :multipart => true} do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
     <% end %>
-  </fieldset>
-  <fieldset>
-    <legend style=""><i class="icon-chevron-down"></i> Изпити</legend>
-    <div class="control-group <%= @applicant.errors[:enrollment_assessments].length > 0 ? 'error' : '' %> has_many_association_type enrollment_assessments_field" id="applicant_enrollment_assessments_attributes_field">
-      <%= f.label :enrollment_assessments, :class => "control-label" %>
-      <div class="controls" data-nestedmany>
-        <div class="btn-group">
-          <a class="btn btn-info toggler" data-target="#applicant_enrollment_assessments_attributes_field > .tab-content, #applicant_enrollment_assessments_attributes_field > .controls > .nav" data-toggle="button">
-            <i class="icon-white icon-chevron-right"></i>
-          </a>
-          <%= f.link_to_add '<i class="icon-plus icon-white"></i> Добави нов'.html_safe, :enrollment_assessments, 'data-association' => "enrollment_assessments", 'data-blueprint_name' => "enrollment_assessments_fields_blueprint", :class => "btn btn-info add_nested_fields" %>
-        </div>
-        <%= @applicant.errors[:enrollment_assessments].length > 0 ? '<span class="help-inline">'.html_safe + @applicant.errors[:enrollment_assessments].join('; ') + '</span>'.html_safe : '' %>
-        <p class="help-block">Задължително. </p>
-        <ul class='nav nav-tabs' style='margin-top:5px'>
-
-        </ul>
-      </div>
-      <div class="tab-content">
-        <%= f.fields_for :enrollment_assessments %>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend style=""><i class="icon-chevron-down"></i> Файлове</legend>
-    <div class="control-group <%= @applicant.errors[:assets].length > 0 ? 'error' : '' %> has_many_association_type assets_field" id="applicant_assets_attributes_field">
-      <%= f.label :assets, :class => "control-label" %>
-      <div class="controls" data-nestedmany>
-        <div class="btn-group">
-          <a class="btn btn-info toggler" data-target="#applicant_assets_attributes_field > .tab-content, #applicant_assets_attributes_field > .controls > .nav" data-toggle="button">
-            <i class="icon-white icon-chevron-right"></i>
-          </a>
-          <%= f.link_to_add '<i class="icon-plus icon-white"></i> Добави нов'.html_safe, :assets, 'data-association' => "assets", 'data-blueprint_name' => "assets_fields_blueprint", :class => "btn btn-info add_nested_fields" %>
-        </div>
-        <%= @applicant.errors[:assets].length > 0 ? '<span class="help-inline">'.html_safe + @applicant.errors[:assets].join('; ') + '</span>'.html_safe : '' %>
-        <p class="help-block">Задължително. </p>
-        <ul class='nav nav-tabs' style='margin-top:5px'>
-
-        </ul>
-      </div>
-      <div class="tab-content">
-        <%= f.fields_for :assets %>
-      </div>
-    </div>
-  </fieldset>
-  <div class="form-actions">
-    <button type="submit" data-disable-with="Обнови" class="btn btn-primary" id="save_btn" name="commit">
-      <i class='icon-white icon-ok'></i> Обнови
-    </button>
   </div>
-<% end %>
+  <div class="box form-horizontal denser">
+    <%= render :partial => 'reviews', :locals => {:reviews => @applicant.reviews.reverse} %>
+    <%= render :partial => 'guides_right' %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<fieldset>
+  <legend style=""><i class="icon-chevron-down"></i> Забележки</legend>
+  <% reviews.each do |review| %>
+    <div class="control-group">
+      <p><strong>от <%= l review.created_at, :format => :long %></strong></p>
+      <p><%= review.content %></p>
+    </div>
+  <% end %>
+</fieldset>

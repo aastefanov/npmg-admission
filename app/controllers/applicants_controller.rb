@@ -2,6 +2,23 @@
 
 class ApplicantsController < ApplicationController
   def new
+    @applicant = Applicant.new
+  end
+
+  def create
+    if params[:_continue]
+      redirect_to root_path 
+      return
+    end
+
+    @applicant = Applicant.new(params[:applicant])
+    if @applicant.save
+      flash[:notice] = "Успешно направихте вашата кандидатура. Очаквайте нейното удобрение."
+      redirect_to root_path
+    else
+      flash[:error] = "Възникна грешка при валидацията!"
+      render :action => 'new'
+    end
   end
 
   def edit
@@ -13,6 +30,11 @@ class ApplicantsController < ApplicationController
   end
 
   def update
+    if params[:_continue]
+      redirect_to root_path 
+      return
+    end
+
     @applicant = Applicant.find(params[:id])
 
     if @applicant.update_attributes(params[:applicant])

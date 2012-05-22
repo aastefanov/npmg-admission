@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521124938) do
+ActiveRecord::Schema.define(:version => 20120522203116) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
@@ -21,14 +21,15 @@ ActiveRecord::Schema.define(:version => 20120521124938) do
     t.string   "email"
     t.string   "encrypted_password"
     t.string   "password_salt"
-    t.integer  "version"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.boolean  "approved"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "egn"
+    t.integer  "approved"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.integer  "version_n"
+    t.datetime "last_viewed"
   end
-
-  add_index "applicants", ["approved"], :name => "index_applicants_on_approved"
 
   create_table "assessments", :force => true do |t|
     t.integer "exam_id"

@@ -150,6 +150,10 @@ bg:
       assessment: "Изпит"
       competition: "Състезания"
       points_to_mark: "Точки-оценки"
+      applicant: "Онлайн документи"
+      asset: "Прикачен файл"
+      enrollment_assessment: "Изпит"
+      review: "Забележка"
     attributes:
       applicant:
         first_name: "Първо име"
@@ -162,6 +166,10 @@ bg:
         password_confirmation: "Парола отново"
         enrollment_assessments: "Изпити"
         assets: "Файлове"
+        status_text: "Състояние"
+        last_viewed: "Последно отворен за удобрение"
+        user_edits: "Брой редакции от потребител"
+        reviews: "Забележки"
       enrollment_assessment:
         exam: "Изпит"
         is_taking_exam: "Ще се яви"
@@ -189,6 +197,8 @@ bg:
       grade:
         name: "Име"
         exams: "Изпити"
+      review:
+        content: "Съдържание"
       competition:
         name: "Име"
         exam: "Изпит"

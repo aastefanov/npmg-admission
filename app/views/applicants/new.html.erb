@@ -1,2 +1,13 @@
-<h1>Applicants#new</h1>
-<p>Find me in app/views/applicants/new.html.erb</p>
+<div class="boxes">
+  <div class="box full">
+    <%= nested_form_for @applicant, :html => {:class => "form-horizontal denser", :multipart => true} do |f| %>
+      <fieldset>
+        <legend style=""><i class="icon-chevron-down"></i> Данни за вход</legend>
+        <%= render :partial => 'form_text_field', :locals => {:f => f, :object => @applicant, :field => :email} %>
+        <%= render :partial => 'form_password_field', :locals => {:f => f, :object => @applicant, :field => :password} %>
+        <%= render :partial => 'form_password_field', :locals => {:f => f, :object => @applicant, :field => :password_confirmation} %>
+      </fieldset>
+      <%= render :partial => 'form', :locals => {:f => f} %>
+    <% end %>
+  </div>
+</div>

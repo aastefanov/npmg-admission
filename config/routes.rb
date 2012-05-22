@@ -1,8 +1,4 @@
 Admission::Application.routes.draw do
-  get "applicants/new"
-
-  get "applicants/edit"
-
   devise_for :users
   devise_for :applicants
 
@@ -12,7 +8,11 @@ Admission::Application.routes.draw do
   
   root :to => "main#index"
 
-  scope "adnp2012", :module => :rails_admin, :as => "rails_admin" do
+  devise_scope :user do
+    match "adnp/login", :to => "devise/sessions#new"
+  end
+
+  scope "adnp", :module => :rails_admin, :as => "rails_admin" do
     controller "assessments" do
       get "/protocols", :model_name => :assessments, :to => :index, :as => "protocols"
       get "/get_assessments/:id", :to => :get_assessments, :as => "get_assessments"
@@ -32,32 +32,15 @@ Admission::Application.routes.draw do
       get "/miscellaneous", :model_name => "students", :to => :index, :as => "misc"
       post "/miscellaneous/points_marks_import", :model_name => "students", :to => :points_marks_import, :as => "points_marks_import"
     end
+
+    controller "approval" do
+      get "/approval", :model_name => "students", :to => :index, :as => "approval"
+      get "/approval/new", :model_name => "students", :to => :preview, :as => "preview_approval"
+      get "/approval/:id/change_state", :model_name => "students", :to => :change_state, :as => "change_state_approval"
+    end
   end
 
-  mount RailsAdmin::Engine => '/adnp2012', :as => 'rails_admin'
-
-  #   # Prefix route urls with "admin" and route names with "rails_admin_"
-  # scope "adnp2011", :module => :rails_admin, :as => "rails_admin" do
-  #   
-  #   controller "main" do
-  #     match "/", :to => :index, :as => "dashboard"
-  #     get "/:model_name", :to => :list, :as => "list"
-  #     get "/:model_name/new", :to => :new, :as => "new"
-  #     match "/:model_name/get_pages", :to => :get_pages, :as => "get_pages"
-  #     post "/:model_name", :to => :create, :as => "create"
-  #     get "/:model_name/:id/edit", :to => :edit, :as => "edit"
-  #     put "/:model_name/:id", :to => :update, :as => "update"
-  #     get "/:model_name/:id/delete", :to => :delete, :as => "delete"
-  #     delete "/:model_name/:id", :to => :destroy, :as => "destroy"
-  #     get "/:model_name/bulk_delete", :to => :bulk_delete, :as => "bulk_delete"
-  #     post "/:model_name/bulk_destroy", :to => :bulk_destroy, :as => "bulk_destroy"
-      
-  #     get "/students/:id/certificate", :model_name => "students", :to => :certificate, :as => "certificate"
-  #     get "/students/:id/final_certificate", :model_name => "students", :to => :final_certificate, :as => "final_certificate"
-  #   end
-
-  #   
-  # end 
+  mount RailsAdmin::Engine => '/adnp', :as => 'rails_admin'
 
   resources :applicants
   match '/update_competitions_select/:exam_id', :controller => :applicants, :action => :update_competitions_select

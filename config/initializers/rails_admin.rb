@@ -14,7 +14,6 @@ RailsAdmin.config do |config|
     edit
     delete
     history_show
-    show_in_app
     assessment_certificate
     final_certificate
   end
@@ -33,11 +32,35 @@ RailsAdmin.config do |config|
   end
 
   config.model Applicant do
-    visible false
+    field :status_text
+    field :last_viewed
+    field :approved do
+      hide
+    end
+    field :first_name
+    field :middle_name
+    field :last_name
+    field :egn
+    field :phone
+    field :email
+    
+    group :enrollment_assessments do
+      field :enrollment_assessments
+    end
+
+    group :assets do
+      field :assets
+    end
+
+    group :reviews do
+      field :reviews
+    end
   end
 
   config.model Review do
     visible false
+
+    field :content
   end
 
   config.model PointsToMark do
@@ -48,10 +71,18 @@ RailsAdmin.config do |config|
 
   config.model Asset do
     visible false
+
+    field :file
+    field :description
   end
 
   config.model EnrollmentAssessment do
     visible false
+
+    field :exam
+    field :is_taking_exam
+    field :competition
+    field :points
   end
   
   config.model Student do

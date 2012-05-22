@@ -1,0 +1,58 @@
+<fieldset>
+  <legend><i class="icon-chevron-down"></i> Информация</legend>
+  <% [:first_name, :middle_name, :last_name, :egn, :phone, :email].each do |field| %>
+    <div class="control-group">
+      <label class="control-label"><%= t 'activerecord.attributes.applicant.' + field.to_s %></label>
+      <div class="controls">
+        <strong><%= applicant.send field %></strong>
+      </div>
+    </div>
+  <% end %>
+</fieldset>
+<fieldset>
+  <legend><i class="icon-chevron-down"></i> Изпити</legend>
+  <% applicant.enrollment_assessments.each do |enrollment| %>
+    <div class="control-group">
+      <label class="control-label"><%= enrollment.exam.name %></label>
+      <div class="controls">
+        <% if enrollment.is_taking_exam %>
+          <img alt="true" src="/assets/rails_admin/bullet_black.png"> Ще се яви на изпит
+        <% else %>
+          <img alt="true" src="/assets/rails_admin/bullet_white.png"> Няма да се яви на изпит
+        <% end %>
+        <br />
+        <% if enrollment.points %>
+          Оценка <strong><%= PointsToMark.get_mark(enrollment.points, enrollment.competition_id).to_f %></strong> от състезание (<%= enrollment.points %> т. на <%= enrollment.competition.name %>)
+        <% else %>
+          Няма оценка от състезание
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</fieldset>
+<fieldset>
+  <legend><i class="icon-chevron-down"></i> Файлове</legend>
+  <% applicant.assets.each do |asset| %>
+    <div class="control-group">
+      <label class="control-label"><%= t 'activerecord.models.asset' %></label>
+      <div class="controls">
+        <%= asset.description %><br />
+        <strong><a href="<%= asset.file %>" target="_blank"><%= asset.file %></a></strong>
+      </div>
+    </div>
+  <% end %>
+</fieldset>
+<% if applicant.reviews.count > 0 %>
+  <fieldset>
+    <legend><i class="icon-chevron-down"></i> Забележки</legend>
+    <% applicant.reviews.each do |review| %>
+      <div class="control-group">
+        <label class="control-label"><%= t 'activerecord.models.reviews' %></label>
+        <div class="controls">
+          <strong><%= l review.created_at, :format => :long %></strong><br />
+          <%= review.content %>
+        </div>
+      </div>
+    <% end %>
+  </fieldset>
+<% end %>

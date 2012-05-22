@@ -1,0 +1,15 @@
+<ul class='nav nav-tabs' style="display: block !important;">
+  <li class="icon show_member_link active"><a href="#"><i class="icon-info-sign"></i> <span>Начало</span></a></li>
+  <li class="icon show_member_link"><a href="#"><i class="icon-book"></i> <span>...</span></a></li>
+</ul>
+
+<form class="form-horizontal densier" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_preview_approval_path %>">
+  <fieldset>
+    <div class="control-group" style="text-align: center;">
+      Остават още <strong><%= Applicant.unapproved.count %></strong> регистрации за проверка. Има <strong><%= Applicant.approved.count %></strong> удобрени и <strong><%= Applicant.dissapproved.count %></strong> отхвърлени регистрации.
+    </div>
+  </fieldset>
+  <div class="form-actions">
+    <%= submit_tag "Разглеждане на регистрация", :class => "btn btn-primary", :id => "save_btn" %>
+  </div>
+</form>

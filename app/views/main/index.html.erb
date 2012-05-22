@@ -2,11 +2,68 @@
   <div class="box">
      <h2>Къде съм?</h2>
      <p>
-      Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
+      Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас. Тук вие можете онлайн да подадете документите на вашето дете за кандидатстване в <strong>НПМГ</strong>.
      </p>
   </div>
-
+  <div class="box">
+     <h2>Въпроси</h2>
+     <p>
+      ......
+     </p>
+  </div>
+  <div class="box box-main">
+     <h2>Подаване на документи</h2>
+     <p>
+      <% unless current_applicant %>
+        <form method="get" action="<%= new_applicant_path %>">
+          <button type="submit" data-disable-with="Нов профил" class="btn btn-primary" id="save_btn">
+            <i class='icon-white icon-ok'></i> Нов профил
+          </button> 
+        </form>
+        <%= form_for :applicant, :url => applicant_session_path, :method => :post, :html => {:class => "form-horizontal denser"} do |f| %>
+          <div class="control-group">
+            <%= f.label :email, "Имейл", :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :email %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :password, "Парола", :class => "control-label" %>
+            <div class="controls">
+              <%= f.password_field :password %>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" data-disable-with="Вход" type="submit">
+              Вход
+            </button>
+          </div>
+        <% end %>
+      <% else %>
+      <% statuses = ['error', 'notice', 'green']
+        messages = ['Вашата кандидатура е отхвърлена! '.html_safe + link_to("Моля разгледайте забележките и ги коригирайте.", edit_applicant_path(current_applicant).html_safe), 'Вашата кандидатура очаква удобрение.', 'Вашата кандидатура е удобрена!'] %>
+        <div class="box flash-<%= statuses[current_applicant.status] %>">
+          <%= messages[current_applicant.status] %>
+        </div>
+        <br />
+        <strong>Име: </strong> <%= current_applicant.full_name %>
+        <br />
+        <br />
+        <form method="get" action="<%= edit_applicant_path(current_applicant) %>" style="display: inline-block;">
+          <button type="submit" data-disable-with="Редакция" class="btn btn-primary" id="save_btn">
+            <i class='icon-white icon-ok'></i> Редакция
+          </button> 
+        </form>
+        <form method="get" action="<%= destroy_applicant_session_path %>" style="display: inline-block;">
+          <button type="submit" data-disable-with="Изход" class="btn" id="save_btn">
+            Изход
+          </button> 
+        </form>
+      <% end %>
+     </p>
+  </div>
 </div>
+<% unless current_applicant %>
 <div class="boxes">
   <div class="box full">
     <h2>Проверка на резултат</h2>
@@ -27,3 +84,4 @@
     </p>
   </div>
 </div>
+<% end %>

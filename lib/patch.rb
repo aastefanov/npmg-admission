@@ -7,6 +7,7 @@ RailsAdmin::ApplicationHelper.module_eval do
       nodes_stack.group_by(&:navigation_label).map do |navigation_label, nodes|
 
         %{<li class='nav-header'>#{navigation_label || t('admin.misc.navigation')}</li>}.html_safe +
+        %{<li><a class="pjax" href="#{Rails.application.routes.url_helpers.rails_admin_approval_path}">Удобрение на онлайн документи</a></li>}.html_safe +
         nodes.select{|n| n.parent.nil? || !n.parent.to_s.in?(nodes_stack.map{|c| c.abstract_model.model_name }) }.map do |node|
           %{
             <li data-model="#{node.abstract_model.to_param}">

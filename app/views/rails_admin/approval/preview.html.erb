@@ -1,0 +1,30 @@
+<ul class='nav nav-tabs' style="display: block !important;">
+  <li class="icon show_member_link"><a href="#"><i class="icon-info-sign"></i> <span>Начало</span></a></li>
+  <li class="icon show_member_link active"><a href="#"><i class="icon-book"></i> <span>...</span></a></li>
+</ul>
+
+<style>
+  .controls {
+    padding-top: 5px;
+  }
+</style>
+<form class="form-horizontal densier" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_change_state_approval_path(@applicant) %>">
+  <%= render :partial => 'applicants/preview_data', :locals => {:applicant => @applicant} %>
+  <fieldset>
+    <legend><i class="icon-chevron-down"></i> Добави забележка</legend>
+    <div class="control-group">
+      <label class="control-label">Съдържание</label>
+      <div class="controls">
+        <textarea name="new_review" cols="48" rows="3"></textarea>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-actions">
+    <button type="submit" data-disable-with="Удобри" class="btn btn-primary" id="save_btn" name="_approve">
+    <i class='icon-white icon-ok'></i> Удобри
+  </button>
+  <button class="btn" data-disable-with="Отхвърли" name="_dissapprove" type="submit">
+    <i class="icon-remove"></i> Отхвърли
+  </button>
+  </div>
+</form>
