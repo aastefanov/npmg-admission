@@ -2,21 +2,21 @@
 <span style="display:none" class="object-infos" data-model-label="Изпит" data-object-label="<%= f.object.id.nil? ? 'Изпит (нов)' : f.object.exam.name %>"></span>
 <fieldset>
   <legend style="display:none"><i class="icon-chevron-down"></i> Информация</legend>
-    <%= render :partial => 'form_select_field', :locals => {:f => f, :object => f.object, :field => :exam_id, :from => Exam.all} %>
-    <%= render :partial => 'form_boolean_field', :locals => {:f => f, :object => f.object, :field => :is_taking_exam} %>
-    <%= render :partial => 'form_select_field', :locals => {:f => f, :object => f.object, :field => :competition_id, :from => f.object.id.nil? ? [] : Competition.where(:exam_id => f.object.id)} %>
+    <%= render :partial => 'form_select_field', :locals => {:f => f, :object => f.object, :field => :exam_id, :lab => t('activerecord.attributes.enrollment_assessment.exam_id'), :from => Exam.all} %>
+    <%= render :partial => 'form_boolean_field', :locals => {:f => f, :object => f.object, :field => :is_taking_exam, :lab => t('activerecord.attributes.enrollment_assessment.is_taking_exam')} %>
+    <%= render :partial => 'form_select_field', :locals => {:f => f, :object => f.object, :field => :competition_id, :lab => t('activerecord.attributes.enrollment_assessment.competition_id'), :from => f.object.competition_id.nil? ? [] : Competition.where(:exam_id => f.object.competition_id)} %>
     <script>
       jQuery(function($) {
         <% id = f.object_name.split('[').last.tr(']', '') %>
-        $("#applicant_enrollment_assessments_attributes_<%= id %>_exam").change(function() {
-          var value = $('select#applicant_enrollment_assessments_attributes_<%= id %>_exam :selected').val();
+        $("#applicant_enrollment_assessments_attributes_<%= id %>_exam_id").change(function() {
+          var value = $('select#applicant_enrollment_assessments_attributes_<%= id %>_exam_id :selected').val();
           if(value == "") return;
           jQuery.get('/update_competitions_select/' + value, function(data){
-              $("#applicant_enrollment_assessments_attributes_<%= id %>_competition").html(data);
+              $("#applicant_enrollment_assessments_attributes_<%= id %>_competition_id").html(data);
           })
           return false;
         });
       });
     </script>
-    <%= render :partial => 'form_text_field', :locals => {:f => f, :object => f.object, :field => :points} %>
+    <%= render :partial => 'form_text_field', :locals => {:f => f, :object => f.object, :field => :points, :lab => t('activerecord.attributes.enrollment_assessment.points')} %>
 </fieldset>

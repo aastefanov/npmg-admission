@@ -2,6 +2,6 @@
 <span style="display:none" class="object-infos" data-model-label="Файл" data-object-label="<%= f.object.id.nil? ? 'Файл (нов)' : 'Файл' %>"></span>
 <fieldset>
   <legend style="display:none"><i class="icon-chevron-down"></i> Информация</legend>
-    <%= render :partial => 'form_file_field', :locals => {:f => f, :object => f.object, :field => :file} %>
-    <%= render :partial => 'form_text_field', :locals => {:f => f, :object => f.object, :field => :description} %>
+    <%= render :partial => 'form_file_field', :locals => {:f => f, :object => f.object, :field => :file, :lab => t('activerecord.attributes.asset.file')} %>
+    <%= render :partial => 'form_text_field', :locals => {:f => f, :object => f.object, :field => :description, :lab => t('activerecord.attributes.asset.description')} %>
 </fieldset>

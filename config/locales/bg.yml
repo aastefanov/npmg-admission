@@ -171,9 +171,11 @@ bg:
         user_edits: "Брой редакции от потребител"
         reviews: "Забележки"
       enrollment_assessment:
+        exam_id: "Изпит"
         exam: "Изпит"
         is_taking_exam: "Ще се яви"
         points: "Точки"
+        competition_id: "Състезание"
         competition: "Състезание"
       asset:
         file: "Файл"
