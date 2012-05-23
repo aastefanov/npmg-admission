@@ -14,21 +14,24 @@ class EnrollmentAssessment < ActiveRecord::Base
   end
 
   def validate_special
-    if (!points.nil? && competition_id.nil?)
+    self.competition_id = competition_id.to_i
+
+    if (!points.nil? && (competition_id.nil? || competition_id == 0))
       errors[:competition_id] << "Попълнили сте точки, но не и състезание!"
     end
 
-    if (points.nil? && !competition_id.nil?)
+    if (points.nil? && !(competition_id.nil? || competition_id == 0))
       errors[:points] << "Попълнили сте състезание, но не и точки!"
     end
 
-    if (points.nil? || competition_id.nil?) and !is_taking_exam?
+    if (points.nil? || (competition_id.nil? || competition_id == 0)) and !is_taking_exam?
       errors[:is_taking_exam] << "Ученикът трябва или да има точки от олимпиада или да се яви на изпит!"
     end
   end
 
   def validate_competition
-    return if competition_id.nil?
+    self.competition_id = competition_id.to_i
+    return if competition_id.nil? || competition_id == 0
     if competition.exam_id != exam_id
       errors[:competition_id] << "Оценка от това състезание не може да бъде приложена за избрания изпит."
     end
