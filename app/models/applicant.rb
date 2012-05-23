@@ -105,7 +105,7 @@ class Applicant < ActiveRecord::Base
   end
 
   def status_text
-    strings = ['Отхвърлен', 'Изчакване', 'Удобрен']
+    strings = ['Отхвърлен', 'Изчакване', 'Одобрен']
     return strings[status]
   end
 

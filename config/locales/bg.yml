@@ -167,7 +167,7 @@ bg:
         enrollment_assessments: "Изпити"
         assets: "Файлове"
         status_text: "Състояние"
-        last_viewed: "Последно отворен за удобрение"
+        last_viewed: "Последно отворен за одобрение"
         user_edits: "Брой редакции от потребител"
         reviews: "Забележки"
       enrollment_assessment:

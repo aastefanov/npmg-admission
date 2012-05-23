@@ -27,7 +27,7 @@ class ApplicantsController < ApplicationController
 
     @applicant = Applicant.new(params[:applicant])
     if @applicant.save
-      flash[:notice] = "Успешно направихте вашата кандидатура. Очаквайте нейното удобрение."
+      flash[:notice] = "Успешно направихте вашата кандидатура. Очаквайте нейното одобрение."
       redirect_to root_path
     else
       flash[:error] = "Възникна грешка при валидацията!"

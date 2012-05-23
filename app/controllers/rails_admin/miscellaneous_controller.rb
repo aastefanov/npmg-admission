@@ -35,7 +35,7 @@ module RailsAdmin
       if count == applicants.count
         flash[:notice] = "Всички #{count} онлайн документи бяха финализирани."
       else
-        flash[:notice] = "#{applicants.count - count} не бяха финализирани, защото не са удобрени."
+        flash[:notice] = "#{applicants.count - count} не бяха финализирани, защото не са одобрени."
       end
       redirect_to Rails.application.routes.url_helpers.rails_admin_misc_path
     end

@@ -6,7 +6,7 @@
 <form class="form-horizontal densier" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_preview_approval_path %>">
   <fieldset>
     <div class="control-group" style="text-align: center;">
-      Остават още <strong><%= Applicant.unapproved.count %></strong> регистрации за проверка. Има <strong><%= Applicant.approved.count %></strong> удобрени и <strong><%= Applicant.dissapproved.count %></strong> отхвърлени регистрации.
+      Остават още <strong><%= Applicant.unapproved.count %></strong> регистрации за проверка. Има <strong><%= Applicant.approved.count %></strong> одобрени и <strong><%= Applicant.dissapproved.count %></strong> отхвърлени регистрации.
     </div>
   </fieldset>
   <div class="form-actions">
