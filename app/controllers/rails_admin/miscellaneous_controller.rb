@@ -13,6 +13,51 @@ module RailsAdmin
       @page_name = "Разни"
     end
 
+    def export_applicants
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
+      @page_name = "Разни"
+
+      applicants = Applicant.where("applicants.student_id IS NULL")
+      count = 0
+      errors = []
+      applicants.each do |applicant|
+        begin
+          count += 1 if applicant.export_to_student
+        rescue ActiveRecord::RecordInvalid => e
+          errors << ["Документи с ЕГН " + applicant.egn, e.to_s]
+        end
+      end
+      
+      if errors.length > 0
+        flash[:error] = "Грешки: " + errors.inspect
+      end
+
+      if count == applicants.count
+        flash[:notice] = "Всички #{count} онлайн документи бяха финализирани."
+      else
+        flash[:notice] = "#{applicants.count - count} не бяха финализирани, защото не са удобрени."
+      end
+      redirect_to Rails.application.routes.url_helpers.rails_admin_misc_path
+    end
+
+    def applicants_close
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
+      @page_name = "Разни"
+
+      Configurable.create!(:name => 'applicants_closed', :value => true)
+      flash[:notice] = "Успешно затворихте онлайн регистрацията!"
+      redirect_to Rails.application.routes.url_helpers.rails_admin_misc_path
+    end
+
+    def view_results
+      @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
+      @page_name = "Разни"
+
+      Configurable.create!(:name => 'view_results', :value => true)
+      flash[:notice] = "Успешно включихте уеб интерфейса за преглед на резултати!"
+      redirect_to Rails.application.routes.url_helpers.rails_admin_misc_path
+    end
+
     # Format: competition_id, to_range, mark
     def points_marks_import
       @authorization_adapter.try(:authorize, :import, @abstract_model, @object)

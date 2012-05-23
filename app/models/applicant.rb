@@ -135,9 +135,10 @@ class Applicant < ActiveRecord::Base
       end
     end
 
-    student.save
+    student.save!
     self.student_id = student.id
     self._approve = true
-    self.save
+    self.save!
+    return true
   end
 end

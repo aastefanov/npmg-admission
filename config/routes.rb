@@ -31,6 +31,9 @@ Admission::Application.routes.draw do
     controller "miscellaneous" do
       get "/miscellaneous", :model_name => "students", :to => :index, :as => "misc"
       post "/miscellaneous/points_marks_import", :model_name => "students", :to => :points_marks_import, :as => "points_marks_import"
+      post "/miscellaneous/applicants_close", :model_name => "students", :to => :applicants_close, :as => "applicants_close"
+      post "/miscellaneous/view_results", :model_name => "students", :to => :view_results, :as => "view_results"
+      post "/miscellaneous/export", :model_name => "students", :to => :export_applicants, :as => "export_applicants"
     end
 
     controller "approval" do

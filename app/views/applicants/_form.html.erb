@@ -16,7 +16,7 @@
         <%= f.link_to_add '<i class="icon-plus icon-white"></i> Добави нов'.html_safe, :enrollment_assessments, 'data-association' => "enrollment_assessments", 'data-blueprint_name' => "enrollment_assessments_fields_blueprint", :class => "btn btn-info add_nested_fields" %>
       </div>
       <%= @applicant.errors[:enrollment_assessments].length > 0 ? '<span class="help-inline">'.html_safe + @applicant.errors[:enrollment_assessments].join('; ') + '</span>'.html_safe : '' %>
-      <p class="help-block">Задължително. </p>
+      <p class="help-block"></p>
       <ul class='nav nav-tabs' style='margin-top:5px'>
 
       </ul>
@@ -38,7 +38,7 @@
         <%= f.link_to_add '<i class="icon-plus icon-white"></i> Добави нов'.html_safe, :assets, 'data-association' => "assets", 'data-blueprint_name' => "assets_fields_blueprint", :class => "btn btn-info add_nested_fields" %>
       </div>
       <%= @applicant.errors[:assets].length > 0 ? '<span class="help-inline">'.html_safe + @applicant.errors[:assets].join('; ') + '</span>'.html_safe : '' %>
-      <p class="help-block">Задължително. </p>
+      <p class="help-block"></p>
       <ul class='nav nav-tabs' style='margin-top:5px'>
 
       </ul>

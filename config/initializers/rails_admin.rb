@@ -18,6 +18,10 @@ RailsAdmin.config do |config|
     final_certificate
   end
 
+  config.model Configurable do
+    visible false
+  end
+
   config.model Assessment do
     visible false
 

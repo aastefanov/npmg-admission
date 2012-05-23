@@ -2,6 +2,7 @@
 
 class ApplicantsController < ApplicationController
   def new
+    return if check_closed_register
 
     @applicant = Applicant.new
   end
@@ -17,6 +18,8 @@ class ApplicantsController < ApplicationController
   end
 
   def create
+    return if check_closed_register
+
     if params[:_continue]
       redirect_to root_path 
       return
@@ -79,6 +82,9 @@ class ApplicantsController < ApplicationController
   private
 
   def check_closed_register
-
+    return false unless Configurable.applicants_closed
+    flash[:error] = "Срокът за регистрация е изтекъл."
+    redirect_to root_path
+    return true
   end
 end

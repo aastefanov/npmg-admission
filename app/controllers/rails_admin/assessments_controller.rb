@@ -49,17 +49,14 @@ module RailsAdmin
     def all_students
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
 
-      @grades = Grade.all
+      @exams = Exam.all
       @students = Student.all
       @assessments = {}
       @students.each do |student|
         @assessments[student.id.to_i] = {}
-        asses = Assessment.joins(:exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id").
-          where("assessments.student_id = #{student.id}").
-          group("exams_grades.grade_id").
-          select("exams_grades.grade_id as grade_id, assessments.exam_id, assessments.student_id, assessments.fik_number, MAX(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0))) as final_m")
+        asses = Assessment.where(:student_id => student.id)
         asses.each do |a|
-          @assessments[student.id.to_i][a.grade_id.to_i] = a
+          @assessments[student.id.to_i][a.exam_id.to_i] = a
         end
       end
 

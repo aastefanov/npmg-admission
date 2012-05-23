@@ -1,5 +1,5 @@
 <div class="boxes">
-  <div class="box half">
+  <div class="box full">
     <h2>Информация за ученика</h2>
     <p>
       <% [["Входящ номер", :id], ["Име", :full_name], ["ЕГН", :egn]].each do |vals| %>
@@ -9,30 +9,18 @@
       <% end %>
     </p>
   </div>
-
-  <div class="box half">
-    <h2>Информация за паралелки</h2>
-    <p>
-      Кандидатства за:
-      <ul>
-        <% @student.grades.each do |grade| %>
-          <li><%= link_to grade.name, "##{grade.id}" %></li>
-        <% end %>
-      </ul>
-    </p>
-  </div>
 </div>
 
 <div class="boxes">
   <% @assessments.each do |assessment| %>
-    <div id="<%= assessment.grade_id %>" class="box full">
-      <h2>Профил - <%= assessment.grade_name %></h2>
+    <div id="<%= assessment.exam_id %>" class="box full">
+      <h2>Изпит - <%= assessment.exam.name %></h2>
       <p>
         <div class="row">
-          <label>Крайна оценка:</label> <strong><%= Assessment.mark_with_words(assessment.final_m) %> <%= assessment.final_m %></strong>
+          <label>Крайна оценка:</label> <strong><%= Assessment.mark_with_words(assessment.final_mark) %> <%= assessment.final_mark %></strong>
         </div>
         <div class="row">
-          <label>Преди вас*:</label> <strong><%= Assessment.num_with_greater_marks(assessment.grade_id, assessment.final_m) %> човека</strong>
+          <label>Преди вас*:</label> <strong><%= Assessment.num_with_greater_marks(assessment.exam_id, assessment.final_mark).to_i %> човека</strong>
         </div>
       </p>
     </div>
@@ -41,4 +29,4 @@
 
 <br />
 <br />
-* - Показва боря ученици с по-висока оценка за този профил.
+* - Показва боря ученици с по-висока оценка за този изпит.

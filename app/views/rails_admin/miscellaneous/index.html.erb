@@ -1,8 +1,11 @@
 <ul class='nav nav-tabs' style="display: block !important;">
-  <li id="first_button" class="icon show_member_link active"><a href="#first_import" onclick=""><i class="icon-pencil"></i> <span>Автоматично въвеждане на точки-оценка</span></a></li>
+  <li id="first_button" class="icon show_member_link active"><a href="#first_import" onclick="$('.nav-tabs').children().removeClass('active'); $('#first_button').addClass('active'); $('.to-close').hide(); $('#auto_import').show();"><i class="icon-pencil"></i> <span>Автоматично въвеждане на точки-оценка</span></a></li>
+  <li id="second_button" class="icon show_member_link"><a href="#export_applicants" onclick="$('.nav-tabs').children().removeClass('active'); $('#second_button').addClass('active'); $('.to-close').hide(); $('#export_applicants').show();"><i class="icon-tag"></i> <span>Финализиране на онлайн</span></a></li>
+  <li id="third_button" class="icon show_member_link"><a href="#export_applicants" onclick="$('.nav-tabs').children().removeClass('active'); $('#third_button').addClass('active'); $('.to-close').hide(); $('#applicants_close').show();"><i class="icon-tag"></i> <span>Затваряне на онлайн</span></a></li>
+  <li id="fourth_button" class="icon show_member_link"><a href="#export_applicants" onclick="$('.nav-tabs').children().removeClass('active'); $('#fourth_button').addClass('active'); $('.to-close').hide(); $('#view_results').show();"><i class="icon-tag"></i> <span>Включване на резултати</span></a></li>
 </ul>
 
-<%= form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_points_marks_import_path, :method => :post, :html => {:multipart => true, :id => "auto_import", :class => "form-horizontal densier"} do |f| %>
+<%= form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_points_marks_import_path, :method => :post, :html => {:multipart => true, :id => "auto_import", :class => "to-close form-horizontal densier"} do |f| %>
   <fieldset>
     <div class="control-group">
       <label class="control-label" for="csv">Файл</label>
@@ -12,6 +15,30 @@
     </div>
     <div class="form-actions">
       <%= submit_tag "Въвеждане", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+<% end %>
+
+<%= form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_export_applicants_path, :method => :post, :html => {:multipart => true, :id => "export_applicants", :class => "to-close form-horizontal densier", :style => 'display: none;'} do |f| %>
+  <fieldset>
+    <div class="form-actions">
+      <%= submit_tag "Финализиране", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+<% end %>
+
+<%= form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_applicants_close_path, :method => :post, :html => {:multipart => true, :id => "applicants_close", :class => "to-close form-horizontal densier", :style => 'display: none;'} do |f| %>
+  <fieldset>
+    <div class="form-actions">
+      <%= submit_tag "Затваряне", :class => "btn btn-primary", :id => "save_btn" %>
+    </div>
+  </fieldset>
+<% end %>
+
+<%= form_for :import, :url => Rails.application.routes.url_helpers.rails_admin_view_results_path, :method => :post, :html => {:multipart => true, :id => "view_results", :class => "to-close form-horizontal densier", :style => 'display: none;'} do |f| %>
+  <fieldset>
+    <div class="form-actions">
+      <%= submit_tag "Включване", :class => "btn btn-primary", :id => "save_btn" %>
     </div>
   </fieldset>
 <% end %>

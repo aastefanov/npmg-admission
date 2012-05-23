@@ -4,22 +4,44 @@
      <p>
       Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас. Тук вие можете онлайн да подадете документите на вашето дете за кандидатстване в <strong>НПМГ</strong>.
      </p>
+     <p>
+      <a href="http://npmg.org/wp-content/uploads/2011/12/grafik-priem-2012-20131.pdf" target="_blank">График за провеждане на приемната кампания</a>
+     </p>
+     <p>
+      <strong><a href="http://npmg.org/%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%BD%D0%B0-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F-2012/" target="_blank">Друга информация</a></strong>
+     </p>
+     <p>
+      <strong><a href="http://npmg.org/%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B8/" target="_blank">Контакти</a></strong>
+     </p>
   </div>
   <div class="box">
      <h2>Въпроси</h2>
-     <p>
-      ......
-     </p>
+     <ul>
+      <li>
+      При регистрация вие въвеждате вашите данни за кандидатстване в <strong>НПМГ</strong>. След това вашите документи подлежат на удобрение (проверка) от администратор. 
+    </li>
+    <li>
+      Когато сте влязли в системата за кандидатстване, <strong>от дясно може да видите</strong> състоянието на регистрацията - <strong>изчакване</strong>, <strong>удобрена</strong> или <strong>отхвърлена</strong>. Във всеки един момент вие може да <strong>редактирате</strong> вашите данни като след това те подлеждат отново на удобрение от администратор. 
+    </li>
+    <li>
+      В случай на <strong>отхвърлена</strong> регистрация вие трябва да редактирате данните като също така виждате <strong>съобщение</strong> какво точно е довело до отхвърляне.
+    </li>
+    <li>
+      След приключване на датите за онлайн регистрация според <strong>графика</strong> вие трябва да влезете в системата за подаване на документи и <strong>разпечатате служебни бележки</strong>, с които ще бъдете допуснати на изпит. 
+    </li>
+  </ul>
   </div>
   <div class="box box-main">
      <h2>Подаване на документи</h2>
      <p>
       <% unless current_applicant %>
+        <% unless Configurable.applicants_closed %>
         <form method="get" action="<%= new_applicant_path %>">
           <button type="submit" data-disable-with="Нов профил" class="btn btn-primary" id="save_btn">
-            <i class='icon-white icon-ok'></i> Нов профил
+            <i class='icon-white icon-ok'></i> Нова регистрация
           </button> 
         </form>
+        <% end %>
         <%= form_for :applicant, :url => applicant_session_path, :method => :post, :html => {:class => "form-horizontal denser"} do |f| %>
           <div class="control-group">
             <%= f.label :email, "Имейл", :class => "control-label" %>
@@ -85,25 +107,27 @@
      </p>
   </div>
 </div>
-<% unless current_applicant %>
-<div class="boxes">
-  <div class="box full">
-    <h2>Проверка на резултат</h2>
-    <p>
-    <%= form_for :student, :url => results_url do |f| %>
-      <div class="row">
-        <label for="id">Входящ номер:</label>
-        <input type="text" name="id" />
-      </div>
-      <div class="row">
-        <label for="id">ЕГН:</label>
-        <input type="text" name="egn" />
-      </div>
-      <div class="row">
-        <input type="submit" value="Провери" />
-      </div>
-    <% end %>
-    </p>
+<% if Configurable.view_results %>
+  <% unless current_applicant %>
+  <div class="boxes">
+    <div class="box full">
+      <h2>Проверка на резултат</h2>
+      <p>
+      <%= form_for :student, :url => results_url do |f| %>
+        <div class="row">
+          <label for="id">Входящ номер:</label>
+          <input type="text" name="id" />
+        </div>
+        <div class="row">
+          <label for="id">ЕГН:</label>
+          <input type="text" name="egn" />
+        </div>
+        <div class="row">
+          <input type="submit" value="Провери" />
+        </div>
+      <% end %>
+      </p>
+    </div>
   </div>
-</div>
+  <% end %>
 <% end %>

@@ -1,12 +1,12 @@
 @students.each do |student|
   fin_arr = [student.id, student.full_name, student.egn]
-  @grades.each do |grade|
-  	if @assessments[student.id][grade.id].nil?
+  @exams.each do |exam|
+  	if @assessments[student.id][exam.id].nil?
   	  fin_arr += ["@-@", "@-@", "@-@"]
   	else
-  	  fin_arr += [@assessments[student.id][grade.id].fik_number, 
-  	    @assessments[student.id][grade.id].final_m.to_f == 0.0 ? "2.000" : @assessments[student.id][grade.id].final_m,
-  	    Assessment.mark_with_words(@assessments[student.id][grade.id].final_m)]
+  	  fin_arr += [@assessments[student.id][exam.id].fik_number, 
+  	    @assessments[student.id][exam.id].final_mark.to_f == 0.0 ? "2.000" : @assessments[student.id][exam.id].final_mark,
+  	    Assessment.mark_with_words(@assessments[student.id][exam.id].final_mark)]
   	end
   end
   csv << fin_arr

@@ -1,0 +1,9 @@
+applicants_closed:
+  name: No further registrations
+  default: false
+  type: boolean
+
+view_results:
+  name: Index page check results
+  default: false
+  type: boolean

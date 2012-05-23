@@ -14,6 +14,8 @@ gem 'jquery-rails'
 gem 'paper_trail', '~> 2'
 gem "paperclip", "~> 3.0"
 
+gem 'configurable_engine'
+
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'devise-encryptable'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'

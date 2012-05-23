@@ -37,7 +37,7 @@ class Assessment < ActiveRecord::Base
   end
 
   def final_mark
-  	(exam_mark || 0) > (competition_mark || 0) ? exam_mark : competition_mark
+  	(exam_mark || 2.0) > (competition_mark || 2.0) ? exam_mark : competition_mark
   end
 
   attr_protected :id
@@ -55,10 +55,8 @@ class Assessment < ActiveRecord::Base
     words
   end
 
-  def self.num_with_greater_marks(grade, mark)
-    n = Assessment.joins(:exam, "INNER JOIN exams_grades ON exams_grades.exam_id = exams.id", "INNER JOIN grades ON grades.id = exams_grades.grade_id")
-    n = n.where("grades.id = #{grade}")
-    n = n.select("SUM(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0)) > #{mark}) as num")
+  def self.num_with_greater_marks(exam, mark)
+    n = Assessment.where(:exam_id => exam).select("SUM(GREATEST(COALESCE(assessments.competition_mark, 0), COALESCE(assessments.exam_mark, 0)) > #{mark || 2.0}) as num")
 
     return n.first.num
   end

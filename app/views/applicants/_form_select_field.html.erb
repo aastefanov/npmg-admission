@@ -4,6 +4,6 @@
     <%= f.collection_select(field, from, :id, :name, :prompt => "Моля изберете") %>
 
     <%= object.errors[field].length > 0 ? '<span class="help-inline">'.html_safe + object.errors[field].join('; ') + '</span>'.html_safe : '' %>
-    <p class="help-block">...</p>
+    <p class="help-block"><%= local_assigns[:help] || ' ' %></p>
   </div>
 </div>

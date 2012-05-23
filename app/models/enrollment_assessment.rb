@@ -14,6 +14,14 @@ class EnrollmentAssessment < ActiveRecord::Base
   end
 
   def validate_special
+    if (!points.nil? && competition_id.nil?)
+      errors[:competition_id] << "Попълнили сте точки, но не и състезание!"
+    end
+
+    if (points.nil? && !competition_id.nil?)
+      errors[:points] << "Попълнили сте състезание, но не и точки!"
+    end
+
     if (points.nil? || competition_id.nil?) and !is_taking_exam?
       errors[:is_taking_exam] << "Ученикът трябва или да има точки от олимпиада или да се яви на изпит!"
     end
