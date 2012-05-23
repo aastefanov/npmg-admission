@@ -36,6 +36,7 @@ class Applicant < ActiveRecord::Base
             :uniqueness => true
 
   before_update :versionizer
+  before_create :versionizer
 
   scope :unapproved, where("`applicants`.`approved` < `applicants`.`version_n` AND `applicants`.`approved` != 0")
   scope :approved, where("`applicants`.`approved` = `applicants`.`version_n`")
