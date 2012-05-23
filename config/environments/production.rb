@@ -56,5 +56,5 @@ Admission::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.assets.precompile += ['rails_admin/imports.js', 'screen.css']
+  config.assets.precompile += ['rails_admin/imports.css', 'screen.css']
 end
