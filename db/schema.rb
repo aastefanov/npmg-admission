@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522203116) do
+ActiveRecord::Schema.define(:version => 20120523100939) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(:version => 20120522203116) do
     t.datetime "reset_password_sent_at"
     t.integer  "version_n"
     t.datetime "last_viewed"
+    t.integer  "student_id"
   end
+
+  add_index "applicants", ["student_id"], :name => "index_applicants_on_student_id"
 
   create_table "assessments", :force => true do |t|
     t.integer "exam_id"
@@ -132,9 +135,10 @@ ActiveRecord::Schema.define(:version => 20120522203116) do
     t.string   "email"
     t.string   "address"
     t.integer  "registered_by"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.boolean  "is_girl",       :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "is_girl",           :default => false
+    t.boolean  "registered_online"
   end
 
   create_table "students_grades", :id => false, :force => true do |t|

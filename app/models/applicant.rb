@@ -4,6 +4,7 @@ class Applicant < ActiveRecord::Base
   has_many :reviews
   has_many :assets
   has_many :enrollment_assessments
+  belongs_to :student
   has_paper_trail
 
   devise :database_authenticatable, :validatable, :recoverable
@@ -112,5 +113,31 @@ class Applicant < ActiveRecord::Base
     num = 0
     versions.each { |v| num += 1 if v.whodunnit.nil? }
     return num
+  end
+
+  def export_to_student
+    return false if status != 2
+
+    student = Student.new :first_name => first_name, :middle_name => middle_name, :last_name => last_name, :egn => egn, :phone => phone
+    
+    enrollment_assessments.each do |enrollment|
+      assessment = Assessment.new :exam_id => enrollment.exam_id, :is_taking_exam => enrollment.is_taking_exam
+      if enrollment.points
+        assessment.competition_mark = PointsToMark.get_mark(enrollment.points, enrollment.competition_id).to_f
+      end
+      student.assessments << assessment
+    end
+
+    versions.reverse.each do |ver|
+      if ver.whodunnit
+        student.registered_by = ver.whodunnit.to_i
+        break
+      end
+    end
+
+    student.save
+    self.student_id = student.id
+    self._approve = true
+    self.save
   end
 end

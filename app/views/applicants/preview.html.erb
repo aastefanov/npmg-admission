@@ -1,0 +1,16 @@
+<style>
+  .controls {
+    padding-top: 5px;
+  }
+</style>
+
+<div class="form-horizontal densier boxes">
+  <div class="box full">
+    <form method="get" action="<%= root_path %>" style="display: inline-block;">
+      <button type="submit" data-disable-with="Назад" class="btn btn-primary" id="save_btn">
+        <i class='icon-white icon-arrow-left'></i> Назад
+      </button> 
+    </form>
+    <%= render :partial => 'preview_data', :locals => {:applicant => current_applicant} %>
+  </div>
+</div>

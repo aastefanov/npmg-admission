@@ -42,7 +42,10 @@ Admission::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/adnp', :as => 'rails_admin'
 
-  resources :applicants
+  resources :applicants do
+    get 'preview', :on => :member
+    get 'certificate', :on => :member
+  end
   match '/update_competitions_select/:exam_id', :controller => :applicants, :action => :update_competitions_select
 
   match ':controller(/:action(/:id(.:format)))'

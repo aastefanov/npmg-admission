@@ -4,8 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="NONE,NOARCHIVE" />
   <title><%= @page_name.nil? ? "" : @page_name + " |" %> <%= @plugin_name || "НПМГ приемна кампания " + Time.now.strftime("%Y") %></title>
-  <%= stylesheet_link_tag 'rails_admin/imports' %>
-  <%= stylesheet_link_tag('screen', :media => :screen) %>
+  <%= (!@print) ? stylesheet_link_tag('rails_admin/imports') : '' %>
+  <%= (!@print) ? stylesheet_link_tag('screen', :media => :screen)  : '' %>
 
   <%= javascript_include_tag "application" %>
 
@@ -18,20 +18,24 @@
 </head>
 <body class="rails_admin">
   <div id="wrapper">
-    <div class="header">
-      <%= image_tag("rails_admin/logo_print.jpg", :alt => "logo") %>
-    </div>
-    <% if flash[:error] %>
-      <div class="box flash-error full">
-        <%= flash[:error] %>
+    <% unless @print %>
+      <div class="header">
+        <a href="/">
+          <%= image_tag("rails_admin/logo_print.jpg", :alt => "logo") %>
+        </a>
       </div>
-      <div style="clear: both;"></div>
-    <% end %>
-    <% if flash[:notice] && flash[:notice] != "Влезе успешно." %>
-      <div class="box flash-notice full">
-        <%= flash[:notice] %>
-      </div>
-      <div style="clear: both;"></div>
+      <% if flash[:error] %>
+        <div class="box flash-error full">
+          <%= flash[:error] %>
+        </div>
+        <div style="clear: both;"></div>
+      <% end %>
+      <% if flash[:notice] && flash[:notice] != "Влезе успешно." %>
+        <div class="box flash-notice full">
+          <%= flash[:notice] %>
+        </div>
+        <div style="clear: both;"></div>
+      <% end %>
     <% end %>
     <%= content_for(:layout) %>
   </div>

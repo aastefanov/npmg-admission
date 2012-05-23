@@ -9,7 +9,7 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :assessments, :allow_destroy => true
   # attr_accessible :assessments_attributes
   
-  validates_presence_of :first_name, :middle_name, :last_name, :registered_by, :grades, :assessments
+  validates_presence_of :first_name, :middle_name, :last_name, :registered_by, :assessments
 
   validates :egn,
             :presence => true,

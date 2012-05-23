@@ -45,9 +45,9 @@
 <% if applicant.reviews.count > 0 %>
   <fieldset>
     <legend><i class="icon-chevron-down"></i> Забележки</legend>
-    <% applicant.reviews.each do |review| %>
+    <% applicant.reviews.reverse.each do |review| %>
       <div class="control-group">
-        <label class="control-label"><%= t 'activerecord.models.reviews' %></label>
+        <label class="control-label"><%= t 'activerecord.models.review' %></label>
         <div class="controls">
           <strong><%= l review.created_at, :format => :long %></strong><br />
           <%= review.content %>

@@ -40,20 +40,42 @@
           </div>
         <% end %>
       <% else %>
-      <% statuses = ['error', 'notice', 'green']
-        messages = ['Вашата кандидатура е отхвърлена! '.html_safe + link_to("Моля разгледайте забележките и ги коригирайте.", edit_applicant_path(current_applicant).html_safe), 'Вашата кандидатура очаква удобрение.', 'Вашата кандидатура е удобрена!'] %>
-        <div class="box flash-<%= statuses[current_applicant.status] %>">
-          <%= messages[current_applicant.status] %>
-        </div>
+        <% if current_applicant.student_id.nil? %>
+          <% statuses = ['error', 'notice', 'green']
+          messages = ['Вашата кандидатура е отхвърлена! '.html_safe + link_to("Моля разгледайте забележките и ги коригирайте.", edit_applicant_path(current_applicant).html_safe), 'Вашата кандидатура очаква удобрение.', 'Вашата кандидатура е удобрена!'] %>
+          <div class="box flash-<%= statuses[current_applicant.status] %>">
+            <%= messages[current_applicant.status] %>
+          </div>
+        <% else %>
+          <div class="box flash-green">
+            Вашият входящ номер е <span style="font-weight: bold; font-size: 20px;"><%= current_applicant.student_id %></span>
+          </div>
+        <% end %>
         <br />
         <strong>Име: </strong> <%= current_applicant.full_name %>
         <br />
         <br />
-        <form method="get" action="<%= edit_applicant_path(current_applicant) %>" style="display: inline-block;">
-          <button type="submit" data-disable-with="Редакция" class="btn btn-primary" id="save_btn">
-            <i class='icon-white icon-ok'></i> Редакция
-          </button> 
-        </form>
+        <% if current_applicant.student_id %>
+          <form method="get" action="<%= certificate_applicant_path(current_applicant) %>" style="display: inline-block;">
+            <button type="submit" data-disable-with="Служебна бележка" class="btn btn-primary" id="save_btn">
+              <i class='icon-white icon-print'></i> Служебна бележка
+            </button> 
+          </form>
+        <% else %>
+          <form method="get" action="<%= preview_applicant_path(current_applicant) %>" style="display: inline-block;">
+            <button type="submit" data-disable-with="Моята кандидатура" class="btn btn-primary" id="save_btn">
+              Моята кандидатура
+            </button> 
+          </form>
+        <% end %>
+        <% if current_applicant.student_id.nil? %>
+          <form method="get" action="<%= edit_applicant_path(current_applicant) %>" style="display: inline-block;">
+            <button type="submit" data-disable-with="Редакция" class="btn<%= current_applicant.status == 0 ? ' btn-primary' : '' %>" id="save_btn">
+              <i class='icon-white icon-edit'></i> Редакция
+            </button> 
+          </form>
+        <% end %>
+        <br />
         <form method="get" action="<%= destroy_applicant_session_path %>" style="display: inline-block;">
           <button type="submit" data-disable-with="Изход" class="btn" id="save_btn">
             Изход

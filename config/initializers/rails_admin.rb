@@ -33,7 +33,6 @@ RailsAdmin.config do |config|
 
   config.model Applicant do
     field :status_text
-    field :last_viewed
     field :approved do
       hide
     end
@@ -94,7 +93,6 @@ RailsAdmin.config do |config|
     field :phone
     
     group :grades do
-      field :grades
       field :assessments
     end
 

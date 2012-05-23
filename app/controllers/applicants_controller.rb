@@ -2,7 +2,18 @@
 
 class ApplicantsController < ApplicationController
   def new
+
     @applicant = Applicant.new
+  end
+
+  def certificate
+    if current_applicant
+      @print = true
+      @object = current_applicant.student
+      render :template => 'rails_admin/main/assessment_certificate'
+    else
+      redirect_to new_applicant_session_path
+    end
   end
 
   def create
@@ -23,6 +34,11 @@ class ApplicantsController < ApplicationController
 
   def edit
     if current_applicant
+      if current_applicant.student_id
+        flash[:error] = "Промяната на данни е затворена! Вие вече имате входящ номер."
+        redirect_to root_path
+        return
+      end
       @applicant = Applicant.includes(:assets, :reviews, :enrollment_assessments).find(current_applicant.id)
     else
       redirect_to new_applicant_session_path
@@ -30,24 +46,39 @@ class ApplicantsController < ApplicationController
   end
 
   def update
-    if params[:_continue]
-      redirect_to root_path 
-      return
-    end
+    if current_applicant
+      if current_applicant.student_id
+        flash[:error] = "Промяната на данни е затворена! Вие вече имате входящ номер."
+        redirect_to root_path
+        return
+      end
 
-    @applicant = Applicant.find(params[:id])
+      if params[:_continue]
+        redirect_to root_path 
+        return
+      end
 
-    if @applicant.update_attributes(params[:applicant])
-      flash[:notice] = "Успешно обновихте вашата кандидатура."
-      redirect_to root_path
+      @applicant = current_applicant
+      if @applicant.update_attributes(params[:applicant])
+        flash[:notice] = "Успешно обновихте вашата кандидатура."
+        redirect_to root_path
+      else
+        flash[:error] = "Възникна грешка при валидацията!"
+        render :action => :edit
+      end
     else
-      flash[:error] = "Възникна грешка при валидацията!"
-      render :action => :edit
+      redirect_to new_applicant_session_path
     end
   end
 
   def update_competitions_select
     competitions = Competition.where(:exam_id => params[:exam_id]) unless params[:exam_id].blank?
     render :partial => "competitions", :locals => { :competitions => competitions }
+  end
+
+  private
+
+  def check_closed_register
+
   end
 end
