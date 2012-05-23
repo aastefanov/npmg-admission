@@ -28,7 +28,8 @@ class EnrollmentAssessment < ActiveRecord::Base
   end
 
   def validate_competition
-    if !competition_id.nil? && competition.exam_id != exam_id
+    return if competition_id.nil?
+    if competition.exam_id != exam_id
       errors[:competition_id] << "Оценка от това състезание не може да бъде приложена за избрания изпит."
     end
   end
