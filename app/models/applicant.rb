@@ -121,7 +121,7 @@ class Applicant < ActiveRecord::Base
 
     student = Student.new :first_name => first_name, :middle_name => middle_name, :last_name => last_name, :egn => egn, :phone => phone
     
-    assessments = []
+    asse = []
 
     enrollment_assessments.each do |enrollment|
       assessment = Assessment.new :exam_id => enrollment.exam_id, :is_taking_exam => enrollment.is_taking_exam
@@ -133,10 +133,10 @@ class Applicant < ActiveRecord::Base
           assessment.competition_mark = mark
         end
       end
-      assessments << assessment
+      asse << assessment
     end
 
-    assessments.each do |a|
+    asse.each do |a|
       student.assessments << a
     end
 
