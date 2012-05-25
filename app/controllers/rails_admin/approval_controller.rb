@@ -47,7 +47,7 @@ module RailsAdmin
             @applicant.last_viewed = DateTime.now - 2.hour
             @applicant.save
             redirect_to Rails.application.routes.url_helpers.rails_admin_approval_path
-            return
+            return false
           end
           @applicant._dissapprove = true
           @applicant.reviews << Review.new(:content => params[:review])
@@ -55,7 +55,7 @@ module RailsAdmin
         end
         @applicant.save
         redirect_to Rails.application.routes.url_helpers.rails_admin_approval_path
-        return
+        return false
       end
     end
   end

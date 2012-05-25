@@ -8,7 +8,7 @@
     padding-top: 5px;
   }
 </style>
-<form class="form-horizontal densier" method="get" action="<%= Rails.application.routes.url_helpers.rails_admin_change_state_approval_path(@applicant) %>">
+<form class="form-horizontal densier" method="post" action="<%= Rails.application.routes.url_helpers.rails_admin_change_state_approval_path(@applicant) %>">
   <%= render :partial => 'applicants/preview_data', :locals => {:applicant => @applicant} %>
   <fieldset>
     <legend><i class="icon-chevron-down"></i> Добави забележка</legend>
