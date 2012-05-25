@@ -43,7 +43,7 @@ class Applicant < ActiveRecord::Base
   scope :dissapproved, where("`applicants`.`approved` = 0")
   scope :not_viewed, where("`applicants`.`last_viewed` IS NULL OR `applicants`.`last_viewed` <= ?", DateTime.now - 1.hour)
 
-  attr_accessor :_dissapprove, :_approve
+  attr_accessor :_dissapprove, :_approve, :_no_view_date
 
   def versionizer
     self.version_n  ||= 2
@@ -53,7 +53,7 @@ class Applicant < ActiveRecord::Base
     elsif _dissapprove
       self.approved = 0
     else
-      self.last_viewed = DateTime.now - 2.hour
+      self.last_viewed = DateTime.now - 2.hour unless _no_view_date
       self.version_n += 1
       self.approved = 1 if self.approved == 0
     end

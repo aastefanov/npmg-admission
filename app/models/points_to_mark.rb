@@ -2,7 +2,7 @@ class PointsToMark < ActiveRecord::Base
   belongs_to :competition
 
   validates :mark,
-    :inclusion => {:in => 2.0..6.0},
+    :numericality => { :greater_than_or_equal_to => 0.0, :less_than_or_equal_to => 6.0 },
     :allow_blank => false,
     :allow_nil => false
 

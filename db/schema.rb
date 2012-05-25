@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523135508) do
+ActiveRecord::Schema.define(:version => 20120525153655) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
@@ -104,13 +104,12 @@ ActiveRecord::Schema.define(:version => 20120523135508) do
   end
 
   create_table "points_to_marks", :force => true do |t|
-    t.integer "to_range"
     t.integer "competition_id"
     t.decimal "mark",           :precision => 4, :scale => 3
+    t.decimal "to_range",       :precision => 4, :scale => 3
   end
 
   add_index "points_to_marks", ["competition_id"], :name => "index_points_to_marks_on_competition_id"
-  add_index "points_to_marks", ["to_range"], :name => "index_points_to_marks_on_to_range"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
