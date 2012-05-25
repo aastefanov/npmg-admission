@@ -39,7 +39,7 @@ Admission::Application.routes.draw do
     controller "approval" do
       get "/approval", :model_name => "students", :to => :index, :as => "approval"
       get "/approval/new", :model_name => "students", :to => :preview, :as => "preview_approval"
-      get "/approval/:id/change_state", :model_name => "students", :to => :change_state, :as => "change_state_approval"
+      post "/approval/:id/change_state", :model_name => "students", :to => :change_state, :as => "change_state_approval"
     end
   end
 

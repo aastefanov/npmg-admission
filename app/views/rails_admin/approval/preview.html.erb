@@ -8,7 +8,7 @@
     padding-top: 5px;
   }
 </style>
-<form class="form-horizontal densier" method="post" action="<%= Rails.application.routes.url_helpers.rails_admin_change_state_approval_path(@applicant) %>">
+<%= form_for :applicant, :url => Rails.application.routes.url_helpers.rails_admin_change_state_approval_path(@applicant), :method => :post, :class => "form-horizontal densier"} do |f| %>
   <%= render :partial => 'applicants/preview_data', :locals => {:applicant => @applicant} %>
   <fieldset>
     <legend><i class="icon-chevron-down"></i> Добави забележка</legend>
@@ -30,4 +30,4 @@
     <i class="icon-edit"></i> Редакция
   </button>
   </div>
-</form>
+<% end %>

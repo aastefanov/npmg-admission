@@ -43,9 +43,9 @@ module RailsAdmin
           flash[:notice] = "Успешно одобрихте регистрация."
         else
           if params[:review].nil? || params[:review].length < 1
-            flash[:error] = "Не сте въвел забележка."
             @applicant.last_viewed = DateTime.now - 2.hour
             @applicant.save
+            flash[:error] = "Не сте въвел забележка."
             redirect_to Rails.application.routes.url_helpers.rails_admin_approval_path
             return false
           end
