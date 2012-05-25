@@ -127,8 +127,9 @@ class Applicant < ActiveRecord::Base
         mark = PointsToMark.get_mark(enrollment.points, enrollment.competition_id).to_f
         if (mark < 2.0 || mark > 6.0 || mark.nil?) && !enrollment.is_taking_exam?
           return 1
+        else
+          assessment.competition_mark = mark
         end
-        assessment.competition_mark = mark
       end
       student.assessments << assessment
     end
