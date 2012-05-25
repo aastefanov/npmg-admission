@@ -19,10 +19,13 @@ module RailsAdmin
 
       applicants = Applicant.where("applicants.student_id IS NULL")
       count = 0
+      semi_errors = []
       errors = []
       applicants.each do |applicant|
         begin
-          count += 1 if applicant.export_to_student
+          result = applicant.export_to_student
+          count += 1 if result == 2
+          errors << ["Документи с ЕГН " + applicant.egn, "Подал е оценка, която не се признава, а не е отметнато, че ще се яви на изпит!"]
         rescue ActiveRecord::RecordInvalid => e
           errors << ["Документи с ЕГН " + applicant.egn, e.to_s]
         end
@@ -35,7 +38,7 @@ module RailsAdmin
       if count == applicants.count
         flash[:notice] = "Всички #{count} онлайн документи бяха финализирани."
       else
-        flash[:notice] = "#{applicants.count - count} не бяха финализирани, защото не са одобрени."
+        flash[:notice] = "#{applicants.count - count} не бяха финализирани, защото не са одобрени или вече са финализирани."
       end
       redirect_to Rails.application.routes.url_helpers.rails_admin_misc_path
     end

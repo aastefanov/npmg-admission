@@ -117,7 +117,7 @@ class Applicant < ActiveRecord::Base
   end
 
   def export_to_student
-    return false if status != 2
+    return 0 if status != 2
 
     student = Student.new :first_name => first_name, :middle_name => middle_name, :last_name => last_name, :egn => egn, :phone => phone
     
@@ -125,7 +125,10 @@ class Applicant < ActiveRecord::Base
       assessment = Assessment.new :exam_id => enrollment.exam_id, :is_taking_exam => enrollment.is_taking_exam
       if enrollment.points
         mark = PointsToMark.get_mark(enrollment.points, enrollment.competition_id).to_f
-        assessment.competition_mark = mark if mark >= 2.0 && mark <= 6.0
+        if (mark < 2.0 || mark > 6.0 || mark.nil?) && !enrollment.is_taking_exam?
+          return 1
+        end
+        assessment.competition_mark = mark
       end
       student.assessments << assessment
     end
@@ -141,6 +144,6 @@ class Applicant < ActiveRecord::Base
     self.student_id = student.id
     self._approve = true
     self.save!
-    return true
+    return 2
   end
 end
