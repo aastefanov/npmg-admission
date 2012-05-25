@@ -17,7 +17,7 @@ module RailsAdmin
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @page_name = "Разни"
 
-      applicants = Applicant.where("applicants.student_id IS NULL")
+      applicants = Applicant.approved.where("applicants.student_id IS NULL")
       count = 0
       semi_errors = []
       errors = []
