@@ -17,7 +17,7 @@ module RailsAdmin
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @page_name = "Разни"
 
-      applicants = Applicant.approved.where("applicants.student_id IS NULL")
+      applicants = Applicant.where("applicants.student_id IS NULL")
       count = 0
       semi_errors = []
       errors = []
@@ -25,7 +25,7 @@ module RailsAdmin
         begin
           result = applicant.export_to_student
           count += 1 if result == 2
-          errors << ["Документи с ЕГН " + applicant.egn, "Подал е оценка, която не се признава, а не е отметнато, че ще се яви на изпит!"]
+          errors << ["Документи с ЕГН " + applicant.egn, "Подал е оценка, която не се признава, а не е отметнато, че ще се яви на изпит!"] if result == 1
         rescue ActiveRecord::RecordInvalid => e
           errors << ["Документи с ЕГН " + applicant.egn, e.to_s]
         end
