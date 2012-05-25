@@ -124,7 +124,8 @@ class Applicant < ActiveRecord::Base
     enrollment_assessments.each do |enrollment|
       assessment = Assessment.new :exam_id => enrollment.exam_id, :is_taking_exam => enrollment.is_taking_exam
       if enrollment.points
-        assessment.competition_mark = PointsToMark.get_mark(enrollment.points, enrollment.competition_id).to_f
+        mark = PointsToMark.get_mark(enrollment.points, enrollment.competition_id).to_f
+        assessment.competition_mark = mark if mark >= 2.0 && mark <= 6.0
       end
       student.assessments << assessment
     end
