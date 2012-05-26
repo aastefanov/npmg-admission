@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525153655) do
+ActiveRecord::Schema.define(:version => 20120526164737) do
 
   create_table "applicants", :force => true do |t|
     t.string   "first_name"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20120525153655) do
 
   create_table "enrollment_assessments", :force => true do |t|
     t.integer "applicant_id"
-    t.integer "points"
+    t.decimal "points",         :precision => 16, :scale => 3
     t.integer "competition_id"
     t.integer "exam_id"
     t.boolean "is_taking_exam"
@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(:version => 20120525153655) do
 
   create_table "points_to_marks", :force => true do |t|
     t.integer "competition_id"
-    t.decimal "mark",           :precision => 4, :scale => 3
-    t.decimal "to_range",       :precision => 4, :scale => 3
+    t.decimal "mark",           :precision => 4,  :scale => 3
+    t.decimal "to_range",       :precision => 16, :scale => 3
   end
 
   add_index "points_to_marks", ["competition_id"], :name => "index_points_to_marks_on_competition_id"
