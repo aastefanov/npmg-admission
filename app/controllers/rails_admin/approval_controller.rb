@@ -17,7 +17,7 @@ module RailsAdmin
       @authorization_adapter.try(:authorize, :index, @abstract_model, @object)
       @page_name = "Одобрение на онлайн документи"
 
-      @applicant = Applicant.not_viewed.unapproved.joins(:enrollment_assessments, :assets).order(:id).limit(1).readonly(false)
+      @applicant = Applicant.not_viewed.unapproved.joins(:enrollment_assessments, :assets).order(:last_viewed).limit(1).readonly(false)
       if @applicant.length == 0
         flash[:notice] = "Няма неотворени регистрации за одобрение."
         redirect_to Rails.application.routes.url_helpers.rails_admin_approval_path

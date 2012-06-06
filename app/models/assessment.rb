@@ -37,7 +37,7 @@ class Assessment < ActiveRecord::Base
   end
 
   def final_mark
-  	(exam_mark || 2.0) > (competition_mark || 2.0) ? exam_mark : competition_mark
+  	(exam_mark || 2.0) >= (competition_mark || 2.0) ? exam_mark : competition_mark
   end
 
   attr_protected :id
