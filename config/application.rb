@@ -18,9 +18,11 @@ module Admission
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'    
+    config.assets.version = '1.0'
 
-# Settings in config/environments/* take precedence over those specified here.
+    config.assets.initialize_on_precompile = false
+
+    # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
@@ -41,8 +43,7 @@ module Admission
     config.time_zone = 'Sofia'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.locale = :bg
+
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
@@ -52,5 +53,10 @@ module Admission
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.active_record.sqlite3.represent_boolean_as_integer = true
+
+    config.secret_key_base = '2b5a82983bffdbe2c891a0dcf06fd82eb1e5ae8180d9e64a3a14723951cce0a0d3d8b3b37f9f563637d7004b1940d000471acff51dbb37268ec4b92bc9c67ecc'
+
   end
 end

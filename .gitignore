@@ -1,10 +1,18 @@
+# Dev tools
+*.iml
+.idea/
+# Application Files
 .bundle
 db/*.sqlite3
 log/*.log
 tmp/**/*
 config/database.yml
+config/storage.yml
 ENV=production/
 public/javascripts/ckeditor/
 test/
 tmp/
 .sass-cache/
+
+public/assets
+.rspec

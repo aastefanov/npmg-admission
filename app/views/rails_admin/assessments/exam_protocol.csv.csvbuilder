@@ -1,5 +1,0 @@
-csv << ["КВЕСТОРСКИ ПРОТОКОЛ\n за приемен изпит\n по #{@exam.name} след 7ми клас", "", "", "", "", ""]
-csv << ["Входящ номер", "Име", "Допълнителни листи", "Излизания", "Край", "Подпис"]
-@assessments.each do |assessment|
-	csv << [assessment.student_id, assessment.student.full_name, "", "", "", ""]
-end

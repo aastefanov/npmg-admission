@@ -1,29 +1,18 @@
 <div class="boxes">
   <div class="box">
-     <h2>Къде съм?</h2>
-     <p>
-     Добре дошли в системата за кандидатстване в <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
-     </p>
-  </div>
-
-</div>
-<div class="boxes">
-  <div class="box full">
-    <h2>Проверка на резултат</h2>
+    <h2>Къде съм?</h2>
     <p>
-    <% form_for :student, :url => results_url do |f| %>
-      <div class="row">
-        <label for="id">Входящ номер:</label>
-        <input type="text" name="id" />
-      </div>
-      <div class="row">
-        <label for="id">ЕГН:</label>
-        <input type="text" name="egn" />
-      </div>
-      <div class="row">
-        <input type="submit" value="Провери" />
-      </div>
-    <% end %>
+      Добре дошли в системата за кандидатстване в
+      <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
     </p>
   </div>
+  <% if user_signed_in? %>
+    <div class="box">
+      <%= link_to("Влезте в панела, за да регистрирате учениците си", rails_admin_path) %>
+    </div>
+  <% else %>
+    <div class="box">
+      <%= link_to("Влезте", new_user_session_path) %> или <%= link_to("се регистрирайте", new_user_registration_path) %>
+    </div>
+    <% end %>
 </div>

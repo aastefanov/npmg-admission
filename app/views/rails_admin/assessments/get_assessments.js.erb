@@ -1,4 +1,0 @@
-<% @assessments.each do |assessment| %>
-	if(!$("assessment-<%= assessment.exam.id %>"))
-		$("assessments").insert("<%= escape_javascript(render :partial => 'assessment', :locals => {:assessment => assessment}) %>");
-<% end %>

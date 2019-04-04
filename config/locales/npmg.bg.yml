@@ -1,0 +1,50 @@
+bg:
+  activerecord:
+    models:
+      role:
+        one: "Роля"
+        other: "Роли"
+      school:
+        one: "Училище"
+        other: "Училища"
+      user:
+        one: "Потребител"
+        other: "Потребители"
+      exam:
+        one: "Модул"
+        other: "Модули"
+      grade:
+        one: "Оценка"
+        other: "Оценки"
+      student:
+        one: "Ученик"
+        other: "Ученици"
+#      user: "Потребител"
+#      exam: "Изпит"
+#      grade: "Паралелка"
+#      student: "Ученик"
+    attributes:
+      role:
+        name: "Име"
+        users: "Потребители"
+      school:
+        name: "Име"
+        region: "Област"
+        municipality: "Община"
+        city: "Град"
+      student:
+        first_name: "Първо име"
+        middle_name: "Бащино име"
+        last_name: "Фамилия"
+        exams: "Модули"
+      exam:
+        name: "Име"
+        held_in: "Провежда се на"
+      user:
+        first_name: "Първо име"
+        last_name: "Фамилия"
+        email: "Мейл"
+        phone: "Телефон"
+        password: "Парола"
+        password_confirmation: "Потвърждение на парола"
+        is_active: "Активен"

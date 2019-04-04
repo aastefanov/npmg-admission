@@ -1,4 +1,4 @@
-class CreateExams < ActiveRecord::Migration
+class CreateExams < ActiveRecord::Migration[5.2]
   def self.up
     create_table :exams do |t|
       t.string :name
