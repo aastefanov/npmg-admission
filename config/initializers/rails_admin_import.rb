@@ -11,5 +11,7 @@ RailsAdmin.config do |config|
   # Configure global RailsAdminImport options
   config.configure_with(:import) do |config|
     config.logging = true
+    config.line_item_limit = 6000 # Required for City imports
+    config.rollback_on_error = false
   end
 end

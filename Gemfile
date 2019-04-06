@@ -6,14 +6,27 @@ gem 'rails-i18n'
 gem 'activestorage'
 gem 'phonelib'
 gem 'rails_admin_import'
+gem 'paper_trail'
+
+gem 'bootstrap_form'
 #gem 'mysql2'
 
 group :development, :test do
   gem 'sqlite3', '>= 1.3.0', '~> 1.3.13'
-  gem 'rspec-rails'
+
 end
-group :test, :production do
+
+group :production do
 #  gem 'pg'
+end
+
+group :test do
+  gem 'rails-controller-testing'
+  gem 'factory_bot'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'simplecov'
+  gem 'rspec-simplecov'
 end
 
 
@@ -22,6 +35,7 @@ group :assets do
   gem 'sass-rails' #, "  ~> 3.2.3"
   gem 'coffee-rails' #, "~> 3.2.1"
   gem 'uglifier' #, ">= 1.0.3"
+  gem 'bootstrap'
 end
 
 gem 'jquery-rails'

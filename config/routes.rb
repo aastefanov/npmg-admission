@@ -8,7 +8,7 @@ Admission::Application.routes.draw do
   # end
   #
   #
-  resources :approvals
+  resources :students
 
   # resources :users
   # match 'students/results' => 'students#results', :via => :post
@@ -18,6 +18,16 @@ Admission::Application.routes.draw do
   devise_for :users, controllers: {
       registrations: 'users/registrations'
   }
+
+  scope :api, :module => :api do
+    get 'regions', to: 'regions#index'
+    get 'regions/:id', to: 'regions#show'
+    get 'regions/:id/cities', to: 'regions#cities_in_region'
+    # get 'regions/:id/schools', to: 'regions#schools_in_region'
+    get 'cities/:id', to: 'regions#city'
+    get 'cities/:id/schools', to: 'regions#schools_in_city'
+    get 'schools/:id', to: 'regions#school'
+  end
   #
   # devise_for :users, controllers: {
   #     sessions: 'users/sessions',

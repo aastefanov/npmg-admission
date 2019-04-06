@@ -35,4 +35,5 @@ Admission::Application.configure do
 
   config.eager_load = true
 
+  config.active_storage.service = :test
 end

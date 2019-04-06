@@ -29,7 +29,7 @@ Admission::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.active_storage.storage = :test
+  config.active_storage.service = :local
 
   config.log_tags = [:uuid, :remote_ip]
 

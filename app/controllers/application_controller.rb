@@ -1,9 +1,4 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  # layout 'rails_admin/application'
-  # include ActionView::Helpers::TextHelper
-  # include RailsAdmin::MainHelper
-  # include RailsAdmin::ApplicationHelper
-  # include RailsAdmin::Engine.routes.url_helpers
-
+  before_action :set_paper_trail_whodunnit
 end

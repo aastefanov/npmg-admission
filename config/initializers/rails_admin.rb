@@ -15,7 +15,7 @@ RailsAdmin.config do |config|
   # config.authorize_with :pundit
 
   ## == PaperTrail ==
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
@@ -55,7 +55,7 @@ RailsAdmin.config do |config|
   #   # end
   # end
 
-  config.model Student do
+  config.model 'Student' do
     group :personal_data do
       field :first_name
       field :middle_name
@@ -63,7 +63,7 @@ RailsAdmin.config do |config|
     end
 
     group :school_data do
-
+      field :school
     end
 
     group :exams do
@@ -85,11 +85,39 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model Exam do
+  config.model 'Exam' do
     field :name
     field :held_in
   end
 
+  config.model 'Region' do
+    field :name
+    field :short_name
+    show do
+      field :cities
+      field :schools
+    end
+  end
+
+  config.model 'City' do
+    field :name
+    field :region
+    show do
+      field :schools
+    end
+  end
+
+  config.model 'School' do
+    field :name
+    field :city
+    show do
+      field :region
+      field :students
+    end
+    list do
+      field :region
+    end
+  end
   # config.model ExamResult do
   #   field :exam
   #   field :student
@@ -101,7 +129,7 @@ RailsAdmin.config do |config|
   #   #   end
   # end
 
-  config.model User do
+  config.model 'User' do
     field :first_name
     field :last_name
     field :email

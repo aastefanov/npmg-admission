@@ -1,3 +1,8 @@
+##
+# A registered user
+#
+# Should be a parent or a legal guardian to one or many students
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable

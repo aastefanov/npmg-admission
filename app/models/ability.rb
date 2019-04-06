@@ -1,3 +1,8 @@
+##
+# Defines abilities
+#
+# Gives permissions for different user roles
+
 class Ability
   include CanCan::Ability
 
@@ -11,6 +16,8 @@ class Ability
       can [:read, :view, :edit, :create], Student, user_id: user.id
 
       can :edit, User, id: user.id
+
+      can :read, [Region, City, School]
     end
 
     if user.has_role? :grader
