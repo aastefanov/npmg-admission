@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="bg">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="robots" content="NONE,NOARCHIVE"/>
-  <title><%= @page_name.nil? ? "" : @page_name + " |" %> <%= @plugin_name || "НПМГ приемна кампания " + Time.now.strftime("%Y") %></title>
+  <title>
+    <%= @page_name.nil? ? "" : @page_name + " |" %> <%= @plugin_name || "НПМГ приемна кампания " + Time.now.strftime("%Y") %>
+  </title>
   <%#= stylesheet_link_tag('print', :media => :screen) %>
   <%#= stylesheet_link_tag('print', :media => :print) %>
 
@@ -15,26 +17,31 @@
 
 
   <%= csrf_meta_tag %>
-  <style type="text/css" media="print">
-    .print {
-      display: none;
+  <style type="text/css">
+    body {
+      padding-top: 60px;
     }
   </style>
 </head>
 <body>
-<div id="wrapper">
-  <div class="header">
-    <%= image_tag("rails_admin/logo_print.jpg", :alt => "logo") %>
-  </div>
-  <% if flash[:error] %>
-    <div class="box flash-error full">
-      <%= flash[:error] %>
-    </div>
-    <div style="clear: both;"></div>
-  <% end %>
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-    <%= content_for(:layout) %>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        Национално Състезание по Природни Науки и География "Акад. Л. Чакалов"
+        <small>Регистрация</small>
+      </a>
+    </div>
   </div>
+</nav>
+<% if flash[:error] %>
+  <div class="box flash-error full">
+    <%= flash[:error] %>
+  </div>
+  <div style="clear: both;"></div>
+<% end %>
+<div class="container-fluid">
+  <%= content_for(:layout) %>
 </div>
 </body>
 </html>

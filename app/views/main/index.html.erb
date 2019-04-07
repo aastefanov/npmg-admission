@@ -1,18 +1,28 @@
 <div class="boxes">
   <div class="box">
     <h2>Къде съм?</h2>
-    <p>
-      Добре дошли в системата за кандидатстване в
-      <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
-    </p>
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          Добре дошли в системата за кандидатстване в
+          <strong>Националната природо-математическа гимназия "Акад. Л. Чакалов"</strong> след седми клас.
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% if user_signed_in? %>
+          <% if current_user.has_role? :admin %>
+            <%= link_to("Влезте в административния панел", rails_admin_path) %>
+          <% else %>
+            <%= link_to("Влезте в панела, за да регистрирате учениците си", students_path) %>
+          <% end %>
+        <% else %>
+          <%= link_to("Влезте", new_user_session_path) %>
+          или <%= link_to("се регистрирайте", new_user_registration_path) %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <% if user_signed_in? %>
-    <div class="box">
-      <%= link_to("Влезте в панела, за да регистрирате учениците си", rails_admin_path) %>
-    </div>
-  <% else %>
-    <div class="box">
-      <%= link_to("Влезте", new_user_session_path) %> или <%= link_to("се регистрирайте", new_user_registration_path) %>
-    </div>
-    <% end %>
+</div>
 </div>

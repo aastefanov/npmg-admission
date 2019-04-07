@@ -7,6 +7,8 @@ class School < ApplicationRecord
   belongs_to :city
   validates_presence_of :city, :name
 
+  has_many :students
+
   def region
     city.region
   end

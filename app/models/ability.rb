@@ -13,7 +13,7 @@ class Ability
 
     if user.is_parent?
       can :read, Exam
-      can [:read, :view, :edit, :create], Student, user_id: user.id
+      can [:read, :edit, :create], Student, user_id: user.id
 
       can :edit, User, id: user.id
 

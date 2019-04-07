@@ -8,6 +8,8 @@ require 'rspec/rails'
 require 'paper_trail/frameworks/rspec'
 require 'active_storage/engine'
 require 'devise'
+require 'cancan/matchers'
+
 
 
 

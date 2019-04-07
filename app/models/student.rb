@@ -25,9 +25,4 @@ class Student < ApplicationRecord
   def full_name
     "#{first_name} #{middle_name} #{last_name}"
   end
-
-  def clear_approval_fields
-    self.update_attribute(:is_approved, false)
-    self.update_attribute(:review, nil)
-  end
 end

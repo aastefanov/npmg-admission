@@ -86,14 +86,13 @@ ActiveRecord::Schema.define(version: 2019_04_06_133137) do
     t.string "middle_name"
     t.string "last_name"
     t.string "ref_number"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "review"
     t.boolean "is_approved"
     t.integer "school_id"
-    t.integer "user_id"
     t.index ["school_id"], name: "index_students_on_school_id"
-    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

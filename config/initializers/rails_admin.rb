@@ -37,6 +37,7 @@ RailsAdmin.config do |config|
   # config.excluded_models << Assessment
 
   config.label_methods << :full_name
+  config.label_methods << :name
 
   # config.model School do
   #   field :name
@@ -63,7 +64,10 @@ RailsAdmin.config do |config|
     end
 
     group :school_data do
-      field :school
+      field :school do
+        inline_add false
+        inline_edit false
+      end
     end
 
     group :exams do
@@ -134,7 +138,7 @@ RailsAdmin.config do |config|
     field :last_name
     field :email
     field :phone
-    field :is_active
+    field :roles
 
     edit do
       group :password_change do
