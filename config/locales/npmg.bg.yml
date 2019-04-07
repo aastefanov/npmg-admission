@@ -1,6 +1,12 @@
 bg:
   activerecord:
     models:
+      region:
+        one: "Област"
+        other: "Области"
+      city:
+        one: "Град"
+        other: "Градове"
       role:
         one: "Роля"
         other: "Роли"
@@ -24,14 +30,23 @@ bg:
 #      grade: "Паралелка"
 #      student: "Ученик"
     attributes:
+      region:
+        name: "Име"
+        short_name: "Съкр. име"
+        cities: "Градове"
+        schools: "Училища"
+      city:
+        name: "Име"
+        schools: "Училища"
+        region: "Област"
       role:
         name: "Име"
         users: "Потребители"
       school:
         name: "Име"
-        region: "Област"
-        municipality: "Община"
         city: "Град"
+        region: "Област"
+        students: "Ученици"
       student:
         first_name: "Първо име"
         middle_name: "Бащино име"

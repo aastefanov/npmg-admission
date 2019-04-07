@@ -22,6 +22,10 @@ class Student < ApplicationRecord
 
   validates_presence_of :first_name, :middle_name, :last_name, :declaration, :school, :exams
 
+  ##
+  # Returns the full name of the user
+  #
+  # @return [String] The full name
   def full_name
     "#{first_name} #{middle_name} #{last_name}"
   end

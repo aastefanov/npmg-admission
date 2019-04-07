@@ -17,14 +17,27 @@ class User < ApplicationRecord
   validates :phone,
             phone: true
 
+  ##
+  # Returns the full name of the user
+  #
+  # @return [String] The full name
   def full_name
     "#{first_name} #{last_name}"
   end
 
+  ##
+  # Returns if the user has a role
+  #
+  # @param role_sym [Symbol] The role name
+  # @return [Boolean] Whether the user is in the role
   def has_role?(role_sym)
     roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end
 
+  ##
+  # Returns if the user is a parent
+  #
+  # @return [Boolean] Whether the user is a parent
   def is_parent?
     roles.size == 0
   end

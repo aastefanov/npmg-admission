@@ -28,33 +28,13 @@ RailsAdmin.config do |config|
     index
     new
     export
-    # bulk_delete
+    bulk_delete
     show
     edit
     delete
   end
 
-  # config.excluded_models << Assessment
-
   config.label_methods << :full_name
-  config.label_methods << :name
-
-  # config.model School do
-  #   field :name
-  #   field :city
-  #   # edit do
-  #   #   field :city do
-  #   #     enum do
-  #   #       School.all.collect(|c| c.city)
-  #   #     end
-  #   #     field :ob6tina do
-  #   #       enum do
-  #   #         Schoo
-  #   #       end
-  #   #     end
-  #   #   end
-  #   # end
-  # end
 
   config.model 'Student' do
     group :personal_data do
@@ -115,23 +95,9 @@ RailsAdmin.config do |config|
     field :name
     field :city
     show do
-      field :region
       field :students
     end
-    list do
-      field :region
-    end
   end
-  # config.model ExamResult do
-  #   field :exam
-  #   field :student
-  #   list do
-  #     field :mark
-  #   end
-  #   # if :current_user.is_admin
-  #   #     field :mark
-  #   #   end
-  # end
 
   config.model 'User' do
     field :first_name

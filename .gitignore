@@ -17,3 +17,4 @@ public/assets
 storage/
 log/
 coverage/
+.yardoc/

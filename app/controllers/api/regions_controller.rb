@@ -12,7 +12,7 @@ module Api
     ##
     # Returns a region by id
     #
-    # @param :id ID of the region
+    # @param :id [Integer] ID of the region
     def show
       render json: Region.find_by_id(controller_params)
     end
@@ -20,7 +20,7 @@ module Api
     ##
     # Returns all cities in a region
     #
-    # @param :id ID of the region
+    # @param :id [Integer] ID of the region
     def cities_in_region
       render json: City.where(region_id: controller_params).order(:name)
     end
@@ -28,7 +28,8 @@ module Api
     ##
     # Returns a city by id
     #
-    # @param :id ID of the city
+    # @param :id [Integer] ID of the city
+    # @return [void]
     def city
       render json: City.find_by_id(controller_params)
     end
@@ -36,7 +37,8 @@ module Api
     ##
     # Returns all schools in a city
     #
-    # @param :id ID of the city
+    # @param :id ID [Integer] of the city
+    # @return [void]
     def schools_in_city
       render json: School.where(city_id: controller_params).order(:name)
     end
@@ -44,11 +46,17 @@ module Api
     ##
     # Returns a school by id
     #
-    # @param :id ID of the school
+    # @param :id [Integer] ID of the school
+    # @return [void]
     def school
       render json: School.find_by_id(controller_params)
     end
 
+    ##
+    # Mass assignment protection
+    #
+    # @returns [Parameters] Parameters specification
+    # @param :id [Integer]
     def controller_params
       params.require(:id)
     end
