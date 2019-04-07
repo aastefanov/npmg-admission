@@ -42,7 +42,12 @@ describe StudentsController do
                           school: School.first.id}}
       post :create, :params => params
 
-      expect(response).to render_template(:new)
+      expect(response).to render_template :new
+    end
+
+    it 'should open the new student page' do
+      get :new
+      expect(response).to render_template :new
     end
   end
 end

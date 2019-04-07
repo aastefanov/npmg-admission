@@ -6,6 +6,10 @@ describe User do
       email: 'test@test.test', phone: '0888888888'
   }
 
+  it 'should have a valid full name' do
+    subject.full_name.should eq "#{subject.first_name} #{subject.last_name}"
+  end
+
   it 'is valid with all required attributes' do
     expect(subject).to be_valid
   end

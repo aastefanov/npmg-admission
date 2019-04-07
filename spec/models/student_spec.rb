@@ -26,7 +26,7 @@ describe Student do
     expect(subject).to_not be_valid
   end
 
-  it 'should have a full name' do
+  it 'should have a valid full name' do
     subject.full_name.should eq "#{subject.first_name} #{subject.middle_name} #{subject.last_name}"
   end
 end
