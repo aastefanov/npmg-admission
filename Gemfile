@@ -17,6 +17,7 @@ end
 
 group :development, :test do
   gem 'sqlite3', '>= 1.3.0', '~> 1.3.13'
+  gem 'travis'
 end
 
 group :production do
