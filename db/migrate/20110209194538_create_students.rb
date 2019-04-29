@@ -4,7 +4,7 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.string :first_name
       t.string :middle_name
       t.string :last_name
-      t.string :ref_number
+      t.integer :ref_number
 
       t.timestamps
     end

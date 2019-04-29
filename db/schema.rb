@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_133137) do
+ActiveRecord::Schema.define(version: 2019_04_29_065522) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,26 @@ ActiveRecord::Schema.define(version: 2019_04_06_133137) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "approval_comments", force: :cascade do |t|
+    t.integer "approval_request_id", null: false
+    t.integer "user_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["approval_request_id"], name: "index_approval_comments_on_approval_request_id"
+    t.index ["user_id"], name: "index_approval_comments_on_user_id"
+  end
+
+  create_table "approval_requests", force: :cascade do |t|
+    t.integer "respond_user_id"
+    t.datetime "approved_at"
+    t.datetime "rejected_at"
+    t.integer "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_approval_requests_on_student_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -89,8 +109,6 @@ ActiveRecord::Schema.define(version: 2019_04_06_133137) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "review"
-    t.boolean "is_approved"
     t.integer "school_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end

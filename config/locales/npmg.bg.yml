@@ -52,6 +52,7 @@ bg:
         middle_name: "Бащино име"
         last_name: "Фамилия"
         exams: "Модули"
+        school: "Училище"
       exam:
         name: "Име"
         held_in: "Провежда се на"

@@ -1,1 +1,34 @@
-<h1>zdrbebe</h1>
+<div class="panel panel-primary">
+  <div class="panel-heading">Заявки</div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Име</th>
+          <th>Презиме</th>
+          <th>Фамилия</th>
+          <th>Училище</th>
+          <th>Модули</th>
+          <th>Коментари</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @requests.map(&:student).each do |student| %>
+          <tr>
+            <td><%= student.first_name %></td>
+            <td><%= student.middle_name %></td>
+            <td><%= student.last_name %></td>
+            <td><%= student.school.name %></td>
+            <td><%= student.exams.map(&:name).join(', ') %></td>
+            <td><%= student.approval_request.comments.count %></td>
+            <td><%= student.status %></td>
+            <td><%= link_to "Заявка", approval_path(student.approval_request.id) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

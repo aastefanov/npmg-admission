@@ -35,12 +35,15 @@ RailsAdmin.config do |config|
   end
 
   config.label_methods << :full_name
+  config.label_methods << :description
 
   config.model 'Student' do
     group :personal_data do
       field :first_name
       field :middle_name
       field :last_name
+
+      field :status
     end
 
     group :school_data do
@@ -112,5 +115,13 @@ RailsAdmin.config do |config|
         field :password_confirmation
       end
     end
+  end
+
+  config.model 'ApprovalRequest' do
+
+  end
+
+  config.model 'ApprovalComment' do
+
   end
 end

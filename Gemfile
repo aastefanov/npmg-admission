@@ -11,9 +11,12 @@ gem 'paper_trail'
 gem 'bootstrap_form'
 #gem 'mysql2'
 
+group :development do
+  gem 'irb'
+end
+
 group :development, :test do
   gem 'sqlite3', '>= 1.3.0', '~> 1.3.13'
-
 end
 
 group :production do
