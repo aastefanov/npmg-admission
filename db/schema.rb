@@ -81,6 +81,63 @@ ActiveRecord::Schema.define(version: 2019_04_29_065522) do
     t.index ["item", "table", "month", "year"], name: "index_histories_on_item_and_table_and_month_and_year"
   end
 
+  create_table "quiz_attempt_answers", force: :cascade do |t|
+    t.integer "quiz_attempt_id"
+    t.integer "quiz_question_id"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_attempt_id"], name: "index_quiz_attempt_answers_on_quiz_attempt_id"
+    t.index ["quiz_question_id"], name: "index_quiz_attempt_answers_on_quiz_question_id"
+  end
+
+  create_table "quiz_attempt_questions_question_answers", id: false, force: :cascade do |t|
+    t.integer "quiz_question_answer_id", null: false
+    t.integer "quiz_attempt_question_id", null: false
+  end
+
+  create_table "quiz_attempts", force: :cascade do |t|
+    t.integer "fik_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quiz_question_answers", force: :cascade do |t|
+    t.integer "quiz_question_id"
+    t.boolean "is_correct"
+    t.text "description"
+    t.integer "num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_question_id"], name: "index_quiz_question_answers_on_quiz_question_id"
+  end
+
+  create_table "quiz_questions", force: :cascade do |t|
+    t.integer "quizzes_id"
+    t.decimal "points"
+    t.integer "num"
+    t.boolean "auto_gradeable"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quizzes_id"], name: "index_quiz_questions_on_quizzes_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer "exam_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_quizzes_on_exam_id"
+  end
+
+  create_table "ref_to_fik_mappings", force: :cascade do |t|
+    t.integer "ref_number"
+    t.integer "fik_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "regions", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
@@ -105,12 +162,13 @@ ActiveRecord::Schema.define(version: 2019_04_29_065522) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
-    t.string "ref_number"
-    t.integer "user_id"
+    t.integer "ref_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "school_id"
+    t.integer "user_id"
     t.index ["school_id"], name: "index_students_on_school_id"
+    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

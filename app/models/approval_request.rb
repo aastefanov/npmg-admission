@@ -13,6 +13,7 @@ class ApprovalRequest < ApplicationRecord
   delegate :user, :to => :student
 
   validates_presence_of :student
+  validates_associated :student
 
   def is_approved?
     !approved_at.nil?

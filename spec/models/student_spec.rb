@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Student do
   subject {
     Student.new first_name: 'Test1', middle_name: 'Test2', last_name: 'Test3',
-                review: 'Test', is_approved: false, exams: [Exam.new(name: 'Exam', held_in: DateTime.now)],
+                exams: [Exam.new(name: 'Exam', held_in: DateTime.now)],
                 school: School.new
   }
 
@@ -27,6 +27,6 @@ describe Student do
   end
 
   it 'should have a valid full name' do
-    subject.full_name.should eq "#{subject.first_name} #{subject.middle_name} #{subject.last_name}"
+    expect(subject.full_name).to eq "#{subject.first_name} #{subject.middle_name} #{subject.last_name}"
   end
 end

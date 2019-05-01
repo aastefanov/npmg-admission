@@ -7,7 +7,7 @@ describe User do
   }
 
   it 'should have a valid full name' do
-    subject.full_name.should eq "#{subject.first_name} #{subject.last_name}"
+    expect(subject.full_name).to eq "#{subject.first_name} #{subject.last_name}"
   end
 
   it 'is valid with all required attributes' do

@@ -23,14 +23,14 @@ class StudentsController < ApplicationController
 
     attributes = student_params.clone
     attributes[:school] = School.find_by_id(student_params[:school])
-    attributes[:exams] = Exam.find(student_params[:exams].reject(&:blank?))
+    attributes[:exams] = Exam.find((student_params[:exams] || []).reject(&:blank?))
     attributes[:user] = current_user
-    attributes[:exam_ids] = student_params[:exams].compact
+    attributes[:exam_ids] = (student_params[:exams] || []).compact
     @student = Student.new attributes
 
     request = ApprovalRequest.new :student => @student
 
-    if request.save!
+    if request.save
       redirect_to :action => :index
     else
       flash[:error] = "Неуспешна регистрация.\n" + request.errors.full_messages.to_sentence

@@ -7,12 +7,12 @@ describe School do
   it 'should have a region' do
     school = School.first
 
-    school.region.should eq Region.first
+    expect(school.region).to eq Region.first
   end
 
   it 'should have a region id' do
     school = School.first
 
-    school.region_id.should eq Region.first.id
+    expect(school.region_id).to eq Region.first.id
   end
 end
