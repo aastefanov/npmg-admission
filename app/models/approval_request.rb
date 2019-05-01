@@ -6,7 +6,7 @@ class ApprovalRequest < ApplicationRecord
   alias_attribute :parent_id, :user_id
 
   has_many :approval_comments
-  belongs_to :student
+  belongs_to :student, :autosave => true
 
   belongs_to :respond_user, :class_name => 'User', :foreign_key => :respond_user_id
 
@@ -14,6 +14,8 @@ class ApprovalRequest < ApplicationRecord
 
   validates_presence_of :student
   validates_associated :student
+
+  accepts_nested_attributes_for :student
 
   def is_approved?
     !approved_at.nil?

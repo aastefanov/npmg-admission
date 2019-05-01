@@ -25,7 +25,7 @@ end
 
 module Admission
   class Application < Rails::Application
-  # Enable the asset pipeline
+    # Enable the asset pipeline
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
@@ -39,7 +39,7 @@ module Admission
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/lib)
-    
+
     # config.middleware.use PDFKit::Middleware, :print_media_type => true
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -66,6 +66,9 @@ module Admission
     config.filter_parameters += [:password]
 
     config.active_record.sqlite3.represent_boolean_as_integer = true
+
+    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [:en, :bg]
 
     config.secret_key_base = '2b5a82983bffdbe2c891a0dcf06fd82eb1e5ae8180d9e64a3a14723951cce0a0d3d8b3b37f9f563637d7004b1940d000471acff51dbb37268ec4b92bc9c67ecc'
 

@@ -43,7 +43,6 @@ RailsAdmin.config do |config|
       field :middle_name
       field :last_name
 
-      field :status
     end
 
     group :school_data do
@@ -56,7 +55,11 @@ RailsAdmin.config do |config|
     group :exams do
       field :exams
     end
-    # end
+
+    list do
+      field :status
+    end
+
     create do
       field :user_id, :hidden do
         default_value do
@@ -66,6 +69,7 @@ RailsAdmin.config do |config|
     end
 
     show do
+      field :status
       group :parent_data do
         field :user
       end
@@ -118,10 +122,27 @@ RailsAdmin.config do |config|
   end
 
   config.model 'ApprovalRequest' do
+    field :created_at
+    field :updated_at
+    field :student do
+      inline_add false
+      inline_edit false
+    end
 
+    field :respond_user
+
+    edit do
+      field :approved_at
+      field :rejected_at
+    end
   end
 
   config.model 'ApprovalComment' do
-
+    field :user do
+      inline_add false
+      inline_edit false
+    end
+    field :content
+    field :created_at
   end
 end

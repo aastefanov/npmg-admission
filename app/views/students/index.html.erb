@@ -34,8 +34,13 @@
 
                 end %>
             </td>
-            <td><%= link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
-          </tr>
+            <td>
+              <% if student.status != :approved && student.status != :rejected %>
+                <%= link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
+              <% elsif student.status == :approved %>
+                Номер: <%= student.ref_number || "-" %>
+              <% end %>
+              </tr>
         <% end %>
         </tbody>
       </table>

@@ -23,6 +23,10 @@ class ApprovalsController < ApplicationController
     unless @request.is_approved? or @request.is_rejected?
       @request.approved_at = DateTime.now
       @request.respond_user = current_user
+
+
+      @request.student.ref_number = (Student.maximum("ref_number") || 0) + 1
+
       @request.save!
     end
 
