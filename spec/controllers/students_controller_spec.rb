@@ -28,7 +28,7 @@ describe StudentsController do
       file = fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test-image.png'))
       params = {student: {first_name: 'Test', middle_name: 'Test', last_name: 'test',
                           declaration: file,
-                          exams: [Exam.first.id],
+                          exam_ids: [Exam.first.id],
                           school: School.first.id}}
 
       post :create, :params => params
@@ -38,7 +38,7 @@ describe StudentsController do
 
     it 'should fail with no exams' do
       params = {student: {first_name: 'Test', middle_name: 'Test', last_name: 'test',
-                          exams: [],
+                          exam_ids: [],
                           school: School.first.id}}
       post :create, :params => params
 

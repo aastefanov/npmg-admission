@@ -34,13 +34,13 @@
     </div>
   </div>
 </nav>
-<% if flash[:error] %>
-  <div class="box flash-error full">
-    <%= flash[:error] %>
-  </div>
-  <div style="clear: both;"></div>
-<% end %>
 <div class="container-fluid">
+  <% if flash[:error] %>
+    <div class="box flash-error full alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+    <div style="clear: both;"></div>
+  <% end %>
   <%= content_for(:layout) %>
 </div>
 </body>

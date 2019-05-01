@@ -4,6 +4,7 @@
 
 class Student < ApplicationRecord
   alias_attribute :parent, :user
+  alias_attribute :request, :approval_request
   # meta: {
   #     is_approved: :is_approved,
   #     review: :review

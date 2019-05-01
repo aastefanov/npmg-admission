@@ -1,25 +1,3 @@
-// // jQuery(function() {
-// //     var states;
-// //     $('#student_city').parent().hide();
-// //     states = $('#student_city').html();
-// //     console.log(states);
-// //     return $('#student_region').change(function() {
-// //         var country, escaped_country, options;
-// //         country = $('#student_region :selected').text();
-// //         escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
-// //         options = $(states).filter("optgroup[label=" + escaped_country + "]").html();
-// //         console.log(options);
-// //         if (options) {
-// //             $('#student_city').html(options);
-// //             return $('#student_city').parent().show();
-// //         } else {
-// //             $('#student_city').empty();
-// //             return $('#student_city').parent().hide();
-// //         }
-// //     });
-// // });
-//
-
 function initalize_schools_selector(cities_by_region_url, schools_by_city_url) {
     var region_selector = $('#student_region');
     var city_selector = $('#student_city');

@@ -23,8 +23,21 @@
             <td><%= student.school.name %></td>
             <td><%= student.exams.map(&:name).join(', ') %></td>
             <td><%= student.approval_request.comments.count %></td>
-            <td><%= student.status %></td>
-            <td><%= link_to "Заявка", approval_path(student.approval_request.id) %></td>
+            <td>
+              <%=
+                case student.status
+                when :approved
+                  "Одобрен"
+                when :rejected
+                  "Отхвърлен"
+                when :commented
+                  "Има коментари"
+                else # :unapproved
+                  "Чака одобрение"
+
+                end %>
+            </td>
+            <td><%= link_to "Преглед", approval_path(student.approval_request.id), :class => "btn btn-primary" %></td>
           </tr>
         <% end %>
         </tbody>

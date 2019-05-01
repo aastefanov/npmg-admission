@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">Редактирай ученик</div>
+      <div class="panel-body">
+        <%= bootstrap_form_for @student, url: student_path, method: :patch do |f| %>
+
+          <%= f.text_field :first_name %>
+          <%= f.text_field :middle_name %>
+          <%= f.text_field :last_name %>
+
+          <%= f.file_field :declaration %>
+
+          <%= f.collection_select :region, Region.order(:name), :id, :name %>
+          <%= f.select :city, [] %>
+          <%= f.select :school, [] %>
+
+          <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name %>
+
+          <%= f.submit 'Промени', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">История</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-4">
+            <label>Създаден</label>
+          </div>
+          <div class="col-xs-8">
+            <%= @student.created_at %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">
+            <label>Последно променен</label>
+          </div>
+          <div class="col-xs-8">
+            <%= @student.updated_at %>
+          </div>
+        </div>
+        <% if @student.request.is_approved? %>
+          <div class="row">
+            <div class="col-xs-4">
+              <label>Одобрен на</label>
+            </div>
+            <div class="col-xs-8">
+              <%= @student.request.approved_at %>
+            </div>
+          </div>
+        <% end %>
+        <% if @student.request.is_rejected? %>
+          <div class="row">
+            <div class="col-xs-4">
+              <label>Отхвърлен на</label>
+            </div>
+            <div class="col-xs-8">
+              <%= @student.request.rejected_at %>
+            </div>
+          </div>
+        <% end %>
+
+        <% unless @student.request.comments.blank? %>
+          <div class="row">
+            <div class="col-xs-4">
+              <label>Коментари</label>
+            </div>
+            <div class="col-xs-8">
+              <% @student.request.comments.each do |c| %>
+                <div class="row">
+                  <%= c.created_at %>:
+                  <div class="col-xs-11 col-xs-push-1">
+                    <%= c.content %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        initalize_schools_selector("/api/regions/%id%/cities", "/api/cities/%id%/schools");
+    });
+</script>
