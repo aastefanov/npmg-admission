@@ -9,7 +9,6 @@ gem 'rails_admin_import'
 gem 'paper_trail'
 
 gem 'bootstrap_form'
-#gem 'mysql2'
 
 group :development do
   gem 'irb'
@@ -21,7 +20,7 @@ group :development, :test do
 end
 
 group :production do
-#  gem 'pg'
+ gem 'pg'
 end
 
 group :test do
