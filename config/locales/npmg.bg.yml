@@ -65,6 +65,7 @@ bg:
         middle_name: "Бащино име"
         last_name: "Фамилия"
         exams: "Модули"
+        exam_ids: "Модули"
         school: "Училище"
         declaration: "Декларация"
         region: "Регион"
