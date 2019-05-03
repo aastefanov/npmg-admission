@@ -22,7 +22,8 @@ group :development, :test do
 end
 
 group :production do
- gem 'pg'
+  gem 'pg'
+  gem 'thin'
 end
 
 group :test do
@@ -35,13 +36,11 @@ group :test do
 end
 
 
-group :assets do
-  gem 'bootstrap-sass'
-  gem 'sass-rails' #, "  ~> 3.2.3"
-  gem 'coffee-rails' #, "~> 3.2.1"
-  gem 'uglifier' #, ">= 1.0.3"
-  gem 'bootstrap'
-end
+gem 'bootstrap-sass'
+gem 'sass-rails' #, "  ~> 3.2.3"
+gem 'coffee-rails' #, "~> 3.2.1"
+gem 'uglifier' #, ">= 1.0.3"
+gem 'bootstrap'
 
 gem 'jquery-rails'
 
@@ -49,9 +48,7 @@ gem 'devise' # Devise must be required before RailsAdmin
 gem 'devise-encryptable'
 gem 'devise-i18n' # Translations
 gem 'cancancan'
-# gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'rails_admin'
-# gem 'pdfkit'
 
 gem 'fastercsv'
 gem 'csv_builder'

@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    check_student_parent(@student, current_user)
     redirect_to edit_student_path(params[:id])
   end
 
@@ -13,12 +14,14 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find params[:id]
+    check_student_parent(@student, current_user)
     check_student_not_finalized(@student)
 
   end
 
   def update
     @student = Student.find params[:id]
+    check_student_parent(@student, current_user)
     check_student_not_finalized(@student)
 
     attributes = student_params.clone
@@ -47,7 +50,6 @@ class StudentsController < ApplicationController
   # @param :student [Student] The student to be created
   # @return [void]
   def create
-
     attributes = student_params.clone
     attributes[:school] = School.find_by_id(student_params[:school])
     attributes[:user] = current_user
@@ -78,6 +80,13 @@ class StudentsController < ApplicationController
 
   def check_student_not_finalized(student)
     if student.is_approved? || student.is_rejected?
+      flash[:error] = "Нямате достъп до тази страница"
+      redirect_back fallback_location: root_path
+    end
+  end
+
+  def check_student_parent(student, parent)
+    if student.user != parent
       flash[:error] = "Нямате достъп до тази страница"
       redirect_back fallback_location: root_path
     end

@@ -145,4 +145,15 @@ RailsAdmin.config do |config|
     field :content
     field :created_at
   end
+
+  config.model 'Post' do
+    field :title
+
+    edit do
+      field :content
+    end
+    show do
+      field :content
+    end
+  end
 end

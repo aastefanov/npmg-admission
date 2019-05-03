@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_060258) do
+ActiveRecord::Schema.define(version: 2019_05_03_072447) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -79,6 +79,11 @@ ActiveRecord::Schema.define(version: 2019_05_03_060258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item", "table", "month", "year"], name: "index_histories_on_item_and_table_and_month_and_year"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
   end
 
   create_table "quiz_attempt_answers", force: :cascade do |t|
