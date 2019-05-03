@@ -21,8 +21,15 @@ class Student < ApplicationRecord
 
   has_one_attached :declaration
 
-  validates_presence_of :first_name, :middle_name, :last_name, :declaration, :school, :exams
+  validates_presence_of :first_name, :middle_name, :last_name, :declaration, :school, :exams, :class_name
 
+  validates :first_name, :middle_name, :last_name,
+            :format => {with: /\p{Cyrillic}+/u, message: "трябва да бъде на кирилица"}
+
+  validates :declaration, :attached => true,
+            :content_type => {:in => %w(image/png image/jpg image/jpeg),
+                              :message => 'трябва да бъде във формат png, jpg или jpeg'},
+            :size => {:less_than => 4.megabytes, message: 'трябва да бъде до 4 мегабайта'}
 
   def is_approved?
     approval_request&.is_approved?

@@ -62,7 +62,6 @@ class StudentsController < ApplicationController
       redirect_to :action => :index
     else
       flash[:error] = "Неуспешна регистрация.\n" +
-          request.errors.full_messages.to_sentence + ". " +
           request.student.errors.full_messages.to_sentence + "."
       render :new
     end
@@ -89,6 +88,6 @@ class StudentsController < ApplicationController
   # @param :student [Student] Request model
   # @returns [Parameters] Parameters specification
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :middle_name, :declaration, :school, :exam_ids => [])
+    params.require(:student).permit(:first_name, :last_name, :middle_name, :declaration, :school, :class_name, :exam_ids => [])
   end
 end

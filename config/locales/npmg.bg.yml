@@ -39,6 +39,7 @@ bg:
         student: "Ученик"
         created_at: "Създадена на"
         updated_at: "Променена на"
+        comments: "Коментари"
       approval_comment:
         approval_request: "Заявка"
         user: "Потребител"
@@ -68,10 +69,11 @@ bg:
         exam_ids: "Модули"
         school: "Училище"
         declaration: "Декларация"
-        region: "Регион"
+        region: "Област"
         city: "Населено място"
         status: "Статут на регистрацията"
         ref_number: "Пореден номер"
+        class_name: "Клас (паралелка)"
       exam:
         name: "Име"
         held_in: "Провежда се на"

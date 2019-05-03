@@ -38,6 +38,18 @@
     </div>
     <div style="clear: both;"></div>
   <% end %>
+  <% if flash[:alert] %>
+    <div class="box flash-alert full alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+    <div style="clear: both;"></div>
+<% end %>
+  <% if flash[:notice] %>
+    <div class="box flash-notice full alert alert-primary">
+      <%= flash[:error] %>
+    </div>
+    <div style="clear: both;"></div>
+  <% end %>
   <%= content_for(:layout) %>
 </div>
 </body>

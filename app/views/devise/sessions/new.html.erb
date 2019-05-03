@@ -1,6 +1,8 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Вход</div>
   <div class="panel-body">
+
+
     <%= bootstrap_form_for(resource, as: resource_name, url: new_session_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 

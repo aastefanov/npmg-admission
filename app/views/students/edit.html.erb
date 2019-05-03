@@ -12,11 +12,14 @@
 
           <%= f.file_field :declaration %>
 
+          <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name %>
+
+          <h3>Данни за училището</h3>
           <%= f.collection_select :region, Region.order(:name), :id, :name %>
           <%= f.select :city, [] %>
           <%= f.select :school, [] %>
 
-          <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name %>
+          <%= f.text_field :class_name %>
 
           <%= f.submit 'Промени', class: 'btn btn-primary btn-block' %>
         <% end %>

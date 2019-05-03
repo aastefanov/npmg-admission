@@ -4,13 +4,13 @@ bg:
       user:
         confirmation_sent_at: 
         confirmation_token: 
-        confirmed_at: 
-        created_at: 
+        confirmed_at: Потвърден на
+        created_at: Създаден на
         current_password: Настояща парола
         current_sign_in_at: 
         current_sign_in_ip: 
         email: Имейл
-        encrypted_password: 
+        encrypted_password: Криптирана парола
         failed_attempts: 
         last_sign_in_at: 
         last_sign_in_ip: 
@@ -22,9 +22,9 @@ bg:
         reset_password_sent_at: 
         reset_password_token: Код за промяна на парола
         sign_in_count: 
-        unconfirmed_email: 
+        unconfirmed_email: Непотвърден имейл
         unlock_token: Код за отключване на профил
-        updated_at: 
+        updated_at: Променен на
     models:
       user: Потребител
   devise:
@@ -37,10 +37,10 @@ bg:
     failure:
       already_authenticated: Вече сте влезли в профила си.
       inactive: Профилът Ви все още не е активиран.
-      invalid: 
+      invalid: Невалидни %{authentication_keys} или парола
       last_attempt: Имате още един опит преди акаунтът Ви да бъде заключен.
       locked: Профилът Ви е заключен.
-      not_found_in_database: 
+      not_found_in_database: Невалидни %{authentication_keys} или парола
       timeout: Сесията Ви е изтекла, моля влезте отново, за да продължите.
       unauthenticated: Преди да продължите, трябва да влезете в профила си или да се регистрирате.
       unconfirmed: Преди да продължите, трябва да потвърдите регистрацията си.

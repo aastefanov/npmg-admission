@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_065522) do
+ActiveRecord::Schema.define(version: 2019_05_03_060258) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -106,21 +106,21 @@ ActiveRecord::Schema.define(version: 2019_04_29_065522) do
     t.integer "quiz_question_id"
     t.boolean "is_correct"
     t.text "description"
-    t.integer "num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "num"
     t.index ["quiz_question_id"], name: "index_quiz_question_answers_on_quiz_question_id"
   end
 
   create_table "quiz_questions", force: :cascade do |t|
-    t.integer "quizzes_id"
+    t.integer "quiz_id"
     t.decimal "points"
     t.integer "num"
     t.boolean "auto_gradeable"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quizzes_id"], name: "index_quiz_questions_on_quizzes_id"
+    t.index ["quiz_id"], name: "index_quiz_questions_on_quiz_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -162,13 +162,15 @@ ActiveRecord::Schema.define(version: 2019_04_29_065522) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
-    t.integer "ref_number"
+    t.string "ref_number"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "review"
+    t.boolean "is_approved"
     t.integer "school_id"
-    t.integer "user_id"
+    t.string "class_name"
     t.index ["school_id"], name: "index_students_on_school_id"
-    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

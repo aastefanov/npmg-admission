@@ -8,6 +8,8 @@ gem 'phonelib'
 gem 'rails_admin_import'
 gem 'paper_trail'
 
+gem 'active_storage_validations'
+
 gem 'bootstrap_form'
 
 group :development do
