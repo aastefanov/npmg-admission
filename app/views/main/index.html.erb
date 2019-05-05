@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-6 col-md-8">
+  <div class="<%= @posts.present? ? 'col-sm-6 col-md-8' : 'col-xs-12' %>">
     <h2>Къде съм?</h2>
     Добре дошли в системата за кандидатстване в
     <strong>Националното състезание по природни науки и география "Акад. Л. Чакалов" </strong>
@@ -21,19 +21,17 @@
       или <%= link_to("се регистрирайте", new_user_registration_path) %>
     <% end %>
   </div>
+  <% if @posts.present? %>
 
-  <div class="col-sm-6 col-md-4">
-    <% if @posts.present? %>
+    <div class="col-sm-6 col-md-4">
       <h3>Информация:</h3>
-
       <% @posts.each do |post| %>
         <div class="media">
           <div class="media-body"></div>
           <h4 class="media-heading"><%= post.title %></h4>
           <%= raw post.content %>
       <% end %>
-
-    <% end %>
-    </div>
+      </div>
+  <% end %>
   </div>
 </div>
