@@ -125,6 +125,6 @@ Devise.setup do |config|
   # only the current scope. By default, Devise signs out all scopes.
   # config.sign_out_all_scopes = true
 
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
 end

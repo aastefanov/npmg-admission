@@ -10,8 +10,7 @@
 
   <%= stylesheet_link_tag :application, :media => :screen %>
 
-  <%= javascript_include_tag "application" %>
-
+  <%= javascript_include_tag :application %>
 
   <%= csrf_meta_tag %>
   <style type="text/css">
@@ -21,57 +20,9 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <%= link_to root_path, class: "navbar-brand" do %>
-        Национално Състезание по Природни Науки и География "Акад. Л. Чакалов"
-        <small>Регистрация</small>
-      <% end %>
-    </div>
-
-    <div class="navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Начало", root_path %></li>
-        <% if current_user.present? %>
-          <% if current_user.is_parent? %>
-            <li>
-              <%= link_to "Ученици", students_path %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "Одобрения", approvals_path %>
-            </li>
-            <li>
-              <% if current_user.has_role? :admin %>
-                <%= link_to "Администрация", rails_admin_path %>
-              <% end %>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
+<%= render 'navbar' %>
 <div class="container-fluid">
-  <% if flash[:error] %>
-    <div class="box flash-error full alert alert-danger">
-      <%= flash[:error] %>
-    </div>
-    <div style="clear: both;"></div>
-  <% end %>
-  <% if flash[:alert] %>
-    <div class="box flash-alert full alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-    <div style="clear: both;"></div>
-  <% end %>
-  <% if flash[:notice] %>
-    <div class="box flash-notice full alert alert-primary">
-      <%= flash[:error] %>
-    </div>
-    <div style="clear: both;"></div>
-  <% end %>
+  <%= render 'errors' %>
   <%= content_for(:layout) %>
 </div>
 </body>

@@ -73,7 +73,7 @@
             <label><%= Student.human_attribute_name :declaration %></label>
           </div>
           <div class="col-xs-8">
-            <% if @request.student.declaration.present? %>
+            <% if @request.student.declaration.attached? %>
               <%= link_to 'Изтегли', @request.student.declaration %>
               <%= image_tag @request.student.declaration, :class => 'img-responsive' %>
             <% else %>
