@@ -20,7 +20,7 @@
         <%= f.select :school_id, [] %>
       <% end %>
 
-      <%= f.text_field :class_name %>
+      <%= f.text_field :class_name, :value => '7', :readonly => true %>
 
       <%= f.submit 'Създай', class: 'btn btn-primary btn-block' %>
     <% end %>
