@@ -1,0 +1,13 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Смяна на парола</div>
+  <div class="panel-body">
+    Въведете своите e-mail и телефон, за да Ви изпратим линк за смяна на парола.
+
+    <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), :method => :post) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.telephone_field :phone, autocomplete: "phone" %>
+      <%= f.submit 'Изпрати', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>
