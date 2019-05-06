@@ -71,6 +71,8 @@ module Admission
     config.i18n.fallbacks = [:en, :bg]
 
     config.secret_key_base = '2b5a82983bffdbe2c891a0dcf06fd82eb1e5ae8180d9e64a3a14723951cce0a0d3d8b3b37f9f563637d7004b1940d000471acff51dbb37268ec4b92bc9c67ecc'
+
+    config.action_mailer.delivery_method = :smtp
     config.action_mailer.default_url_options = {:host => 'nclc.npmg.org', :protocol => 'https'}
     config.action_mailer.smtp_settings = Admission::Application.config_for(:mailer).symbolize_keys
   end

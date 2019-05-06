@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<html lang="bg">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <style>
+    /* Email styles need to be inline */
+  </style>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <pre>
+Здравейте,
+
+<%= yield %>
+
+Моля, не отговаряйте на това писмо.
+При въпроси и проблеми при работата със системата, пишете ни на e-mail: <%= mail_to "nclc@npmg.org" %>
+
+С уважение,
+Екипът на Националното състезание по природни науки и география "Акад. Л. Чакалов"
+</pre>
+</body>
 </html>

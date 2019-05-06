@@ -25,10 +25,12 @@ class ApprovalsController < ApplicationController
       @request.respond_user = current_user
 
 
-      @request.student.ref_number = (Student.maximum("ref_number") || 0) + 1
+      @request.student.ref_number = (Student.maximum("ref_number").to_i || 0) + 1
 
       @request.save!
     end
+
+    StudentsMailer.with(:user => @request.user, :student => @request.student).registration_approved.deliver_now
 
     redirect_to approval_path @request
   end
@@ -42,6 +44,8 @@ class ApprovalsController < ApplicationController
       @request.save!
     end
 
+    StudentsMailer.with(:user => @request.user, :student => @request.student).registration_rejected.deliver_now
+
     redirect_to approval_path @request
   end
 
@@ -50,6 +54,9 @@ class ApprovalsController < ApplicationController
                                   :user => current_user,
                                   :content => params[:approval_comment][:content]
     comment.save!
+
+    StudentsMailer.with(:user => comment.request.user, :student => comment.request.student).registration_commented.deliver_now
+
 
     redirect_to approval_path params[:approval_id]
   end
