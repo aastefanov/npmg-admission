@@ -14,7 +14,11 @@
       <h3>Данни за училището</h3>
       <%= f.collection_select :region, Region.order(:name), :id, :name %>
       <%= f.select :city, [] %>
-      <%= f.select :school, [] %>
+      <% if @student.school_id.present? %>
+        <%= f.select :school_id, School.all.collect {|p| [p.name, p.id]}, :selected => @student.school_id %>
+      <% else %>
+        <%= f.select :school_id, [] %>
+      <% end %>
 
       <%= f.text_field :class_name %>
 
@@ -25,6 +29,12 @@
 
 <script type="text/javascript">
     $(function () {
-        initalize_schools_selector("/api/regions/%id%/cities", "/api/cities/%id%/schools");
+        initialize_schools_selector(
+            "/api/regions/%id%/cities",
+            "/api/cities/%id%/schools",
+            "/api/regions/%id%",
+            "/api/cities/%id%",
+            "/api/schools/%id%"
+        );
     });
 </script>

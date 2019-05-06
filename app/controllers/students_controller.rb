@@ -25,9 +25,7 @@ class StudentsController < ApplicationController
     check_student_not_finalized(@student)
 
     attributes = student_params.clone
-    if student_params[:school].present?
-      attributes[:school] = School.find_by_id(student_params[:school])
-    end
+    attributes[:school] = School.find(student_params[:school_id])
 
     if student_params[:exam_ids].present? and student_params[:exam_ids].any?(&:present?)
       attributes[:exam_ids] = (student_params[:exam_ids] || []).reject(&:blank?).compact
@@ -51,7 +49,7 @@ class StudentsController < ApplicationController
   # @return [void]
   def create
     attributes = student_params.clone
-    attributes[:school] = School.find_by_id(student_params[:school])
+    attributes[:school] = School.find(student_params[:school_id])
     attributes[:user] = current_user
     attributes[:exam_ids] = (student_params[:exam_ids] || []).reject(&:blank?).compact
     attributes[:exams] = Exam.find(attributes[:exam_ids])
@@ -97,6 +95,6 @@ class StudentsController < ApplicationController
   # @param :student [Student] Request model
   # @returns [Parameters] Parameters specification
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :middle_name, :declaration, :school, :class_name, :exam_ids => [])
+    params.require(:student).permit(:first_name, :last_name, :middle_name, :declaration, :school_id, :class_name, :exam_ids => [])
   end
 end

@@ -68,6 +68,7 @@ bg:
         exams: "Модули"
         exam_ids: "Модули"
         school: "Училище"
+        school_id: "Училище"
         declaration: "Декларация"
         region: "Област"
         city: "Населено място"
