@@ -45,7 +45,9 @@
         </tbody>
       </table>
 
-      <%= link_to "Нов ученик", new_student_path, class: "btn btn-success btn-block" %>
+      <% unless check_closed_register? %>
+        <%= link_to "Нов ученик", new_student_path, class: "btn btn-success btn-block" %>
+      <% end %>
     </div>
   </div>
 </div>

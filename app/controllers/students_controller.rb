@@ -48,6 +48,7 @@ class StudentsController < ApplicationController
   # @param :student [Student] The student to be created
   # @return [void]
   def create
+    return if check_closed_register
     attributes = student_params.clone
     attributes[:school] = School.find(student_params[:school_id])
     attributes[:user] = current_user
@@ -71,6 +72,7 @@ class StudentsController < ApplicationController
   # Opens the :new page with an empty student
   # @return [void]
   def new
+    return if check_closed_register
     @student = Student.new
   end
 
@@ -86,10 +88,16 @@ class StudentsController < ApplicationController
   def check_student_parent(student, parent)
     if student.user != parent
       flash[:error] = "Нямате достъп до тази страница"
-      redirect_back fallback_location: root_path
     end
   end
 
+  def check_closed_register
+    if Rails.configuration.configurable['registration_closed']
+      flash[:error] = "Регистрацията е затворена"
+      redirect_back fallback_location: root_path
+      return true
+    end
+  end
   ##
   # Mass Assignment protection for the student model
   # @param :student [Student] Request model

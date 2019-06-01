@@ -75,5 +75,7 @@ module Admission
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.default_url_options = {:host => 'nclc.npmg.org', :protocol => 'https'}
     config.action_mailer.smtp_settings = Admission::Application.config_for(:mailer).symbolize_keys
+
+    config.configurable = Admission::Application.config_for(:configurable)
   end
 end
