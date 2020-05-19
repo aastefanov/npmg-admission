@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="NONE,NOARCHIVE"/>
+  <title>
+    <%= @page_name.nil? ? "" : "#{@page_name} |" %> <%= @plugin_name || "Състезание \"Акад. Л. Чакалов\" #{Time.now.strftime("%Y")}" %>
+  </title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<%= render 'navbar' %>
+<div class="container-fluid">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= render 'errors' %>
+  <%#= content_for(:layout) %>
+  <%= yield %>
+</div>
+</body>
+</html>

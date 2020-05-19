@@ -1,0 +1,90 @@
+bg:
+  activerecord:
+    models:
+      approval_request:
+        one: "Заявка за регистрация"
+        other: "Заявки за регистрации"
+      approval_comment:
+        one: "Коментар към заявка"
+        other: "Коментари към заявка"
+      region:
+        one: "Област"
+        other: "Области"
+      city:
+        one: "Град"
+        other: "Градове"
+      role:
+        one: "Роля"
+        other: "Роли"
+      school:
+        one: "Училище"
+        other: "Училища"
+      user:
+        one: "Потребител"
+        other: "Потребители"
+      exam:
+        one: "Модул"
+        other: "Модули"
+      grade:
+        one: "Оценка"
+        other: "Оценки"
+      student:
+        one: "Ученик"
+        other: "Ученици"
+    attributes:
+      approval_request:
+        respond_user: "Завършил заявката"
+        approved_at: "Одобрена на"
+        rejected_at: "Отхвърлена на"
+        student: "Ученик"
+        created_at: "Създадена на"
+        updated_at: "Променена на"
+        comments: "Коментари"
+      approval_comment:
+        approval_request: "Заявка"
+        user: "Потребител"
+        content: "Съдържание"
+        created_at: "Създаден на"
+      region:
+        name: "Име"
+        cities: "Населени мяста"
+        schools: "Училища"
+      city:
+        name: "Име"
+        schools: "Училища"
+        region: "Област"
+      role:
+        name: "Име"
+        users: "Потребители"
+      school:
+        name: "Име"
+        city: "Населено място"
+        region: "Област"
+        students: "Ученици"
+      student:
+        first_name: "Първо име"
+        middle_name: "Бащино име"
+        last_name: "Фамилия"
+        exams: "Модули"
+        exam_ids: "Модули"
+        school: "Училище"
+        school_id: "Училище"
+        declaration: "Декларация"
+        region: "Област"
+        city: "Населено място"
+        status: "Статут на регистрацията"
+        ref_number: "Пореден номер"
+        class_name: "Клас"
+      exam:
+        name: "Име"
+        held_in: "Провежда се на"
+      user:
+        first_name: "Първо име"
+        last_name: "Фамилия"
+        email: "Мейл"
+        phone: "Телефон"
+        roles: "Роли"
+        students: "Ученици"
+        password: "Парола"
+        password_confirmation: "Потвърждение на парола"
+        is_active: "Активен"

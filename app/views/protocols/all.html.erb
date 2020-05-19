@@ -1,0 +1,26 @@
+<h1>Финални резултати - <%= @exam.name %></h1>
+<table>
+  <thead>
+  <tr>
+    <% if @personal_data %>
+      <th>Име</th>
+    <% end %>
+    <th>Вх. №</th>
+    <th>Резултат</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @results.each do |result| %>
+    <tr>
+      <% if @personal_data %>
+        <td><%= result.student.full_name %></td>
+      <% end %>
+      <td><%= result.ref_num %></td>
+      <!--      <td><%#= result.pts_grader1 %></td>-->
+      <!--      <td><%#= result.pts_grader2 %></td>-->
+      <td><%= result.pts_final %></td>
+      <td></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

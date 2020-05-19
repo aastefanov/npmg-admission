@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  status: 1
+  approved_at: 2020-01-10 18:16:21
+  declined_at: 2020-01-10 18:16:21
+
+two:
+  student: two
+  status: 1
+  approved_at: 2020-01-10 18:16:21
+  declined_at: 2020-01-10 18:16:21

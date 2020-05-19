@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exam: one
+  room: one
+  priority: 1
+
+two:
+  exam: two
+  room: two
+  priority: 1

@@ -1,0 +1,53 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Ученици</div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Име</th>
+          <th>Презиме</th>
+          <th>Фамилия</th>
+          <th>Училище</th>
+          <th>Модули</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td><%= student.first_name %></td>
+            <td><%= student.middle_name %></td>
+            <td><%= student.last_name %></td>
+            <td><%= student.school.name %></td>
+            <td><%= student.exams.map(&:name).join(', ') %></td>
+            <td>
+              <%=
+                case student.status
+                when :approved
+                  "Одобрен"
+                when :rejected
+                  "Отхвърлен"
+                when :commented
+                  "Има коментари"
+                else # :unapproved
+                  "Чака одобрение"
+
+                end %>
+            </td>
+            <td>
+              <% if student.status != :approved && student.status != :rejected %>
+                <%= link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
+              <% elsif student.status == :approved %>
+                Номер: <%= student.ref_number || "-" %>
+              <% end %>
+              </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <% unless @registration_closed %>
+        <%= link_to "Нов ученик", new_student_path, class: "btn btn-success btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>

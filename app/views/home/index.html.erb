@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="<%= @posts.present? ? 'col-sm-6 col-md-8' : 'col-xs-12' %>">
+    <h2>Къде съм?</h2>
+    Добре дошли в системата за кандидатстване в
+    <strong>Националното състезание по природни науки и география "Акад. Л. Чакалов" </strong>
+
+    <hr/>
+
+    <h3>Какво следва?</h3>
+
+    <% if user_signed_in? %>
+      <% if current_user.is_parent? %>
+        <p>Регистрацията на участник в състезанието може да се направи от родител или учител
+          <%= link_to("тук", students_path) %>.</p>
+        <p>При промяна по регистрацията на някой участник ще получите e-mail, като при одобрение ще получите входящ
+          (пореден) номер на участника.</p>
+        <p>След затваряне на регистрацията ще получите e-mail информация за настаняването на участника за модулите,
+          които е избрал.</p>
+        <p>Информацията ще получите и във формат, в който да можете лесно да я разпечатате и да я
+          донесете в деня на състезанието.</p>
+      <% else %>
+        <%= link_to("Одобрение на регистрации", approvals_path, :class => "btn btn-primary btn-block") %>
+        <%= link_to("Административен панел", rails_admin_path, :class => "btn btn-default btn-block") %>
+      <% end %>
+
+    <% else %>
+      <%= link_to("Влезте", new_user_session_path) %>
+      или <%= link_to("се регистрирайте", new_user_registration_path) %>
+    <% end %>
+  </div>
+  <% if @posts.present? %>
+
+    <div class="col-sm-6 col-md-4">
+      <h3>Информация:</h3>
+      <% @posts.each do |post| %>
+        <div class="media">
+          <div class="media-body"></div>
+          <h4 class="media-heading"><%= post.title %></h4>
+          <%= raw post.content %>
+      <% end %>
+      </div>
+  <% end %>
+  </div>
+</div>

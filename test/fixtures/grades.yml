@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exam: one
+  fik_num: 1
+  grade_first: 9.99
+  grade_second: 9.99
+  grade_arbitrage: 9.99
+  student: one
+
+two:
+  exam: two
+  fik_num: 1
+  grade_first: 9.99
+  grade_second: 9.99
+  grade_arbitrage: 9.99
+  student: two
