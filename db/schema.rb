@@ -48,14 +48,17 @@ ActiveRecord::Schema.define(version: 2020_05_16_073737) do
   end
 
   create_table "exam_results", force: :cascade do |t|
-    t.integer "exam_id"
+    t.integer "exam_id", null: false
+    t.integer "students_id", null: false
+    t.integer "fik_num"
     t.integer "pts_grader1"
     t.integer "pts_grader2"
     t.integer "pts_arbitrage"
-    t.integer "ref_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["exam_id", nil], name: "index_exam_results_on_exam_id_and_student_id", unique: true
     t.index ["exam_id"], name: "index_exam_results_on_exam_id"
+    t.index ["students_id"], name: "index_exam_results_on_students_id"
   end
 
   create_table "exam_rooms", force: :cascade do |t|
@@ -74,19 +77,6 @@ ActiveRecord::Schema.define(version: 2020_05_16_073737) do
     t.datetime "held_in", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "grades", force: :cascade do |t|
-    t.integer "exam_id", null: false
-    t.integer "fik_num", null: false
-    t.decimal "grade_first", null: false
-    t.decimal "grade_second", null: false
-    t.decimal "grade_arbitrage"
-    t.integer "ref_num", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["exam_id"], name: "index_grades_on_exam_id"
-    t.index [nil, "ref_num"], name: "index_grades_on_exam_and_ref_num", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -154,6 +144,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_073737) do
     t.integer "user_id", null: false
     t.datetime "approved_at"
     t.datetime "declined_at"
+    t.boolean "personal_data", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ref_num"], name: "index_students_on_ref_num", unique: true, where: "([ref_num] IS NOT NULL)"

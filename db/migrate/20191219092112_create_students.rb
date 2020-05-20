@@ -10,6 +10,8 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.timestamp :approved_at
       t.timestamp :declined_at
 
+      t.boolean :personal_data, default: true
+
       t.timestamps
     end
 

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @posts = Post.select(:title, :content).order(:created_at => :desc).all
+    @posts = Post.select(:name, :content).order(:created_at => :desc).all
   end
 
   def registered

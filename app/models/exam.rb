@@ -6,4 +6,6 @@ class Exam < ApplicationRecord
 
   has_many :student_exams
   has_many :students, :through => :student_exams
+
+  has_many :exam_results
 end

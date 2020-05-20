@@ -85,6 +85,7 @@ group :test do
 end
 
 group :production do
+  gem 'thin'
   gem 'tiny_tds'
   gem 'activerecord-sqlserver-adapter'
   gem 'activerecord-import-sqlserver'

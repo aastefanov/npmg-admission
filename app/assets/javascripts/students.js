@@ -59,7 +59,7 @@ function initialize_schools_selector(cities_by_region_url, schools_by_city_url, 
 
 
     if (is_school_selected(school_selector)) {
-        const selected_school = school_selector.find('option:selected').attr('value');
+        var selected_school = school_selector.find('option:selected').attr('value');
         $.get(school_data_url.replace(/%id%/, selected_school), function (school_data) {
             $.get(city_data_url.replace(/%id%/, school_data.city_id), function (city_data) {
                 $.get(region_data_url.replace(/%id%/, city_data.region_id), function (region_data) {
