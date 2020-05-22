@@ -10,6 +10,8 @@
           <th>Фамилия</th>
           <th>Училище</th>
           <th>Модули</th>
+          <th></th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -18,14 +20,14 @@
             <td><%= student.first_name %></td>
             <td><%= student.middle_name %></td>
             <td><%= student.last_name %></td>
-            <td><%= student.school.name %></td>
+            <td><%= student.school.name %>, <%= student.school.city.name %>, <%= student.school.region.name %></td>
             <td><%= student.exams.map(&:name).join(', ') %></td>
             <td>
               <%=
                 case student.status
                 when :approved
                   "Одобрен"
-                when :rejected
+                when :declined
                   "Отхвърлен"
                 when :commented
                   "Има коментари"
@@ -38,7 +40,7 @@
               <% if student.status != :approved && student.status != :rejected %>
                 <%= link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
               <% elsif student.status == :approved %>
-                Номер: <%= student.ref_number || "-" %>
+                Вх. номер: <%= student.ref_num || "-" %>
               <% end %>
               </tr>
         <% end %>

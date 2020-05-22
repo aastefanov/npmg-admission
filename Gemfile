@@ -44,6 +44,7 @@ gem 'devise-i18n'
 gem 'cancancan'
 gem 'paper_trail'
 gem 'rails_admin', '~> 2.0'
+gem 'ckeditor'
 
 gem 'bootstrap-sass'
 gem 'sassc-rails', '>= 2.1.0'

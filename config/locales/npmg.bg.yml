@@ -1,12 +1,9 @@
 bg:
   activerecord:
     models:
-      approval_request:
-        one: "Заявка за регистрация"
-        other: "Заявки за регистрации"
-      approval_comment:
-        one: "Коментар към заявка"
-        other: "Коментари към заявка"
+      comment:
+        one: "Коментар"
+        other: "Коментари"
       region:
         one: "Област"
         other: "Области"
@@ -32,22 +29,15 @@ bg:
         one: "Ученик"
         other: "Ученици"
     attributes:
-      approval_request:
-        respond_user: "Завършил заявката"
-        approved_at: "Одобрена на"
-        rejected_at: "Отхвърлена на"
+      comment:
         student: "Ученик"
-        created_at: "Създадена на"
-        updated_at: "Променена на"
-        comments: "Коментари"
-      approval_comment:
-        approval_request: "Заявка"
         user: "Потребител"
         content: "Съдържание"
         created_at: "Създаден на"
+        updated_at: "Променен на"
       region:
         name: "Име"
-        cities: "Населени мяста"
+        cities: "Населени места"
         schools: "Училища"
       city:
         name: "Име"
@@ -61,6 +51,7 @@ bg:
         city: "Населено място"
         region: "Област"
         students: "Ученици"
+        admin_id: "Код по Админ"
       student:
         first_name: "Първо име"
         middle_name: "Бащино име"
@@ -73,18 +64,24 @@ bg:
         region: "Област"
         city: "Населено място"
         status: "Статут на регистрацията"
-        ref_number: "Пореден номер"
+        ref_num: "Пореден номер"
         class_name: "Клас"
+        approved_at: "Одобрена на"
+        declined_at: "Отхвърлена на"
+        approver: "Одобрител"
+        created_at: "Създадена на"
+        updated_at: "Променена на"
+        comments: "Коментари"
       exam:
         name: "Име"
         held_in: "Провежда се на"
       user:
         first_name: "Първо име"
         last_name: "Фамилия"
-        email: "Мейл"
+        email: "Имейл адрес"
         phone: "Телефон"
         roles: "Роли"
         students: "Ученици"
         password: "Парола"
-        password_confirmation: "Потвърждение на парола"
+        password_confirmation: "Потвърждение на паролата"
         is_active: "Активен"

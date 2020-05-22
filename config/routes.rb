@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   get 'home/index'
-  get 'home/registered'
-  get 'home/confirmed'
 
+  get 'page/:name', to: 'home#page', as: :page
+
+
+  post 'approvals/comment/:id', to: 'approvals#comment', as: :approval_comment
 
   devise_for :users, controllers: {
       registrations: 'users/registrations',
@@ -15,10 +18,12 @@ Rails.application.routes.draw do
   resources :protocols
   resources :students
 
+  resources :comments
+
   resources :approvals do
     get :approve, :on => :member
     get :reject, :on => :member
-    post :comment
+    # post :comment
   end
 
   scope :api, :module => :api do

@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected def after_inactive_sign_up_path_for(resource)
-    :home_registered
+    page_path :registered
   end
 
   def create

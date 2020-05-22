@@ -7,19 +7,22 @@ class Student < ApplicationRecord
   has_many :student_exams
   has_many :exams, :through => :student_exams
 
-  has_one_attached :declaration
+  belongs_to :approver, class_name: 'User', required: false
+  has_many :comments
 
-  validates_presence_of :first_name, :last_name, :declaration, :school
+  # has_one_attached :declaration
 
-  validates :declaration, :attached => true,
-            :content_type => {:in => %w(image/png image/jpg image/jpeg),
-                              :message => 'трябва да бъде във формат png, jpg или jpeg'},
-            :size => {:less_than => 4.megabytes, message: 'трябва да бъде до 4 мегабайта'}
+  validates_presence_of :first_name, :last_name, :school
+
+  # validates :declaration, :attached => true,
+  #           :content_type => {:in => %w(image/png image/jpg image/jpeg),
+  #                             :message => 'трябва да бъде във формат png, jpg или jpeg'},
+  #           :size => {:less_than => 4.megabytes, message: 'трябва да бъде до 4 мегабайта'}
 
   validates :first_name, :middle_name, :last_name,
-            :format => {with: /\p{Cyrillic}*/u, message: "трябва да бъде на кирилица"}
+            :format => {with: /\A[\p{Cyrillic} \-.]+\z/u, message: "трябва да бъде на кирилица"}
 
-  has_many :exam_results, foreign_key: :ref_num, primary_key: :ref_num
+  has_many :exam_results
 
   delegate :region, :city, :to => :school, :allow_nil => true
 

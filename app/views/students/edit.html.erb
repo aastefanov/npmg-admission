@@ -1,3 +1,6 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+
+
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-primary">
@@ -10,10 +13,6 @@
           <%= f.text_field :middle_name %>
           <%= f.text_field :last_name %>
 
-          <%= f.file_field :declaration %>
-          <%= link_to((image_tag rails_blob_path(@student.declaration), class: 'img-responsive'),
-                      rails_blob_path(@student.declaration)) %>
-
           <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name %>
 
           <h3>Данни за училището</h3>
@@ -23,13 +22,37 @@
 
           <%= f.text_field :class_name, :value => '7', :readonly => true %>
 
+          <h3>Обработка на лични данни</h3>
+          <div class='form-group'>
+            <!--        <div class="checkbox">-->
+            <!--          <label> <%#= f.check_box :personal_data, :as => :boolean, :label => '', :inline_label => true %>-->
+            <p>Запознат/а съм с целта и средствата на обработка на личните данни на сина ми/дъщеря ми и съм наясно,че то
+              е необходимо за организирането и провеждането на Националното състезание по природни науки и география
+              "Академик Любомир Чакалов".</p>
+            <p> Запознат/а съм, че личните данни (на хартиен носител и в електронен формат) ще бъдат обработвани и
+              съхранявани при спазване на разпоредбите на нормативните актове в областта на защита на личните данни и
+              приложимото българско и европейско законодателство.</p>
+            <% radio_content = [
+                [true,
+                 'Съгласен съм резултатите на сина ми/дъщеря ми от Националното състезание по природни науки и география
+              "Академик Любомир Чакалов" да бъдат обявени публично.'],
+                [false, 'Не съм съгласен резултатите на сина ми/дъщеря ми от Националното състезание по природни науки и география
+            "Академик Любомир Чакалов" да бъдат обявени публично.']
+            ] %>
+            <%= f.collection_radio_buttons :personal_data, radio_content, :first, :last, hide_label: true %>
+            <div id="declaration_link" style="display: none; text-indent: 2em;">
+              <p>В случай че не сте съгласни резултатите на сина Ви/дъщеря Ви да бъдат обявени публично, на сайта на
+                гимназията ще намерите декларация, която трябва да попълните.</p>
+              <p>Моля попълнете и донесете подписаната декларация в деня на състезанието!</p>
+            </div>
+          </div>
+
           <%= f.submit 'Промени', class: 'btn btn-primary btn-block' %>
         <% end %>
       </div>
     </div>
   </div>
   <div class="col-md-6">
-
     <div class="panel panel-default">
       <div class="panel-heading">История</div>
       <div class="panel-body">
@@ -69,29 +92,55 @@
             </div>
           </div>
         <% end %>
-        <!--
-        <%# unless @student.comments.blank? %>
-          <div class="row">
-            <div class="col-xs-4">
-              <label>Коментари</label>
-            </div>
-            <div class="col-xs-8">
-              <%# @student.request.comments.each do |c| %>
-                <div class="row">
-                  <%#= c.created_at %>:
-                  <div class="col-xs-11 col-xs-push-1">
-                    <%#= c.content %>
-                  </div>
-                </div>
-              <%# end %>
-            </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= Student.human_attribute_name :comments %></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#comment-modal">Добави
+              коментар
+            </button>
           </div>
-        <%# end %>-->
-
-
+        </div>
+        <br/>
+        <% unless @student.comments.blank? %>
+          <% @student.comments.order(:created_at => :desc).each do |c| %>
+            <div class="row">
+              <div class="col-xs-12">
+                <p><%= c.user.full_name %> (на <%= c.created_at %>)</p>
+                <%= simple_format c.content %>
+              </div>
+            </div>
+            <hr/>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="comment-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Коментар
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        </h5>
+
+      </div>
+      <div class="modal-body">
+        <%= bootstrap_form_for Comment.new, url: comments_path, include_id: false, method: :post do |f| %>
+          <%= f.hidden_field :student_id, :value => @student.id %>
+          <%= f.cktext_area :content, :class => :ckeditor, ckeditor: {language: 'bg'} %>
+          <%= f.submit 'Създай', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <script type="text/javascript">
@@ -104,4 +153,20 @@
             "/api/schools/%id%"
         );
     });
+
+    $(function () {
+        $("input[name='student[personal_data]']").change(function (e) {
+            var declaration_link = $('#declaration_link');
+            if ($(this).val() == 'true') {
+                declaration_link.css({display: 'none'});
+            } else {
+                declaration_link.css({display: 'block'});
+            }
+        });
+
+        if($("input[name='student[personal_data]']:checked").val() == 'false') {
+            var declaration_link = $('#declaration_link');
+            declaration_link.css({display: 'block'});
+        }
+    })
 </script>

@@ -15,20 +15,20 @@
         </tr>
         </thead>
         <tbody>
-        <% @requests.map(&:student).each do |student| %>
+        <% @students.each do |student| %>
           <tr>
             <td><%= student.first_name %></td>
             <td><%= student.middle_name %></td>
             <td><%= student.last_name %></td>
             <td><%= student.school.name %></td>
             <td><%= student.exams.map(&:name).join(', ') %></td>
-            <td><%= student.approval_request.comments.count %></td>
+            <td><%= student.comments.count %></td>
             <td>
               <%=
                 case student.status
                 when :approved
                   "Одобрен"
-                when :rejected
+                when :declined
                   "Отхвърлен"
                 when :commented
                   "Има коментари"
@@ -37,7 +37,7 @@
 
                 end %>
             </td>
-            <td><%= link_to "Преглед", approval_path(student.approval_request.id), :class => "btn btn-primary" %></td>
+            <td><%= link_to "Преглед", approval_path(student.id), :class => "btn btn-primary" %></td>
           </tr>
         <% end %>
         </tbody>

@@ -3,7 +3,7 @@ bg:
   activerecord:
     errors:
       messages:
-        record_invalid: 'имаше грешки: %{errors}'
+        record_invalid: '%{errors}'
   date:
     abbr_day_names:
       - нед

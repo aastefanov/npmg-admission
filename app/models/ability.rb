@@ -31,23 +31,23 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
-    can :read, Region
-    can :read, City
-    can :read, School
-    can :read, Exam
-    can :read, Room
-
     if user.has_role? :admin
       can :manage, :all
     end
 
     if user.has_role? :approve
-      can :read, Student
-      can :manage, Grade
-      can :manage, Room
+      can :manage, [Student, ExamRoom, StudentExam, Room, Comment]
     end
 
-    can :manage, Student, :user_id => user.id, :is_approved? => false
+    can :manage, Student, :user_id => user.id, :approver_id => nil
+    can :manage, StudentExam, student: {:user_id => user.id, :approver_id => nil}
+    can :create, Comment, student: {:user_id => user.id, :approver_id => nil}
+    can :read, Comment, student: {:user_id => user.id}
 
+    can :read, [ExamResult, StudentExam, Comment], student: {:user_id => user.id}
+
+
+    can :manage, User, :user_id => user.id
+    can :read, [Post, Page, Exam, School, City, Region, Room, ExamRoom]
   end
 end

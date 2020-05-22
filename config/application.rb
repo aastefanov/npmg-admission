@@ -13,6 +13,11 @@ module Nclc
 
     config.i18n.available_locales = [:bg, :en]
     config.i18n.default_locale = :bg
+    config.i18n.fallbacks = [:en]
+
+    I18n.config.available_locales = [:bg, :en]
+    I18n.default_locale = :bg
+    # I18n.fallbacks = :en
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

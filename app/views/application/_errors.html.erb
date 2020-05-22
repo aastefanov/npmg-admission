@@ -1,6 +1,6 @@
 <% if flash[:error] %>
   <div class="alert alert-danger flash-error" role="alert">
-    <%= flash[:error] %>
+    <%= t 'activerecord.errors.messages.record_invalid', errors: flash[:error] %>
   </div>
   <div style="clear: both;"></div>
 <% end %>
@@ -16,5 +16,10 @@
   </div>
   <div style="clear: both;"></div>
 <% end %>
-
+<% if flash[:success] %>
+  <div class="alert alert-success flash-success" role="alert">
+    <%= flash[:success] %>
+  </div>
+  <div style="clear: both;"></div>
+<% end %>
 <% flash.clear %>

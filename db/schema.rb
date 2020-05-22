@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_073737) do
+ActiveRecord::Schema.define(version: 2020_05_20_085333) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -47,6 +47,27 @@ ActiveRecord::Schema.define(version: 2020_05_16_073737) do
     t.index ["region_id"], name: "index_cities_on_region_id"
   end
 
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "data_fingerprint"
+    t.string "type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "user_id"
+    t.string "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_comments_on_student_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "exam_results", force: :cascade do |t|
     t.integer "exam_id", null: false
     t.integer "students_id", null: false
@@ -77,6 +98,14 @@ ActiveRecord::Schema.define(version: 2020_05_16_073737) do
     t.datetime "held_in", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_pages_on_name"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -147,6 +176,8 @@ ActiveRecord::Schema.define(version: 2020_05_16_073737) do
     t.boolean "personal_data", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "approver_id"
+    t.index ["approver_id"], name: "index_students_on_approver_id"
     t.index ["ref_num"], name: "index_students_on_ref_num", unique: true, where: "([ref_num] IS NOT NULL)"
     t.index ["school_id"], name: "index_students_on_school_id"
     t.index ["user_id"], name: "index_students_on_user_id"

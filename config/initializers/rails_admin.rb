@@ -35,7 +35,7 @@ RailsAdmin.config do |config|
     show_in_app
 
     ## With an audit adapter, you can add:
-    history_index
+    #    history_index
     history_show
   end
 
@@ -47,7 +47,15 @@ RailsAdmin.config do |config|
       field :first_name
       field :middle_name
       field :last_name
+      field :ref_num
+    end
 
+    field :user
+
+    group :approval do
+      field :approved_at
+      field :declined_at
+      field :approver
     end
 
     field :school do
@@ -56,25 +64,13 @@ RailsAdmin.config do |config|
     end
 
     field :exams
-    field :applicant, :belongs_to_association
 
     list do
       field :status
     end
 
-    create do
-      field :user_id, :hidden do
-        default_value do
-          bindings[:view]._current_user.id
-        end
-      end
-    end
-
     show do
       field :status
-      group :parent_data do
-        field :user
-      end
     end
   end
 
@@ -118,6 +114,9 @@ RailsAdmin.config do |config|
     field :phone
     field :roles do
       searchable false
+      nested_form false
+      inline_add false
+      # inline_edit false
       queryable false
     end
 
@@ -126,6 +125,48 @@ RailsAdmin.config do |config|
         field :password
         field :password_confirmation
       end
+    end
+  end
+
+  config.model 'Post' do
+    field :name
+
+    create do
+      field :content, :ck_editor
+      field :user_id, :hidden do
+        default_value do
+          bindings[:view]._current_user.id
+        end
+      end
+    end
+    edit do
+      field :content, :ck_editor
+      field :user_id, :hidden do
+        default_value do
+          bindings[:view]._current_user.id
+        end
+      end
+    end
+
+    show do
+      field :content do
+        pretty_value do
+          ERB.new(value).result(binding).html_safe
+        end
+      end
+    end
+
+  end
+
+  config.model 'Page' do
+
+    field :name
+    edit do
+      field :content, :ck_editor
+
+    end
+    show do
+      field :content, :ck_editor
     end
   end
 end

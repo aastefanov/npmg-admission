@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-#  has_paper_trail
+  has_paper_trail
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,8 +16,7 @@ class User < ApplicationRecord
             :phone => true
 
   validates :first_name, :last_name,
-            :format => {with: /\p{Cyrillic}+/u, message: "трябва да бъде на кирилица"}
-
+            :format => {with: /\A[\p{Cyrillic} \-.]+\z/u, message: "трябва да бъде на кирилица"}
 
   ##
   # Returns the full name of the user
@@ -33,7 +32,7 @@ class User < ApplicationRecord
   # @param role_sym [Symbol] The role name
   # @return [Boolean] Whether the user is in the role
   def has_role?(role_sym)
-    roles.any? {|r| r.name.underscore.to_sym == role_sym}
+    roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end
 
   ##

@@ -1,3 +1,5 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-primary">
@@ -8,7 +10,7 @@
             <label><%= Student.human_attribute_name :first_name %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.first_name %>
+            <%= @student.first_name %>
           </div>
         </div>
         <div class="row">
@@ -16,7 +18,7 @@
             <label><%= Student.human_attribute_name :middle_name %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.middle_name %>
+            <%= @student.middle_name %>
           </div>
         </div>
 
@@ -25,7 +27,7 @@
             <label>Фамилия</label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.last_name %>
+            <%= @student.last_name %>
           </div>
         </div>
         <div class="row">
@@ -33,7 +35,7 @@
             <label><%= Student.human_attribute_name :region %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.region.name %>
+            <%= @student.region.name %>
           </div>
         </div>
         <div class="row">
@@ -41,7 +43,7 @@
             <label><%= Student.human_attribute_name :city %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.city.name %>
+            <%= @student.city.name %>
           </div>
         </div>
         <div class="row">
@@ -49,15 +51,8 @@
             <label><%= Student.human_attribute_name :school %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.school.name %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4">
-            <label><%= Student.human_attribute_name :class_name %></label>
-          </div>
-          <div class="col-xs-8">
-            <%= @request.student.class_name %>
+            <p><%= @student.school.name %></p>
+            <p><%= School.human_attribute_name :admin_id %>: <%= @student.school.admin_id %></p>
           </div>
         </div>
         <div class="row">
@@ -65,24 +60,24 @@
             <label><%= Student.human_attribute_name :exams %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.exams.map(&:name).join(', ') %>
+            <%= @student.exams.map(&:name).join(', ') %>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-4">
-            <label><%= Student.human_attribute_name :declaration %></label>
-          </div>
-          <div class="col-xs-8">
-            <% if @request.student.declaration.attached? %>
-              <%= link_to 'Изтегли', @request.student.declaration %>
-              <%= image_tag @request.student.declaration, :class => 'img-responsive' %>
-            <% else %>
-              Не е прикачена декларация.
-            <% end %>
+        <!--        <div class="row">-->
+        <!--          <div class="col-xs-4">-->
+        <!--            <label><%#= Student.human_attribute_name :declaration %></label>-->
+        <!--          </div>-->
+        <!--          <div class="col-xs-8">-->
+        <%# if @request.student.declaration.attached? %>
+        <%#= link_to 'Изтегли', @request.student.declaration %>
+        <%#= image_tag @request.student.declaration, :class => 'img-responsive' %>
+        <%# else %>
+        <!--              Не е прикачена декларация.-->
+        <%# end %>
 
-          </div>
+        <!--          </div>-->
 
-        </div>
+        <!--        </div>-->
 
       </div>
     </div>
@@ -94,7 +89,7 @@
             <label><%= User.human_attribute_name :first_name %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.parent.first_name %>
+            <%= @student.user.first_name %>
           </div>
         </div>
         <div class="row">
@@ -102,7 +97,7 @@
             <label><%= User.human_attribute_name :last_name %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.parent.last_name %>
+            <%= @student.user.last_name %>
           </div>
         </div>
         <div class="row">
@@ -110,7 +105,7 @@
             <label><%= User.human_attribute_name :phone %></label>
           </div>
           <div class="col-xs-8">
-            <%= tel_to @request.parent.phone %>
+            <%= tel_to @student.user.phone %>
           </div>
         </div>
         <div class="row">
@@ -118,7 +113,7 @@
             <label><%= User.human_attribute_name :email %></label>
           </div>
           <div class="col-xs-8">
-            <%= mail_to @request.parent.email %>
+            <%= mail_to @student.user.email %>
           </div>
         </div>
       </div>
@@ -126,22 +121,18 @@
 
   </div>
   <div class="col-md-6">
-    <% unless @request.is_approved? or @request.is_rejected? %>
+    <% unless @student.is_approved? or @student.is_declined? %>
 
       <div class="panel panel-default">
         <div class="panel-heading">Операции</div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-xs-4">
-              <%= link_to "Одобри", approve_approval_path(@request), :class => "btn btn-success btn-block" %>
+            <div class="col-xs-6">
+              <%= link_to "Одобри", approve_approval_path(@student.id), :class => "btn btn-success btn-block" %>
             </div>
-            <div class="col-xs-4">
-              <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#comment-modal">Добави
-                коментар
-              </button>
-            </div>
-            <div class="col-xs-4">
-              <%= link_to "Отхвърли", reject_approval_path(@request), :class => "btn btn-danger btn-block" %>
+
+            <div class="col-xs-6">
+              <%= link_to "Отхвърли", reject_approval_path(@student.id), :class => "btn btn-danger btn-block" %>
             </div>
           </div>
         </div>
@@ -152,27 +143,27 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-4">
-            <label><%= ApprovalRequest.human_attribute_name :created_at %></label>
+            <label><%= Student.human_attribute_name :created_at %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.created_at %>
+            <%= @student.created_at %>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">
-            <label><%= ApprovalRequest.human_attribute_name :updated_at %></label>
+            <label><%= Student.human_attribute_name :updated_at %></label>
           </div>
           <div class="col-xs-8">
-            <%= @request.student.updated_at %>
+            <%= @student.updated_at %>
           </div>
         </div>
-        <% if @request.is_approved? %>
+        <% if @student.is_approved? %>
           <div class="row">
             <div class="col-xs-4">
-              <label><%= ApprovalRequest.human_attribute_name :approved_at %></label>
+              <label><%= Student.human_attribute_name :approved_at %></label>
             </div>
             <div class="col-xs-8">
-              <%= @request.approved_at %>
+              <%= @student.approved_at %>
             </div>
           </div>
           <div class="row">
@@ -180,18 +171,18 @@
               <label>Одобрена от</label>
             </div>
             <div class="col-xs-8">
-              <%= @request.respond_user.full_name %> <<%= mail_to @request.respond_user.email %>
-              , <%= tel_to @request.respond_user.phone %>>
+              <%= @student.approver.full_name %> <<%= mail_to @student.approver.email %>
+              , <%= tel_to @student.approver.phone %>>
             </div>
           </div>
         <% end %>
-        <% if @request.is_rejected? %>
+        <% if @student.is_declined? %>
           <div class="row">
             <div class="col-xs-4">
-              <label><%= ApprovalRequest.human_attribute_name :rejected_at %></label>
+              <label><%= Student.human_attribute_name :declined_at %></label>
             </div>
             <div class="col-xs-8">
-              <%= @request.rejected_at %>
+              <%= @student.declined_at %>
             </div>
           </div>
           <div class="row">
@@ -199,32 +190,37 @@
               <label>Отхвърлена от</label>
             </div>
             <div class="col-xs-8">
-              <%= @request.respond_user.full_name %> <<%= mail_to @request.respond_user.email %>
-              , <%= tel_to @request.respond_user.phone %>>
+              <%= @student.approver.full_name %> <<%= mail_to @student.approver.email %>
+              , <%= tel_to @student.approver.phone %>>
             </div>
           </div>
         <% end %>
-
-        <% unless @request.comments.blank? %>
-          <div class="row">
-            <div class="col-xs-4">
-              <label><%= ApprovalRequest.human_attribute_name :comments %></label>
-            </div>
-            <div class="col-xs-8">
-              <% @request.comments.each do |c| %>
-                <div class="row">
-                  <%= c.user.full_name %> <<%= mail_to c.user.email %>, <%= tel_to c.user.phone %>>
-                  (<%= c.created_at %>)
-                  <div class="col-xs-11 col-xs-push-1">
-                    <%= c.content %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= Student.human_attribute_name :comments %></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#comment-modal">Добави
+              коментар
+            </button>
           </div>
+        </div>
+        <br/>
+        <% unless @student.comments.blank? %>
+          <% @student.comments.order(:created_at => :desc).each do |c| %>
+            <div class="row">
+              <div class="col-xs-12">
+                <p><%= c.user.full_name %> (на <%= c.created_at %>)<br/>
+                  Email: <%= mail_to c.user.email %>, Телефон: <%= tel_to c.user.phone %><br/>
+                </p>
+                <%= simple_format c.content %>
+              </div>
+            </div>
+            <hr/>
+          <% end %>
         <% end %>
-
-
       </div>
     </div>
   </div>
@@ -241,8 +237,9 @@
 
       </div>
       <div class="modal-body">
-        <%= bootstrap_form_for ApprovalComment.new(:request => @request), url: approval_comment_path(@request), method: :post do |f| %>
-          <%= f.text_area :content %>
+        <%= bootstrap_form_for Comment.new, url: comments_path, include_id: false, method: :post do |f| %>
+          <%= f.hidden_field :student_id, :value => @student.id %>
+          <%= f.cktext_area :content, :class => :ckeditor, ckeditor: {language: 'bg'} %>
           <%= f.submit 'Създай', class: 'btn btn-primary btn-block' %>
         <% end %>
       </div>
