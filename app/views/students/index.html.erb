@@ -24,16 +24,17 @@
             <td><%= student.exams.map(&:name).join(', ') %></td>
             <td>
               <%=
-                case student.status
+                case student.approver_status
                 when :approved
                   "Одобрен"
                 when :declined
                   "Отхвърлен"
-                when :commented
+                when :waiting
                   "Има коментари"
-                else # :unapproved
+                when :unapproved
                   "Чака одобрение"
-
+                else
+                  "N/A"
                 end %>
             </td>
             <td>

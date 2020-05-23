@@ -32,11 +32,11 @@ class Student < ApplicationRecord
   end
 
   def is_approved?
-    !approved_at.nil?
+    approved_at?
   end
 
   def is_declined?
-    !declined_at.nil?
+    declined_at?
   end
 
   def status
@@ -47,5 +47,53 @@ class Student < ApplicationRecord
     else
       :unapproved
     end
+  end
+
+  def approver_status
+    if approver_id?
+      status
+      # Approver has to check
+    elsif !new_comments.present? or !last_approver_comment.present?
+      :unapproved
+      # Approver waits for parent
+    elsif !last_parent_comment.present? or last_approver_comment > last_parent_comment
+      :waiting
+      # Parent corrected the approver
+    elsif last_parent_comment > last_approver_comment
+      :unapproved
+    else
+      nil
+    end
+  end
+
+  def parent_status
+    if approver_id?
+      status
+      # Parent waits for approver
+    elsif !new_comments.present? or !last_approver_comment
+      :unapproved
+      # Approver demands a change
+    elsif !last_parent_comment.present? or last_approver_comment > last_parent_comment
+      :waiting
+      # Parent corrected the approver
+    elsif last_parent_comment > last_approver_comment
+      :unapproved
+    else
+      nil
+    end
+  end
+
+  def new_comments
+    comments.where('created_at > ?', updated_at)
+  end
+
+  # after last update
+  def last_parent_comment
+    comments.where('user_id = ? AND created_at > ?', user_id, updated_at).maximum(:created_at)
+  end
+
+  # after last update
+  def last_approver_comment
+    comments.where('user_id != ? AND created_at > ?', user_id, updated_at).maximum(:created_at)
   end
 end

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = :bg
+    Time.zone = 'Europe/Sofia'
   end
 
   rescue_from CanCan::AccessDenied do |exception|

@@ -25,16 +25,17 @@
             <td><%= student.comments.count %></td>
             <td>
               <%=
-                case student.status
+                case student.parent_status
                 when :approved
                   "Одобрен"
                 when :declined
                   "Отхвърлен"
-                when :commented
-                  "Има коментари"
-                else # :unapproved
+                when :waiting
+                  "Чака родител"
+                when :unapproved
                   "Чака одобрение"
-
+                else
+                  "N/A"
                 end %>
             </td>
             <td><%= link_to "Преглед", approval_path(student.id), :class => "btn btn-primary" %></td>

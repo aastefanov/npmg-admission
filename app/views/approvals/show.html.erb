@@ -146,7 +146,7 @@
             <label><%= Student.human_attribute_name :created_at %></label>
           </div>
           <div class="col-xs-8">
-            <%= @student.created_at %>
+            <%= l @student.created_at, :format => :long %>
           </div>
         </div>
         <div class="row">
@@ -154,7 +154,7 @@
             <label><%= Student.human_attribute_name :updated_at %></label>
           </div>
           <div class="col-xs-8">
-            <%= @student.updated_at %>
+            <%= l @student.updated_at, :format => :long %>
           </div>
         </div>
         <% if @student.is_approved? %>
@@ -163,7 +163,7 @@
               <label><%= Student.human_attribute_name :approved_at %></label>
             </div>
             <div class="col-xs-8">
-              <%= @student.approved_at %>
+              <%= l @student.approved_at, :format => :long %>
             </div>
           </div>
           <div class="row">
@@ -182,7 +182,7 @@
               <label><%= Student.human_attribute_name :declined_at %></label>
             </div>
             <div class="col-xs-8">
-              <%= @student.declined_at %>
+              <%= l @student.declined_at, :format => :long %>
             </div>
           </div>
           <div class="row">
@@ -212,7 +212,7 @@
           <% @student.comments.order(:created_at => :desc).each do |c| %>
             <div class="row">
               <div class="col-xs-12">
-                <p><%= c.user.full_name %> (на <%= c.created_at %>)<br/>
+                <p><%= c.user.full_name %> (на <%= l c.created_at, :format => :long %>)<br/>
                   Email: <%= mail_to c.user.email %>, Телефон: <%= tel_to c.user.phone %><br/>
                 </p>
                 <%= simple_format c.content %>

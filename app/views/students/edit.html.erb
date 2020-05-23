@@ -61,7 +61,7 @@
             <label>Създаден</label>
           </div>
           <div class="col-xs-8">
-            <%= @student.created_at %>
+            <%= l @student.created_at, :format => :long %>
           </div>
         </div>
         <div class="row">
@@ -69,7 +69,7 @@
             <label>Последно променен</label>
           </div>
           <div class="col-xs-8">
-            <%= @student.updated_at %>
+            <%= l @student.updated_at, :format => :long %>
           </div>
         </div>
         <% if @student.is_approved? %>
@@ -78,7 +78,7 @@
               <label>Одобрен на</label>
             </div>
             <div class="col-xs-8">
-              <%= @student.approved_at %>
+              <%= l @student.approved_at, :format => :long %>
             </div>
           </div>
         <% end %>
@@ -88,7 +88,7 @@
               <label>Отхвърлен на</label>
             </div>
             <div class="col-xs-8">
-              <%= @student.declined_at %>
+              <%= l @student.declined_at, :format => :long %>
             </div>
           </div>
         <% end %>
@@ -109,7 +109,7 @@
           <% @student.comments.order(:created_at => :desc).each do |c| %>
             <div class="row">
               <div class="col-xs-12">
-                <p><%= c.user.full_name %> (на <%= c.created_at %>)</p>
+                <p><%= c.user.full_name %> (<%= l c.created_at, :format => :long %>)</p>
                 <%= simple_format c.content %>
               </div>
             </div>
@@ -164,7 +164,7 @@
             }
         });
 
-        if($("input[name='student[personal_data]']:checked").val() == 'false') {
+        if ($("input[name='student[personal_data]']:checked").val() == 'false') {
             var declaration_link = $('#declaration_link');
             declaration_link.css({display: 'block'});
         }
