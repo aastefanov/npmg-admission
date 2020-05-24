@@ -12,7 +12,7 @@ class Student < ApplicationRecord
 
   # has_one_attached :declaration
 
-  validates_presence_of :first_name, :last_name, :school
+  validates_presence_of :first_name, :last_name, :school, :exams
 
   # validates :declaration, :attached => true,
   #           :content_type => {:in => %w(image/png image/jpg image/jpeg),
