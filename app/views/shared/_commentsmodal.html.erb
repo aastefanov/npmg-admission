@@ -1,0 +1,20 @@
+<div class="modal" tabindex="-1" role="dialog" id="comment-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Коментар
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        </h5>
+
+      </div>
+      <div class="modal-body">
+        <%= bootstrap_form_for Comment.new, url: comments_path, include_id: false, method: :post do |f| %>
+          <%= f.hidden_field :student_id, :value => @student.id %>
+          <%= f.cktext_area :content, :class => :ckeditor, ckeditor: {language: 'bg'} %>
+          <%= f.submit 'Създай', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

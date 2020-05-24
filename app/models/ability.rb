@@ -40,6 +40,7 @@ class Ability
     end
 
     can :manage, Student, :user_id => user.id, :approver_id => nil
+    can :read, Student, :user_id => user.id
     can :manage, StudentExam, student: {:user_id => user.id, :approver_id => nil}
     can :create, Comment, student: {:user_id => user.id, :approver_id => nil}
     can :read, Comment, student: {:user_id => user.id}

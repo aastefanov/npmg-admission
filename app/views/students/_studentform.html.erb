@@ -1,0 +1,72 @@
+<%= bootstrap_form_for @student do |f| %>
+
+  <%= f.text_field :first_name %>
+  <%= f.text_field :middle_name %>
+  <%= f.text_field :last_name %>
+
+  <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name %>
+
+  <h3>Данни за училището</h3>
+  <%= f.collection_select :region, Region.order(:name), :id, :name, include_blank: '---------------' %>
+  <%= f.select :city, [] %>
+  <% if @student.school_id.present? %>
+    <%= f.select :school_id, School.all.collect { |p| [p.name, p.id] }, :selected => @student.school_id %>
+  <% else %>
+    <%= f.select :school_id, [] %>
+  <% end %>
+  <%= f.text_field :class_name, :value => '7', :readonly => true %>
+
+  <h3>Обработка на лични данни</h3>
+  <div class='form-group'>
+    <!--        <div class="checkbox">-->
+    <!--          <label> <%#= f.check_box :personal_data, :as => :boolean, :label => '', :inline_label => true %>-->
+    <p>Запознат/а съм с целта и средствата на обработка на личните данни на сина ми/дъщеря ми и съм наясно,че то
+      е необходимо за организирането и провеждането на Националното състезание по природни науки и география
+      "Академик Любомир Чакалов".</p>
+    <p> Запознат/а съм, че личните данни (на хартиен носител и в електронен формат) ще бъдат обработвани и
+      съхранявани при спазване на разпоредбите на нормативните актове в областта на защита на личните данни и
+      приложимото българско и европейско законодателство.</p>
+    <% radio_content = [
+        [true,
+         'Съгласен съм резултатите на сина ми/дъщеря ми от Националното състезание по природни науки и география
+              "Академик Любомир Чакалов" да бъдат обявени публично.'],
+        [false, 'Не съм съгласен резултатите на сина ми/дъщеря ми от Националното състезание по природни науки и география
+            "Академик Любомир Чакалов" да бъдат обявени публично.']
+    ] %>
+    <%= f.collection_radio_buttons :personal_data, radio_content, :first, :last, hide_label: true %>
+    <div id="declaration_link" style="display: none; text-indent: 2em;">
+      <p>В случай че не сте съгласни резултатите на сина Ви/дъщеря Ви да бъдат обявени публично, на сайта на
+        гимназията ще намерите декларация, която трябва да попълните.</p>
+      <p>Моля попълнете и донесете подписаната декларация в деня на състезанието!</p>
+    </div>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary btn-block' %>
+<% end %>
+<script type="text/javascript">
+    $(function () {
+        initialize_schools_selector(
+            "/api/regions/%id%/cities",
+            "/api/cities/%id%/schools",
+            "/api/regions/%id%",
+            "/api/cities/%id%",
+            "/api/schools/%id%"
+        );
+    });
+
+    $(function () {
+        $("input[name='student[personal_data]']").change(function (e) {
+            var declaration_link = $('#declaration_link');
+            if ($(this).val() == 'true') {
+                declaration_link.css({display: 'none'});
+            } else {
+                declaration_link.css({display: 'block'});
+            }
+        });
+
+        if ($("input[name='student[personal_data]']:checked").val() == 'false') {
+            var declaration_link = $('#declaration_link');
+            declaration_link.css({display: 'block'});
+        }
+    })
+</script>

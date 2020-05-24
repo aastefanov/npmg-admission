@@ -3,7 +3,7 @@ class StudentsController < ApplicationController
   load_and_authorize_resource
 
   def show
-    redirect_to edit_student_path(params[:id])
+    # redirect_to edit_student_path(params[:id])
   end
 
   ##

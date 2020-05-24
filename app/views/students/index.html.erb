@@ -38,10 +38,10 @@
                 end %>
             </td>
             <td>
-              <% if student.status != :approved && student.status != :rejected %>
-                <%= link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
-              <% elsif student.status == :approved %>
-                Вх. номер: <%= student.ref_num || "-" %>
+              <% if student.approver_id? %>
+              <%=  link_to("Прегледай", student_path(student.id), :class => 'btn btn-success') %></td>
+              <%  else  %>
+              <%=  link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary')  %></td>
               <% end %>
               </tr>
         <% end %>

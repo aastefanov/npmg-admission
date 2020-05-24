@@ -1,0 +1,24 @@
+<% unless @student.approver_id? %>
+  <div class="row">
+    <div class="col-xs-12">
+      <button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#comment-modal">Добави
+        коментар
+      </button>
+    </div>
+  </div>
+  <br/>
+<% end %>
+<% unless @student.comments.blank? %>
+  <% @student.comments.order(:created_at => :desc).each do |c| %>
+    <div class="row">
+      <div class="col-xs-12">
+        <p><%= c.user.full_name %> (на <%= l c.created_at, :format => :long %>)<br/>
+          <% if local_assigns[:contact] %>Email: <%= mail_to c.user.email %>, Телефон: <%= tel_to c.user.phone %><br/>
+          <% end %>
+        </p>
+        <%= simple_format c.content %>
+      </div>
+    </div>
+    <hr/>
+  <% end %>
+<% end %>
