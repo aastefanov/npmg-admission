@@ -88,6 +88,7 @@ end
 group :production do
   gem 'thin'
   gem 'tiny_tds'
+  gem 'sidekiq'
   gem 'activerecord-sqlserver-adapter'
   gem 'activerecord-import-sqlserver'
 end
