@@ -14,7 +14,7 @@ class StudentsMailer < ApplicationMailer
 
   end
 
-  def registration_rejected
+  def registration_declined
     @user = params[:user]
     @student = params[:student]
 

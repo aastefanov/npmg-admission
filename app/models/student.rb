@@ -10,9 +10,19 @@ class Student < ApplicationRecord
   belongs_to :approver, class_name: 'User', required: false
   has_many :comments
 
+  has_one :student_egn, :dependent => :destroy
+  validates_associated :student_egn
+
+  def student_egn
+    super || build_student_egn
+  end
+
+  delegate :egn, :to => :student_egn, allow_nil: true
+
+  accepts_nested_attributes_for :student_egn
   # has_one_attached :declaration
 
-  validates_presence_of :first_name, :last_name, :school, :exams
+  validates_presence_of :first_name, :last_name, :school, :exams, :egn
 
   # validates :declaration, :attached => true,
   #           :content_type => {:in => %w(image/png image/jpg image/jpeg),

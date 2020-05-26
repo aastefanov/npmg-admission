@@ -2,10 +2,24 @@
 
 <div class="row">
   <div class="col-md-6">
+    <% if @same_egn.present? %>
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Дублирани ученици</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <% @same_egn.each do |st| %>
+              <li><%= link_to st.full_name, approval_path(st) %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
     <div class="panel panel-primary">
       <div class="panel-heading">Ученик</div>
       <div class="panel-body">
-<%=render 'shared/studentdata', admin_id: true %>
+        <%= render 'shared/studentdata', admin_id: true %>
 
       </div>
     </div>

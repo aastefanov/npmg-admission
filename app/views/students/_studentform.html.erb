@@ -4,6 +4,10 @@
   <%= f.text_field :middle_name %>
   <%= f.text_field :last_name %>
 
+  <%= f.fields_for :student_egn do |ff| %>
+    <%= ff.text_field :egn %>
+  <% end %>
+
   <%= f.collection_check_boxes :exam_ids, Exam.all, :id, :name %>
 
   <h3>Данни за училището</h3>

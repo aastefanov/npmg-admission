@@ -84,6 +84,6 @@ class StudentsController < ApplicationController
   # @param :student [Student] Request model
   # @returns [Parameters] Parameters specification
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :middle_name, :school_id, :personal_data, :exam_ids => [])
+    params.require(:student).permit(:first_name, :last_name, :middle_name, :school_id, :personal_data, :student_egn_attributes => [:egn], :exam_ids => [])
   end
 end

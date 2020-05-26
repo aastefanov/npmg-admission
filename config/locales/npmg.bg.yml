@@ -28,6 +28,9 @@ bg:
       student:
         one: "Ученик"
         other: "Ученици"
+      egn:
+        one: "Идентификатор"
+        other: "Идентификатори"
     attributes:
       comment:
         student: "Ученик"
@@ -64,7 +67,7 @@ bg:
         region: "Област"
         city: "Населено място"
         status: "Статут на регистрацията"
-        ref_num: "Пореден номер"
+        ref_num: "Вх. номер"
         class_name: "Клас"
         approved_at: "Одобрена на"
         declined_at: "Отхвърлена на"
@@ -72,6 +75,11 @@ bg:
         created_at: "Създадена на"
         updated_at: "Променена на"
         comments: "Коментари"
+        egn: "ЕГН/ЛНЧ"
+        student_egn: "ЕГН/ЛНЧ"
+      student_egn:
+        student: "Ученик"
+        egn: "ЕГН/ЛНЧ"
       exam:
         name: "Име"
         held_in: "Провежда се на"

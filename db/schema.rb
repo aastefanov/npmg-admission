@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_085333) do
+ActiveRecord::Schema.define(version: 2020_05_26_092931) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -150,6 +150,15 @@ ActiveRecord::Schema.define(version: 2020_05_20_085333) do
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_schools_on_admin_id", unique: true
     t.index ["city_id"], name: "index_schools_on_city_id"
+  end
+
+  create_table "student_egns", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.string "egn", limit: 10, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["egn"], name: "index_student_egns_on_egn"
+    t.index ["student_id"], name: "index_student_egns_on_student_id"
   end
 
   create_table "student_exams", force: :cascade do |t|

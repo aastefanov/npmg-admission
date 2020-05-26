@@ -16,6 +16,7 @@ class ApprovalsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
+    @same_egn = Student.joins(:student_egn).where(student_egns: {egn: @student.egn}).where.not(id: params[:id])
   end
 
   def approve
