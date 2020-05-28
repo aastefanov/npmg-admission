@@ -19,6 +19,9 @@ class StudentsController < ApplicationController
   end
 
   def update
+    @personaldata_pre = Page.find_by_name(:personaldata_pre).content
+    @personaldata_decline = Page.find_by_name(:personaldata_decline).content
+
     attributes = student_params.clone
 
     attributes[:exam_ids] = (student_params[:exam_ids] || []).reject(&:blank?).compact
@@ -40,6 +43,9 @@ class StudentsController < ApplicationController
   # @param :student [Student] The student to be created
   # @return [void]
   def create
+    @personaldata_pre = Page.find_by_name(:personaldata_pre).content
+    @personaldata_decline = Page.find_by_name(:personaldata_decline).content
+
     redirect_closed_register
     return if check_closed_register?
 

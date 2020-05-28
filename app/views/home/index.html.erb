@@ -11,8 +11,8 @@
 
     <% if user_signed_in? %>
       <% if current_user.is_parent? %>
-        <p>Регистрацията на участник в състезанието може да се направи от родител или учител
-          <%= link_to("тук", students_path) %>.</p>
+        <p>Регистрацията на участник в състезанието може да се направи от родител/настойник или учител тук:</p>
+          <%= link_to("Регистрация и преглед на участници", students_path, :class => "btn btn-primary btn-block") %>
 
       <% else %>
         <%= link_to("Одобрение на регистрации", approvals_path, :class => "btn btn-primary btn-block") %>
