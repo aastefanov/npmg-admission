@@ -35,6 +35,7 @@ class ApprovalsController < ApplicationController
 
     if @student.valid?
       @student.save
+      StudentMailer.with(user: @student.user, student: @student, approver: current_user).registration_approved.deliver_later
       flash[:success] = "Успешно одобрихте " + @student.full_name
     else
       flash[:error] = @student.errors.full_messages.to_sentence
@@ -55,6 +56,8 @@ class ApprovalsController < ApplicationController
 
     if @student.valid?
       @student.save
+      StudentMailer.with(user: @student.user, student: @student, approver: current_user).registration_declined.deliver_later
+
       flash[:success] = "Успешно отхвърлихте " + @student.full_name
     else
       flash[:error] = @student.errors.full_messages.to_sentence

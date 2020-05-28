@@ -121,6 +121,8 @@ RailsAdmin.config do |config|
     end
 
     edit do
+      field :title
+
       group :password_change do
         field :password
         field :password_confirmation

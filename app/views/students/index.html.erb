@@ -41,7 +41,7 @@
               <% if student.approver_id? %>
               <%=  link_to("Прегледай", student_path(student.id), :class => 'btn btn-success') %></td>
               <%  else  %>
-              <%=  link_to("Редактирай", edit_student_path(student.id), :class => 'btn btn-primary')  %></td>
+              <%=  link_to("Прегледай", edit_student_path(student.id), :class => 'btn btn-primary')  %></td>
               <% end %>
               </tr>
         <% end %>

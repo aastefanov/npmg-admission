@@ -1,0 +1,9 @@
+<p>Здравейте,</p>
+
+<p>Добавен е коментар към регистрацията на <%= @student.full_name %>.</p>
+
+<p>За повече информация, влезте в системата <%= link_to 'тук', edit_student_url(@student.id) %>.</p>
+
+<p>Поздрави,<br/>
+  <%= @approver.full_name %><br/>
+  <%= @approver.title || "" %></p>

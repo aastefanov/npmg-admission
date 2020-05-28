@@ -1,4 +1,4 @@
-<%= javascript_include_tag Ckeditor.cdn_url %>
+<%#= javascript_include_tag Ckeditor.cdn_url %>
 
 
 <div class="row">
@@ -18,14 +18,16 @@
         <%= render 'shared/studenthistory' %>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= Student.human_attribute_name :comments %></div>
-      <div class="panel-body">
-        <%= render 'shared/comments' %>
+    <% if @student.comments.present? %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= Student.human_attribute_name :comments %></div>
+        <div class="panel-body">
+          <%= render 'shared/comments' %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 
-<%= render 'shared/commentsmodal' %>
+<%#= render 'shared/commentsmodal' %>
 

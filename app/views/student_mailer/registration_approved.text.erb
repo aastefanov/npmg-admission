@@ -1,0 +1,9 @@
+Здравейте,
+
+Регистрацията на <%= @student.full_name %> е одобрена.
+
+За повече информация, влезте в системата тук: <%=  student_url @student.id %>
+
+Поздрави,
+<%= @approver.full_name %>
+<%= @approver.title || "" %>

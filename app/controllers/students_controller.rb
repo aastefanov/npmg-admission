@@ -14,6 +14,8 @@ class StudentsController < ApplicationController
   end
 
   def edit
+    @personaldata_pre = Page.find_by_name(:personaldata_pre).content
+    @personaldata_decline = Page.find_by_name(:personaldata_decline).content
   end
 
   def update
@@ -63,6 +65,8 @@ class StudentsController < ApplicationController
   def new
     redirect_closed_register
     return if check_closed_register?
+    @personaldata_pre = Page.find_by_name(:personaldata_pre).content
+    @personaldata_decline = Page.find_by_name(:personaldata_decline).content
     @student = Student.new
   end
 

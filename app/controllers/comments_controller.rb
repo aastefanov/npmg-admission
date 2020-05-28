@@ -6,9 +6,16 @@ class CommentsController < ApplicationController
     comment = Comment.new comment_params
     comment.user = current_user
 
+    @student = Student.find(comment_params[:student_id])
+
+
     if comment.valid?
       comment.save
       flash[:success] = "Успешно добавен коментар"
+
+      if @student.user != current_user
+        StudentMailer.with(user: @student.user, student: @student, approver: current_user).registration_commented.deliver_later
+      end
     else
       flash[:error] = comment.errors.full_messages.to_sentence
     end
