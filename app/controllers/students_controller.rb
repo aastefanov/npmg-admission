@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  skip_authorize_resource :only => :edit
 
   def show
     # redirect_to edit_student_path(params[:id])
@@ -14,6 +15,8 @@ class StudentsController < ApplicationController
   end
 
   def edit
+    redirect_to :action => :show, id: params[:id] unless can? :edit, @student
+
     @personaldata_pre = Page.find_by_name(:personaldata_pre).content
     @personaldata_decline = Page.find_by_name(:personaldata_decline).content
   end
