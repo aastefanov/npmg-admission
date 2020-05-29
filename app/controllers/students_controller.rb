@@ -4,6 +4,7 @@ class StudentsController < ApplicationController
   skip_authorize_resource :only => :edit
 
   def show
+    @expect_belejka = Page.find_by_name(:expect_belejka).content
     # redirect_to edit_student_path(params[:id])
   end
 

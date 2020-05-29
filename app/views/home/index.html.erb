@@ -2,17 +2,17 @@
   <div class="<%= @posts.present? ? 'col-sm-6 col-md-8' : 'col-xs-12' %>">
 
     <h2>Къде съм?</h2>
-    Добре дошли в системата за кандидатстване в
-    <strong>Националното състезание по природни науки и география "Акад. Л. Чакалов" </strong>
+    Добре дошли в системата за регистрация за участие в
+    <strong>Националното състезание по природни науки и география "Акад. Л. Чакалов"</strong>.
 
     <hr/>
 
-    <h3>Какво следва?</h3>
+    <h2>Какво следва?</h2>
 
     <% if user_signed_in? %>
       <% if current_user.is_parent? %>
         <p>Регистрацията на участник в състезанието може да се направи от родител/настойник или учител тук:</p>
-          <%= link_to("Регистрация и преглед на участници", students_path, :class => "btn btn-primary btn-block") %>
+        <%= link_to("Регистрация и преглед на участници", students_path, :class => "btn btn-primary btn-block") %>
 
       <% else %>
         <%= link_to("Одобрение на регистрации", approvals_path, :class => "btn btn-primary btn-block") %>
@@ -20,8 +20,21 @@
       <% end %>
 
     <% else %>
-      <%= link_to("Влезте", new_user_session_path) %>
-      или <%= link_to("се регистрирайте", new_user_registration_path) %>
+      <h2>Регистрацията се извършва от родител/настойник или учител!</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to("Регистрация", new_user_registration_path, :class => "btn btn-primary btn-block") %>
+          <%= link_to("Вход", new_user_session_path, :class => "btn btn-info btn-block") %>
+
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      <%#= link_to("Регистрация", approvals_path, :class => "btn btn-primary btn-block") %>
+      <%#= link_to("Вход", rails_admin_path, :class => "btn btn-default btn-block") %>
+
+      <%#= link_to("Влезте", new_user_session_path) %>
+      <!--      или <%#= link_to("се регистрирайте", new_user_registration_path) %>-->
     <% end %>
 
     <% if @page.present? %>
@@ -37,7 +50,7 @@
           <div class="media-body"></div>
           <h4 class="media-heading"><%= post.name %></h4>
           <%= simple_format post.content %>
-        <hr/>
+          <hr/>
       <% end %>
       </div>
   <% end %>
