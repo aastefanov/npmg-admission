@@ -38,10 +38,18 @@
                 end %>
             </td>
             <td>
-              <% if student.approver_id? %>
-              <%=  link_to("Прегледай", student_path(student.id), :class => 'btn btn-success') %></td>
-              <%  else  %>
-              <%=  link_to("Прегледай", edit_student_path(student.id), :class => 'btn btn-primary')  %></td>
+              <% if @placements_ready && student.ref_num? %>
+                <%= link_to 'Служебна бележка', placements_student_path(student.id), class: "btn btn-success btn-block" %>
+              <% else %>
+                <% if @registration_closed %>
+                  <%= simple_format(@expect_belejka) %>
+                <% end %>
+                <%# else %>
+                <% if student.approver_id? %>
+                  <%= link_to("Прегледай", student_path(student.id), :class => 'btn btn-success') %></td>
+                <% else %>
+                  <%= link_to("Прегледай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
+                <% end %>
               <% end %>
               </tr>
         <% end %>

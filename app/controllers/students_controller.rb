@@ -1,17 +1,40 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  skip_authorize_resource :only => :edit
+  skip_authorize_resource :only => [:edit, :placements]
 
   def show
     @expect_belejka = Page.find_by_name(:expect_belejka).content
+    @placements_ready = check_placements_ready?
     # redirect_to edit_student_path(params[:id])
+  end
+
+  def placements
+    redirect_placements_ready
+    @student = Student.find(params[:id])
+    raise CanCan::AccessDenied unless can? :read, @student
+
+    @slujbel_decline = Page.find_by_name(:slujbel_decline).content
+    @slujbel_footer = Page.find_by_name(:slujbel_footer).content
+
+
+    respond_to do |format|
+      format.pdf do
+        render pdf: @student.ref_num.to_s,
+               template: 'students/placements.html.erb',
+               print_media_type: true
+      end
+      format.html do
+        render :layout => false
+      end
+    end
   end
 
   ##
   # Shows all students of the logged in user
   def index
     @registration_closed = check_closed_register?
+    @placements_ready = check_placements_ready?
     @students = Student.where user_id: current_user.id
   end
 
@@ -84,6 +107,17 @@ class StudentsController < ApplicationController
 
   def check_closed_register?
     AppSettings.find_by_key('registration_closed').value != 'false'
+  end
+
+  def check_placements_ready?
+    AppSettings.find_by_key('placements').value == 'true'
+  end
+
+  def redirect_placements_ready
+    unless check_placements_ready?
+      flash[:error] = "Няма разпределения"
+      redirect_back fallback_location: root_path
+    end
   end
 
   def redirect_closed_register

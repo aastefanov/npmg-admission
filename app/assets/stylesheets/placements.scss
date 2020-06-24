@@ -1,0 +1,7 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+//@include make-grid($class);
+
+@media print {
+  @include make-grid(print);
+}

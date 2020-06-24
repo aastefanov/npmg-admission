@@ -1,7 +1,8 @@
 class StudentExam < ApplicationRecord
   belongs_to :exam
   belongs_to :student
-  has_one :room, required: false
+  belongs_to :room, required: false
+  # has_one :room, required: false
 
   validates_presence_of :exam, :student
 

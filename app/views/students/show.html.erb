@@ -9,7 +9,11 @@
       <div class="panel-body">
         <%= render 'shared/studentdata' %>
         <br/>
-        <%= simple_format(@expect_belejka) %>
+        <% if @placements_ready %>
+        <%= link_to 'Служебна бележка', placements_student_path(@student.id), class: "btn btn-success btn-block" %>
+        <% else %>
+          <%= simple_format(@expect_belejka) %>
+        <% end %>
       </div>
     </div>
   </div>

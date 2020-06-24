@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   resources :approvals
   resources :protocols
   resources :students
+  get 'students/:id/placements', to: 'students#placements', :as => :placements_student
 
   resources :comments
+
 
   resources :approvals do
     get :approve, :on => :member

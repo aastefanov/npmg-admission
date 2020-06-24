@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <title><%= @student.full_name %> </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= wicked_pdf_stylesheet_link_tag 'placements' %>
+  <%#= javascript_include_tag wicked_pdf_asset_base64("number_pages") %>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-xs-12 hidden-print">
+      <br/>
+      <%#= link_to 'Към ученика', student_path(@student.id), class: 'btn btn-default btn-block' %>
+      <%= link_to 'Към учениците', students_path, class: 'btn btn-default btn-block' %>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <h1>Действия</h1>
+      <%= link_to 'Изтегли PDF', placements_student_path(:format => :pdf), class: "btn btn-primary btn-lg btn-block" %>
+      <a class="btn btn-default btn-lg btn-block" href="javascript:window.print();">Печат</a>
+      <!--      <a class="btn btn-default btn-block" href="javascript:back()"></a>-->
+      <br/>
+    </div>
+    <div class="col-md-6 col-xs-12 col-print-12">
+      <div class="row">
+        <div class="jumbotron" style="background-color: lightgray">
+          <div style="text-align: center;">
+            <img src="https://i0.wp.com/npmg.org/wp-content/uploads/2018/05/Logo88.png?ssl=1"
+                 alt="logo" height="100em"/>
+            <div style="display: inline-block;">
+              <h4 style="display: inline-block;">Национално състезание по природни науки и
+                география<br/>
+                "Акад. Л. Чакалов"</h4>
+              <p>Служебна бележка</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Участник</div>
+            <div class="panel-body">
+              <div style="font-size: larger; display: block; position: relative">
+                <div style="float:left;">
+                  <%= @student.full_name %>
+                </div>
+                <div style="text-align: right; float:right;">
+                  Вх. №: <%= @student.ref_num %>
+                </div>
+              </div>
+              <br/>
+              <br/>
+              <div>
+                <div style="float:left">
+                  <p>Училище: <%= @student.school.name %>"</p>
+                  <p>Населено място: <%= @student.city.name %></p>
+                  <p>Област: <%= @student.region.name %></p>
+                </div>
+                <div style="float: right;">
+                  <div id="qrcode"></div>
+                  <script type="text/javascript">
+                      new QRCode(document.getElementById("qrcode"), {
+                          text: "https://nclc.npmg.org/students/<%= @student.id %>",
+                          width: 128,
+                          height: 128
+                      });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-xs-12">
+          <!--          <div class="panel panel-default">-->
+          <!--            <div class="panel-heading">Модули</div>-->
+          <!--            <div class="panel-body">-->
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>Модул</th>
+              <!--                  <th>Започва в</th>-->
+              <th>Явете се на</th>
+              <th>Зала</th>
+              <!--                  <th>Място</th>-->
+            </tr>
+            </thead>
+            <% @student.student_exams.each do |e| %>
+              <tr>
+                <td><%= e.exam.name %></td>
+                <td><%= l(e.exam.held_in - 30.minutes, :format => :short) %></td>
+                <!--                    <td>07:30</td>-->
+                <td><%= e.room&.name || 'Неразпределен' %></td>
+                <!--                    <td><%#= e.room&.location&.name || 'Неразпределен' %></td>-->
+              </tr>
+            <% end %>
+          </table>
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><br/>
+            <%= simple_format @slujbel_footer %>
+            <% unless @student.personal_data %>
+              <%= simple_format @slujbel_decline %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
