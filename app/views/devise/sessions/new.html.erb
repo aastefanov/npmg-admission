@@ -1,14 +1,16 @@
-<div class="panel panel-primary">
-  <div class="panel-heading"><%= t('.sign_in') %></div>
-  <div class="panel-body">
-    <%= bootstrap_form_for(resource, as: resource_name, url: new_session_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      <%= f.password_field :password, autocomplete: "password" %>
-      <%= f.submit t('.sign_in'), class: 'btn btn-primary btn-block' %>
-    <% end %>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header"><%= t('.sign_in') %></div>
+    <div class="card-body">
+      <%= bootstrap_form_for(resource, as: resource_name, url: new_session_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.submit t('.sign_in'), class: 'btn btn-primary btn-block' %>
+      <% end %>
 
-    <br/>
-    <%= render "devise/shared/links" %>
+      <br/>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 </div>

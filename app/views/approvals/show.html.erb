@@ -3,11 +3,11 @@
 <div class="row">
   <div class="col-md-6">
     <% if @same_egn.present? %>
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title">Дублирани ученици</h3>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Дублирани ученици</h3>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <ul>
             <% @same_egn.each do |st| %>
               <li><%= link_to st.full_name, approval_path(st) %></li>
@@ -16,45 +16,45 @@
         </div>
       </div>
     <% end %>
-    <div class="panel panel-primary">
-      <div class="panel-heading">Ученик</div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header">Ученик</div>
+      <div class="card-body">
         <%= render 'shared/studentdata', admin_id: true %>
 
       </div>
     </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading"><%= User.model_name.human %></div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header"><%= User.model_name.human %></div>
+      <div class="card-body">
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-4">
             <label><%= User.human_attribute_name :first_name %></label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-8">
             <%= @student.user.first_name %>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-4">
             <label><%= User.human_attribute_name :last_name %></label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-8">
             <%= @student.user.last_name %>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-4">
             <label><%= User.human_attribute_name :phone %></label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-8">
             <%= tel_to @student.user.phone %>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-4">
             <label><%= User.human_attribute_name :email %></label>
           </div>
-          <div class="col-xs-8">
+          <div class="col-8">
             <%= mail_to @student.user.email %>
           </div>
         </div>
@@ -65,30 +65,32 @@
   <div class="col-md-6">
     <% unless @student.is_approved? or @student.is_declined? %>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">Операции</div>
-        <div class="panel-body">
+      <div class="card">
+        <div class="card-header">Операции</div>
+        <div class="card-body">
           <div class="row">
-            <div class="col-xs-6">
+            <div class="col-6">
               <%= link_to "Одобри", approve_approval_path(@student.id), :class => "btn btn-success btn-block" %>
             </div>
 
-            <div class="col-xs-6">
+            <div class="col-6">
               <%= link_to "Отхвърли", reject_approval_path(@student.id), :class => "btn btn-danger btn-block" %>
             </div>
           </div>
         </div>
       </div>
+      <br/>
     <% end %>
-    <div class="panel panel-default">
-      <div class="panel-heading">История</div>
-      <div class="panel-body">
+    <div class="card">
+      <div class="card-header">История</div>
+      <div class="card-body">
         <%= render 'shared/studenthistory', contact: true %>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= Student.human_attribute_name :comments %></div>
-      <div class="panel-body">
+    <br/>
+    <div class="card">
+      <div class="card-header"><%= Student.human_attribute_name :comments %></div>
+      <div class="card-body">
         <%= render 'shared/comments', contact: true %>
       </div>
     </div>

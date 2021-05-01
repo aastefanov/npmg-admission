@@ -1,12 +1,14 @@
-<h2><%= t('.forgot_your_password') %></h2>
+<div class="container-fluid">
+  <h2><%= t('.forgot_your_password') %></h2>
 
-<%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     <%= f.submit t('.send_me_reset_password_instructions'), class: 'btn btn-primary btn-block' %>
 
-<% end %>
+  <% end %>
 
-<br/>
-<%= render "devise/shared/links" %>
+  <br/>
+  <%= render "devise/shared/links" %>
+</div>

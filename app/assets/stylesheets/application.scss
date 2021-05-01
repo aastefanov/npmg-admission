@@ -14,5 +14,10 @@
  *= #require_self
  */
 
-@import "bootstrap-sprockets";
 @import "bootstrap";
+
+@media print {
+  .hidden-print {
+    display: none !important;
+  }
+}

@@ -1,6 +1,7 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">Ученици</div>
-  <div class="panel-body">
+<div class="container-fluid">
+<div class="card">
+  <div class="card-header">Ученици</div>
+  <div class="card-body">
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -20,7 +21,7 @@
             <td><%= student.first_name %></td>
             <td><%= student.middle_name %></td>
             <td><%= student.last_name %></td>
-            <td><%= student.school.name %>, <%= student.school.city.name %>, <%= student.school.region.name %></td>
+            <td><%= student.school.name %></td>
             <td><%= student.exams.map(&:name).join(', ') %></td>
             <td>
               <%=
@@ -46,9 +47,9 @@
                 <% end %>
                 <%# else %>
                 <% if student.approver_id? %>
-                  <%= link_to("Прегледай", student_path(student.id), :class => 'btn btn-success') %></td>
+                  <%= link_to("Прегледай", student_path(student.id), :class => 'btn btn-success btn-block') %></td>
                 <% else %>
-                  <%= link_to("Прегледай", edit_student_path(student.id), :class => 'btn btn-primary') %></td>
+                  <%= link_to("Прегледай", edit_student_path(student.id), :class => 'btn btn-primary btn-block') %></td>
                 <% end %>
               <% end %>
               </tr>
@@ -57,8 +58,9 @@
       </table>
 
       <% unless @registration_closed %>
-        <%= link_to "Нов ученик", new_student_path, class: "btn btn-success btn-block" %>
+        <%= link_to "Регистрирай друг ученик", new_student_path, class: "btn btn-success btn-block" %>
       <% end %>
     </div>
   </div>
+</div>
 </div>

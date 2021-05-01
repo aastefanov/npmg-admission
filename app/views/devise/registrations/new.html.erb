@@ -1,24 +1,31 @@
-<h2>Важно: Тук се попълват само данни на регистриращия - родител/настойник или учител.</h2>
-<br/>
-<div class="panel panel-primary">
-  <div class="panel-heading"><%= t('.sign_up') %></div>
-  <div class="panel-body">
+<div class="container-fluid">
+  <h2>Важно: Тук се попълват само данни на регистриращия - родител/настойник или учител.</h2>
+  <br/>
+  <div class="card">
+    <div class="card-header"><%= t('.sign_up') %></div>
+    <div class="card-body">
 
-    <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <%= f.text_field :first_name, autocomplete: "first-name" %>
-      <%= f.text_field :last_name, autocomplete: "last-name" %>
+      <%= bootstrap_form_for(
+            resource,
+            as: resource_name,
+            url: registration_path(resource_name)
+          ) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-      <%= f.phone_field :phone, autocomplete: "phone" %>
+        <%= f.email_field :email, autocomplete: 'email', name: 'email' %>
+        <%= f.password_field :password, autocomplete: 'new-password' %>
+        <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
 
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      <%= f.password_field :password, autocomplete: "new-password" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%= f.text_field :first_name, autocomplete: 'given-name', name: 'fname' %>
+        <%= f.text_field :last_name, autocomplete: 'family-name', name: 'lname' %>
 
-      <%= f.submit t('.sign_up'), class: 'btn btn-primary btn-block' %>
+        <%= f.phone_field :phone, autocomplete: 'tel', name: 'phone' %>
 
-      <br/>
-      <%= render "devise/shared/links" %>
-  <% end %>
+        <%= f.submit t('.sign_up'), class: 'btn btn-primary btn-block' %>
+
+        <br/>
+        <%= render "devise/shared/links" %>
+      <% end %>
+    </div>
   </div>
 </div>

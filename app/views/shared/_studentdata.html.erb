@@ -1,58 +1,58 @@
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :first_name %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.first_name %>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :middle_name %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.middle_name %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :last_name %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.last_name %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :egn %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.egn %>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :region %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.region.name %>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :city %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.city.name %>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :school %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= @student.school.name %>
     <% if local_assigns[:admin_id] %>
       (<%= @student.school.admin_id %>)
@@ -60,10 +60,10 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label><%= Student.human_attribute_name :exams %></label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <% @student.exams.each do |e| %>
       <%= e.name %><br/>
     <% end %>
@@ -72,19 +72,19 @@
 <% if @student.ref_num? %>
   <br/><br/>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-4">
       <label><%= Student.human_attribute_name :ref_num %></label>
     </div>
-    <div class="col-xs-8">
+    <div class="col-8">
       <%= @student.ref_num %>
     </div>
   </div>
 <% end %>
 <!--        <div class="row">-->
-<!--          <div class="col-xs-4">-->
+<!--          <div class="col-4">-->
 <!--            <label><%#= Student.human_attribute_name :declaration %></label>-->
 <!--          </div>-->
-<!--          <div class="col-xs-8">-->
+<!--          <div class="col-8">-->
 <%# if @request.student.declaration.attached? %>
 <%#= link_to 'Изтегли', @request.student.declaration %>
 <%#= image_tag @request.student.declaration, :class => 'img-responsive' %>

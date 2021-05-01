@@ -1,39 +1,42 @@
 <%#= javascript_include_tag Ckeditor.cdn_url %>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="panel panel-primary">
-
-      <div class="panel-heading">Покажи ученик</div>
-      <div class="panel-body">
-        <%= render 'shared/studentdata' %>
-        <br/>
-        <% if @placements_ready %>
-        <%= link_to 'Служебна бележка', placements_student_path(@student.id), class: "btn btn-success btn-block" %>
-        <% else %>
-          <%= simple_format(@expect_belejka) %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">История</div>
-      <div class="panel-body">
-        <%= render 'shared/studenthistory' %>
-      </div>
-    </div>
-    <% if @student.comments.present? %>
-      <div class="panel panel-default">
-        <div class="panel-heading"><%= Student.human_attribute_name :comments %></div>
-        <div class="panel-body">
-          <%= render 'shared/comments' %>
+        <div class="card-header">Покажи ученик</div>
+        <div class="card-body">
+          <%= render 'shared/studentdata' %>
+          <br/>
+          <% if @student.is_approved? %>
+            <% if @placements_ready %>
+              <%= link_to 'Служебна бележка', placements_student_path(@student.id), class: "btn btn-success btn-block" %>
+            <% else %>
+              <%= simple_format(@expect_belejka) %>
+            <% end %>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">История</div>
+        <div class="card-body">
+          <%= render 'shared/studenthistory' %>
+        </div>
+      </div>
+      <% if @student.comments.present? %>
+        <br/>
+        <div class="card">
+          <div class="card-header"><%= Student.human_attribute_name :comments %></div>
+          <div class="card-body">
+            <%= render 'shared/comments' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 
 <%#= render 'shared/commentsmodal' %>
-
+</div>

@@ -1,45 +1,45 @@
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label>Създаден</label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= l @student.created_at, :format => :long %>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-4">
     <label>Последно променен</label>
   </div>
-  <div class="col-xs-8">
+  <div class="col-8">
     <%= l @student.updated_at, :format => :long %>
   </div>
 </div>
 <% if @student.is_approved? %>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-4">
       <label>Одобрен на</label>
     </div>
-    <div class="col-xs-8">
+    <div class="col-8">
       <%= l @student.approved_at, :format => :long %>
     </div>
   </div>
 <% end %>
 <% if @student.is_declined? %>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-4">
       <label>Отхвърлен на</label>
     </div>
-    <div class="col-xs-8">
+    <div class="col-8">
       <%= l @student.declined_at, :format => :long %>
     </div>
   </div>
 <% end %>
 <% if local_assigns[:contact] and @student.approver_id? %>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-4">
       <label>Завършена от</label>
     </div>
-    <div class="col-xs-8">
+    <div class="col-8">
       <%= @student.approver.full_name %> <<%= mail_to @student.approver.email %>
       , <%= tel_to @student.approver.phone %>>
     </div>

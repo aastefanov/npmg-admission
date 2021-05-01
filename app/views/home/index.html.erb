@@ -1,58 +1,59 @@
-<div class="row">
-  <div class="<%= @posts.present? ? 'col-sm-6 col-md-8' : 'col-xs-12' %>">
+<div class="container">
+  <div class="row">
+    <div class="<%= @posts.present? ? 'col-sm-6 col-md-8' : 'col-12' %>">
 
-    <h2>Къде съм?</h2>
-    Добре дошли в системата за регистрация за участие в
-    <strong>Националното състезание по природни науки и география "Акад. Л. Чакалов"</strong>.
+      <h2>Къде съм?</h2>
+      Добре дошли в системата за регистрация за участие в
+      <strong>Националното състезание по природни науки и география "Акад. Л. Чакалов"</strong>.
 
-    <hr/>
+      <hr/>
 
-    <h2>Какво следва?</h2>
+      <h2>Какво следва?</h2>
 
-    <% if user_signed_in? %>
-      <% if current_user.is_parent? %>
-        <p>Регистрацията на участник в състезанието може да се направи от родител/настойник или учител тук:</p>
-        <%= link_to("Регистрация и преглед на участници", students_path, :class => "btn btn-primary btn-block") %>
+      <% if user_signed_in? %>
+        <% if current_user.is_parent? %>
+          <p>Регистрацията на участник в състезанието може да се направи от родител/настойник или учител тук:</p>
+          <%= link_to("Регистрация и преглед на участници", students_path, :class => "btn btn-primary btn-block") %>
+
+        <% else %>
+          <%= link_to("Одобрение на регистрации", approvals_path, :class => "btn btn-primary btn-block") %>
+          <%= link_to("Административен панел", rails_admin_path, :class => "btn btn-secondary btn-block") %>
+        <% end %>
 
       <% else %>
-        <%= link_to("Одобрение на регистрации", approvals_path, :class => "btn btn-primary btn-block") %>
-        <%= link_to("Административен панел", rails_admin_path, :class => "btn btn-default btn-block") %>
+        <h2>Регистрацията се извършва от родител/настойник или учител!</h2>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <%= link_to("Вход", new_user_session_path, :class => "btn btn-info btn-block") %>
+          </div>
+          <div class="col-12 col-sm-6">
+            <%= link_to("Регистрация", new_user_registration_path, :class => "btn btn-primary btn-block") %>
+          </div>
+        </div>
+        <%#= link_to("Регистрация", approvals_path, :class => "btn btn-primary btn-block") %>
+        <%#= link_to("Вход", rails_admin_path, :class => "btn btn-secondary btn-block") %>
+
+        <%#= link_to("Влезте", new_user_session_path) %>
+        <!--      или <%#= link_to("се регистрирайте", new_user_registration_path) %>-->
       <% end %>
 
-    <% else %>
-      <h2>Регистрацията се извършва от родител/настойник или учител!</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <%= link_to("Регистрация", new_user_registration_path, :class => "btn btn-primary btn-block") %>
-          <%= link_to("Вход", new_user_session_path, :class => "btn btn-info btn-block") %>
-
-        </div>
-        <div class="col-md-6">
-        </div>
-      </div>
-      <%#= link_to("Регистрация", approvals_path, :class => "btn btn-primary btn-block") %>
-      <%#= link_to("Вход", rails_admin_path, :class => "btn btn-default btn-block") %>
-
-      <%#= link_to("Влезте", new_user_session_path) %>
-      <!--      или <%#= link_to("се регистрирайте", new_user_registration_path) %>-->
-    <% end %>
-
-    <% if @page.present? %>
-      <%= simple_format @page.content %>
-    <% end %>
-  </div>
-  <% if @posts.present? %>
-
-    <div class="col-sm-6 col-md-4">
-      <h3>Информация:</h3>
-      <% @posts.each do |post| %>
-        <div class="media">
-          <div class="media-body"></div>
-          <h4 class="media-heading"><%= post.name %></h4>
-          <%= simple_format post.content %>
-          <hr/>
+      <% if @page.present? %>
+        <%= simple_format @page.content %>
       <% end %>
-      </div>
-  <% end %>
+    </div>
+    <% if @posts.present? %>
+
+      <div class="col-sm-6 col-md-4">
+        <h3>Информация:</h3>
+        <% @posts.each do |post| %>
+          <div class="media">
+            <div class="media-body"></div>
+            <h4 class="media-heading"><%= post.name %></h4>
+            <%= simple_format post.content %>
+            <hr/>
+        <% end %>
+        </div>
+    <% end %>
+    </div>
   </div>
 </div>
