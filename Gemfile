@@ -77,6 +77,7 @@ group :production do
   gem 'thin'
   gem 'tiny_tds'
   gem 'sidekiq'
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
