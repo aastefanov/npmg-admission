@@ -77,8 +77,6 @@ group :production do
   gem 'thin'
   gem 'tiny_tds'
   gem 'sidekiq'
-  gem 'activerecord-sqlserver-adapter'
-  gem 'activerecord-import-sqlserver'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
