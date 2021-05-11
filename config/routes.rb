@@ -7,10 +7,8 @@ Rails.application.routes.draw do
 
   post 'approvals/comment/:id', to: 'approvals#comment', as: :approval_comment
 
-  devise_for :users, controllers: {
-      registrations: 'users/registrations',
-      confirmations: 'users/confirmations'
-  }
+  devise_for :users
+
   root to: "home#index"
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

@@ -9,3 +9,5 @@
 Role.create([{name: 'admin'}, {name: 'approve'}])
 
 AppSettings.create({key: 'registration_closed', value: 'false'})
+AppSettings.create({key: 'placements', value: 'false'})
+

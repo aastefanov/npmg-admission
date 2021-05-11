@@ -4,7 +4,7 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.string :first_name, null: false
       t.string :middle_name
       t.string :last_name, null: false
-      t.integer :ref_num, unique: true, where: '([ref_num] IS NOT NULL)'
+      t.integer :ref_num, unique: true
       t.references :school, foreign_key: true, null: false
       t.references :user, foreign_key: true, null: false
       t.timestamp :approved_at
@@ -15,6 +15,6 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :students, :ref_num, unique: true, where: '([ref_num] IS NOT NULL)'
+    add_index :students, :ref_num, unique: true
   end
 end

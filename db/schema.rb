@@ -77,16 +77,16 @@ ActiveRecord::Schema.define(version: 2021_04_15_164719) do
 
   create_table "exam_results", force: :cascade do |t|
     t.integer "exam_id", null: false
-    t.integer "students_id", null: false
+    t.integer "student_id", null: false
     t.integer "fik_num"
     t.integer "pts_grader1"
     t.integer "pts_grader2"
     t.integer "pts_arbitrage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "\"exam_id\", \"student_id\"", name: "index_exam_results_on_exam_id_and_student_id", unique: true
+    t.index ["exam_id", "student_id"], name: "index_exam_results_on_exam_id_and_student_id", unique: true
     t.index ["exam_id"], name: "index_exam_results_on_exam_id"
-    t.index ["students_id"], name: "index_exam_results_on_students_id"
+    t.index ["student_id"], name: "index_exam_results_on_student_id"
   end
 
   create_table "exam_rooms", force: :cascade do |t|
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_164719) do
   add_foreign_key "comments", "students"
   add_foreign_key "comments", "users"
   add_foreign_key "exam_results", "exams"
-  add_foreign_key "exam_results", "students", column: "students_id"
+  add_foreign_key "exam_results", "students"
   add_foreign_key "exam_rooms", "exams"
   add_foreign_key "exam_rooms", "rooms"
   add_foreign_key "posts", "users"
@@ -247,4 +247,5 @@ ActiveRecord::Schema.define(version: 2021_04_15_164719) do
   add_foreign_key "student_exams", "students"
   add_foreign_key "students", "schools"
   add_foreign_key "students", "users"
+  add_foreign_key "students", "users", column: "approver_id"
 end

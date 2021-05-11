@@ -10,16 +10,15 @@
             as: resource_name,
             url: registration_path(resource_name)
           ) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
 
-        <%= f.email_field :email, autocomplete: 'email', name: 'email' %>
+        <%= f.email_field :email, autocomplete: 'email' %>
         <%= f.password_field :password, autocomplete: 'new-password' %>
         <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
 
-        <%= f.text_field :first_name, autocomplete: 'given-name', name: 'fname' %>
-        <%= f.text_field :last_name, autocomplete: 'family-name', name: 'lname' %>
+        <%= f.text_field :first_name, autocomplete: 'given-name' %>
+        <%= f.text_field :last_name, autocomplete: 'family-name' %>
 
-        <%= f.phone_field :phone, autocomplete: 'tel', name: 'phone' %>
+        <%= f.phone_field :phone, autocomplete: 'tel' %>
 
         <%= f.submit t('.sign_up'), class: 'btn btn-primary btn-block' %>
 
