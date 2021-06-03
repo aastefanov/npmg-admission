@@ -53,7 +53,7 @@
                 <div style="float:left;">
                   <%= @student.full_name %>
                 </div>
-                <div style="text-align: right; float:right;">
+                <div style="text-align: right; float:right; font-size: xx-large;">
                   Вх. №: <%= @student.ref_num %>
                 </div>
               <br/>
@@ -65,14 +65,14 @@
                   <p>Област: <%= @student.region.name %></p>
                 </div>
                 <div style="float: right;">
-                  <div id="qrcode"></div>
-                  <script type="text/javascript">
+                  <!-- <div id="qrcode"></div> -->
+                  <!-- <script type="text/javascript">
                       new QRCode(document.getElementById("qrcode"), {
                           text: "https://nclc.npmg.org/students/<%= @student.id %>",
                           width: 128,
                           height: 128
                       });
-                  </script>
+                  </script> -->
                 </div>
               </div>
               </div>
