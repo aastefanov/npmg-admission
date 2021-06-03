@@ -13,7 +13,7 @@
 <body>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 col-12 hidden-print">
+    <div class="col-12 hidden-print">
       <br/>
       <%#= link_to 'Към ученика', student_path(@student.id), class: 'btn btn-secondary btn-block' %>
       <%= link_to 'Към учениците', students_path, class: 'btn btn-secondary btn-block' %>
@@ -27,9 +27,10 @@
       <!--      <a class="btn btn-secondary btn-block" href="javascript:back()"></a>-->
       <br/>
     </div>
-    <div class="col-md-6 col-12 col-print-12">
+    <div class="col-12">
       <div class="row">
-        <div class="jumbotron" style="background-color: lightgray">
+        <div class="col-12">
+        <div class="jumbotron jumbotron-fluid" style="background-color: lightgray">
           <div style="text-align: center;">
             <img src="https://i0.wp.com/npmg.org/wp-content/uploads/2018/05/Logo88.png?ssl=1"
                  alt="logo" height="100em"/>
@@ -41,12 +42,13 @@
             </div>
           </div>
         </div>
+	</div>
       </div>
       <div class="row">
         <div class="col-12">
-          <div class="panel panel-primary">
-            <div class="panel-heading">Участник</div>
-            <div class="panel-body">
+          <div class="card">
+            <div class="card-header">Участник</div>
+            <div class="card-body">
               <div style="font-size: larger; display: block; position: relative">
                 <div style="float:left;">
                   <%= @student.full_name %>
@@ -54,7 +56,6 @@
                 <div style="text-align: right; float:right;">
                   Вх. №: <%= @student.ref_num %>
                 </div>
-              </div>
               <br/>
               <br/>
               <div>
@@ -74,16 +75,15 @@
                   </script>
                 </div>
               </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <br/>
+      <br/>
       <div class="row">
-
         <div class="col-12">
-          <!--          <div class="panel panel-default">-->
-          <!--            <div class="panel-heading">Модули</div>-->
-          <!--            <div class="panel-body">-->
           <table class="table table-bordered">
             <thead>
             <tr>
